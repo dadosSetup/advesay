@@ -1,0 +1,285 @@
+table 'Medidas Invites'
+	lineageTag: f82efe37-a9ad-40e1-bf53-9e8d96240015
+
+	measure 'Total de invites' =
+			
+			CALCULATE(
+			    COUNTROWS(FatInvites),
+			    USERELATIONSHIP(FatInvites[data_envio],Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: 270b72ff-8d4e-4542-9e05-3daf70843c28
+
+	measure '% Pendente' = ```
+			
+			CALCULATE(
+			    VAR pendente = [total pendente]
+			    VAR totalinvite = [Total de invites]
+			    VAR resultado = DIVIDE(pendente, totalinvite, 0)
+			    RETURN
+			        "(" & FORMAT(pendente, "0") & " - " & FORMAT(resultado, "0.00%") & ")",
+			    USERELATIONSHIP(FatInvites[data_envio], Calendario[Datas])
+			)
+			
+			
+			
+			// % Pendente = 
+			// VAR pendente = [total pendente]
+			// VAR totalinvite = [Total de invites]
+			// VAR resultado = DIVIDE(pendente, totalinvite, 0)
+			// RETURN
+			//     "(" & FORMAT(pendente, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 2d0394e1-c6cc-47d0-9275-d2d2ab226a0e
+
+	measure 'total pendente' =
+			CALCULATE(
+			    COUNTROWS(FatInvites),
+			    FatInvites[status_convite] = "Pendente"
+			)
+		formatString: 0
+		lineageTag: c2244710-b12a-4fda-8802-eb996548adc8
+
+	measure 'total visualizou' = ```
+			
+			IF(
+			    ISBLANK(
+			        CALCULATE(
+			            COUNTROWS(FatInvites),
+			            FatInvites[status_convite] = "Visualizou",
+			            USERELATIONSHIP(FatInvites[data_envio],Calendario[Datas])
+			        )
+			    ),0,
+			    CALCULATE(
+			        COUNTROWS(FatInvites),
+			        FatInvites[status_convite] = "Visualizou",
+			        USERELATIONSHIP(FatInvites[data_envio],Calendario[Datas])   
+			    )
+			)
+			```
+		formatString: 0
+		lineageTag: cd5a7e2e-f2fa-4258-94c4-7bc792f8bcb1
+
+	measure 'Total Cadastrou Interno' = ```
+			
+			IF(
+			    ISBLANK(
+			        CALCULATE(
+			            COUNTROWS(FatInvites),
+			            FatInvites[status_convite] = "Cadastrou"
+			        )
+			    ),
+			    0,
+			    CALCULATE(
+			        COUNTROWS(FatInvites),
+			        FatInvites[status_convite] = "Cadastrou"
+			    )
+			)
+			
+			
+			// total Cadastrou = 
+			// CALCULATE(
+			//     COUNTROWS(FatInvites),
+			//     FatInvites[status_convite] = "Cadastrou"
+			// )
+			```
+		formatString: 0
+		lineageTag: 44222fbe-a367-492e-a4af-672288d7fef3
+
+	measure '% Cadastrou' = ```
+			
+			CALCULATE(
+			    VAR cadastrou = [Total Cadastrou Interno]
+			    VAR totalinvite = [Total de invites]
+			    VAR resultado = DIVIDE(cadastrou, totalinvite, 0)
+			    RETURN
+			        "(" & FORMAT(cadastrou, "0") & " - " & FORMAT(resultado, "0.00%") & ")",
+			    USERELATIONSHIP(FatInvites[data_envio], Calendario[Datas])
+			)
+			
+			
+			```
+		lineageTag: e82bbe77-1cc9-4ba7-bfba-f10984acaa24
+
+	measure '% Visualizou' = ```
+			
+			CALCULATE(
+			    VAR visualizou = [total visualizou]
+			    VAR totalinvite = [Total de invites]
+			    VAR resultado = DIVIDE(visualizou, totalinvite, 0)
+			    RETURN
+			        "(" & FORMAT(visualizou, "0") & " - " & FORMAT(resultado, "0.00%") & ")",
+			    USERELATIONSHIP(FatInvites[data_envio],Calendario[Datas])
+			
+			)
+			
+			
+			```
+		lineageTag: 14516b48-c30c-498e-a7ff-dbc33c985171
+
+	measure 'Total de visualizado' =
+			
+			CALCULATE(
+			    COUNTROWS(FatInvites),
+			    FatInvites[status] = 1,
+			    USERELATIONSHIP(FatInvites[data_envio],Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: e1729d11-5ddc-4887-87e5-a85dbd357f94
+
+	measure 'Total Cadastrou Externo' = ```
+			
+			IF(
+			    ISBLANK(
+			        CALCULATE(
+			            COUNTROWS(DimClientsInvite),
+			            DimClientsInvite[tipo] = "Externo"
+			        )
+			    ),
+			    0,
+			    CALCULATE(
+			        COUNTROWS(DimClientsInvite),
+			            DimClientsInvite[tipo] = "Externo"
+			        )
+			)
+			
+			
+			// total Cadastrou = 
+			// CALCULATE(
+			//     COUNTROWS(FatInvites),
+			//     FatInvites[status_convite] = "Cadastrou"
+			// )
+			```
+		formatString: 0
+		lineageTag: fdd0bcb8-7918-4e04-bc95-81f52f8ca0ae
+
+	measure 'Total Cadastro Externo' = ```
+			
+			CALCULATE(
+			    COUNTROWS(DimClientsInvite))
+			
+			```
+		formatString: 0
+		lineageTag: 11d2f927-2ab8-4f02-8a7b-a02f64cfbc70
+
+	measure 'Total de invites Sem filtro' =
+			
+			CALCULATE(
+			    COUNTROWS(FatInvites),
+			    REMOVEFILTERS(Calendario[Datas])
+			)
+		formatString: 0
+		displayFolder: Sem filtro
+		lineageTag: 2dc98550-1fbd-4723-8cca-885816740d31
+
+	measure 'Total de visualizado sem filtro' =
+			
+			CALCULATE(
+			    COUNTROWS(FatInvites),
+			    FatInvites[status] = 1,
+			    REMOVEFILTERS(Calendario[Datas])
+			)
+		formatString: 0
+		displayFolder: Sem filtro
+		lineageTag: cd8296a2-e6b9-476f-a3a9-cf8e330309ee
+
+	measure 'total pendente sem filtro' =
+			CALCULATE(
+			    COUNTROWS(FatInvites),
+			    FatInvites[status_convite] = "Pendente",
+			    REMOVEFILTERS(Calendario[Datas])
+			)
+		formatString: 0
+		displayFolder: Sem filtro
+		lineageTag: 7cb50806-93eb-4891-9ca5-2801008c7022
+
+	measure '% Pendente sem filtro' = ```
+			
+			CALCULATE(
+			    VAR pendente = [total pendente sem filtro]
+			    VAR totalinvite = [Total de invites Sem filtro]
+			    VAR resultado = DIVIDE(pendente, totalinvite, 0)
+			    RETURN
+			        "(" & FORMAT(pendente, "0") & " - " & FORMAT(resultado, "0.00%") & ")",
+			    USERELATIONSHIP(FatInvites[data_envio], Calendario[Datas])
+			)
+			
+			```
+		displayFolder: Sem filtro
+		lineageTag: c6058ece-991a-4fd1-a8b2-b5e0e065bbdb
+
+	measure '% Visualizou sem filtro' = ```
+			
+			CALCULATE(
+			    VAR visualizou = [Total de visualizado sem filtro]
+			    VAR totalinvite = [Total de invites Sem filtro]
+			    VAR resultado = DIVIDE(visualizou, totalinvite, 0)
+			    RETURN
+			        "(" & FORMAT(visualizou, "0") & " - " & FORMAT(resultado, "0.00%") & ")",
+			    USERELATIONSHIP(FatInvites[data_envio],Calendario[Datas])
+			
+			)
+			
+			
+			```
+		displayFolder: Sem filtro
+		lineageTag: 82408f7c-afee-42fc-b5bc-ad2fa5bae6bb
+
+	measure 'Total Cadastrou Interno sem filtro' = ```
+			
+			IF(
+			    ISBLANK(
+			        CALCULATE(
+			            COUNTROWS(FatInvites),
+			            FatInvites[status_convite] = "Cadastrou",
+			            REMOVEFILTERS(Calendario[Datas])
+			        )
+			    ),
+			    0,
+			    CALCULATE(
+			        COUNTROWS(FatInvites),
+			        FatInvites[status_convite] = "Cadastrou",
+			        REMOVEFILTERS(Calendario[Datas])
+			
+			    )
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Sem filtro
+		lineageTag: bfc3092c-3457-485e-98ba-760fe1560ed1
+
+	measure '% Cadastrou sem filtro' = ```
+			
+			CALCULATE(
+			    VAR cadastrou = [Total Cadastrou Interno sem filtro]
+			    VAR totalinvite = [Total de invites Sem filtro]
+			    VAR resultado = DIVIDE(cadastrou, totalinvite, 0)
+			    RETURN
+			        "(" & FORMAT(cadastrou, "0") & " - " & FORMAT(resultado, "0.00%") & ")",
+			    USERELATIONSHIP(FatInvites[data_envio], Calendario[Datas])
+			)
+			
+			
+			```
+		displayFolder: Sem filtro
+		lineageTag: c5823937-69c6-42a5-b4d9-f296b4369ea3
+
+	column Column
+		formatString: 0
+		lineageTag: bbb907bf-95c1-4f5e-979a-a76a866c28ba
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Invites' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = e06ad3408a1e4e13ada4e5a606a802dd
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

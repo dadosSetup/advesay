@@ -1,0 +1,66 @@
+table 'Medidas base indicacao'
+	lineageTag: 064b5955-842d-4eda-b98a-5201fe2eb3de
+
+	measure CustoPorAcessoLP =
+			
+			DIVIDE(
+				SUM('BaseIndicacao'[Amount Spent]),
+				SUM('BaseIndicacao'[Acessos LP])
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: b9909985-a242-42db-9ff8-98b60f02a10a
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoPorCliqueCopiar =
+			
+			DIVIDE(SUM('BaseIndicacao'[Amount Spent]), [passo3_cliques_copiar])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 35c50466-5b34-4eca-a349-8e22e278b198
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoPorCliqueIndic =
+			
+			DIVIDE(
+				SUM('BaseIndicacao'[Amount Spent]),
+				SUM('BaseIndicacao'[Link Clicks])
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: b114395c-fd5d-4412-b6b7-6ac1366013ca
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoPorRegistroIndic =
+			
+			DIVIDE(
+				SUM('BaseIndicacao'[Amount Spent]),
+				SUM('BaseIndicacao'[passo2_registro_completo])
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 3f00b503-b3c8-432b-9de2-a3a854f7adef
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure passo3_cliques_copiar =
+			
+			SUM('BaseIndicacao'[passo3_clique_copiar_link]) + SUM('BaseIndicacao'[passo3_copiar_link_whatsapp]) + SUM('BaseIndicacao'[passo3_copiar_link_facebook]) + SUM('BaseIndicacao'[passo3_copiar_link_gmail]) + SUM('BaseIndicacao'[passo3_copiar_link_linkedin])
+		formatString: 0
+		lineageTag: fa825c5d-977c-46fb-8100-759036c0882c
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: de928bdd-b7bc-4651-aeb0-af8fcd252e7d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas base indicacao' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 5a6f3797d17f4ef79bee242ce8b04adc
+

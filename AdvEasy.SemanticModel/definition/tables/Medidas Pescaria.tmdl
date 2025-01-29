@@ -1,0 +1,120 @@
+table 'Medidas Pescaria'
+	lineageTag: 311a73bd-9892-4489-8faf-04fd717b0f0f
+
+	measure 'Contagem Advogado pescagem' = ```
+			
+			CALCULATE(
+			    COUNTROWS(SUMMARIZE(FatPescaria, FatPescaria[lawyer_id])),
+			    USERELATIONSHIP(FatPescaria[data_criacao], 'Calendario'[Datas])
+			)
+			
+			```
+		lineageTag: 52c852d4-a833-4107-8688-9753cbf56b51
+
+	measure 'Contagem Cliente Pescagem' =
+			
+			CALCULATE(
+			    COUNTROWS(SUMMARIZE(FatPescaria, FatPescaria[client_id])),
+			    USERELATIONSHIP(FatPescaria[data_criacao], 'Calendario'[Datas])
+			)
+		formatString: 0
+		lineageTag: b6a5e37a-33df-478b-8d3e-7a3cd0e3c5ca
+
+	measure 'Contagem Pescagem' =
+			CALCULATE(
+			    COUNTROWS(FatPescaria),
+			    USERELATIONSHIP(FatPescaria[data_criacao],Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: 425f07f6-cdb8-4856-aac5-43de17a54caf
+
+	measure 'Percentual Aceito cliente' = ```
+			
+			 VAR totalCliente = [Contagem Cliente Pescagem]
+			 VAR AceitoCliente = [Aceito]
+			
+			RETURN  
+			    DIVIDE(AceitoCliente,totalCliente)
+			
+			    
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 155b824a-44a6-47d3-bf15-4c1f7328ced9
+
+	measure Aceito = ```
+			
+			 CALCULATE(
+			    COUNTROWS(FatPescaria),
+			    FatPescaria[status_pescagem] = "Aceito",
+			    USERELATIONSHIP(FatPescaria[data_criacao],Calendario[Datas])
+			 )
+			```
+		formatString: 0
+		lineageTag: 26529f02-3369-4380-b565-c18381b886d2
+
+	measure Aguardando = ```
+			
+			 CALCULATE(
+			    COUNTROWS(FatPescaria),
+			    FatPescaria[status_pescagem] = "Aguardando",
+			    USERELATIONSHIP(FatPescaria[data_criacao],Calendario[Datas])
+			 )
+			```
+		formatString: 0
+		lineageTag: 5f0a8b1e-1e03-458e-b495-244b8de7d052
+
+	measure 'Cancelado Cliente' = ```
+			
+			 CALCULATE(
+			    COUNTROWS(FatPescaria),
+			    FatPescaria[status_pescagem] = "Cancelado Cliente",
+			    USERELATIONSHIP(FatPescaria[data_criacao],Calendario[Datas])
+			 )
+			```
+		formatString: 0
+		lineageTag: d1477bb4-a9bc-4642-99a6-fa1746019735
+
+	measure 'Cancelado Sistema' = ```
+			
+			 CALCULATE(
+			    COUNTROWS(FatPescaria),
+			    FatPescaria[status_pescagem] = "Cancelado Sistema",
+			    USERELATIONSHIP(FatPescaria[data_criacao],Calendario[Datas])
+			 )
+			```
+		formatString: 0
+		lineageTag: 95dfd34b-a21c-494e-ab72-dc70a3a3d176
+
+	measure 'Percentual Cancelado' = ```
+			
+			 VAR totalCliente = [Contagem Cliente Pescagem]
+			 VAR AceitoCliente = [Aguardando]
+			
+			RETURN  
+			    DIVIDE(AceitoCliente,totalCliente)
+			
+			    
+			
+			```
+		lineageTag: 40e0eb6f-9935-449d-b3a7-82299568a5ca
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		formatString: 0
+		lineageTag: ddffcdc6-585c-4129-992a-7fc39824362b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Pescaria' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 6e212c5d5a0c47eea849ebb191580c84
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

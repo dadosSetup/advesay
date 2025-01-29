@@ -1,0 +1,33 @@
+table HoraAtualizacao
+	lineageTag: ff91dc40-ca70-40f4-a869-fc8046695c80
+
+	column Column1
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: dd773510-c7aa-4960-bfc5-1dbb2cfe6066
+		summarizeBy: none
+		sourceColumn: Column1
+
+		variation Variation
+			isDefault
+			relationship: e0e80aee-c86c-4edc-bef1-82217da1e720
+			defaultHierarchy: LocalDateTable_6ea66ddb-de4f-4b3a-b8dd-01014173b90c.'Hierarquia de datas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition HoraAtualizacao = m
+		mode: import
+		source =
+				let
+				    Fonte = DateTimeZone.SwitchZone(DateTimeZone.LocalNow(), -3),
+				    #"Convertido para Tabela" = #table(1, {{Fonte}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Convertido para Tabela",{{"Column1", type datetime}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

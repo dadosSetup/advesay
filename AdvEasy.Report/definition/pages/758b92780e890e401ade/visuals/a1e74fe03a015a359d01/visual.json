@@ -1,0 +1,168 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "a1e74fe03a015a359d01",
+  "position": {
+    "x": 1057.6674937965256,
+    "y": 759.10669975186113,
+    "z": 33000,
+    "height": 281.09181141439205,
+    "width": 832.15880893300255,
+    "tabOrder": 33000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Calendario"
+                    }
+                  },
+                  "Property": "MêsAnoAbre"
+                }
+              },
+              "queryRef": "Calendario.MêsAnoAbre",
+              "nativeQueryRef": "Data",
+              "active": true,
+              "displayName": "Data"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas base indicacao"
+                    }
+                  },
+                  "Property": "CustoPorAcessoLP"
+                }
+              },
+              "queryRef": "Medidas base indicacao.CustoPorAcessoLP",
+              "nativeQueryRef": "CustoPorAcessoLP"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas base indicacao"
+                    }
+                  },
+                  "Property": "CustoPorRegistroIndic"
+                }
+              },
+              "queryRef": "Medidas base indicacao.CustoPorRegistroIndic",
+              "nativeQueryRef": "CustoPorRegistroIndic"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas base indicacao"
+                    }
+                  },
+                  "Property": "CustoPorCliqueCopiar"
+                }
+              },
+              "queryRef": "Medidas base indicacao.CustoPorCliqueCopiar",
+              "nativeQueryRef": "CustoPorCliqueCopiar"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "seriesLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

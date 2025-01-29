@@ -1,0 +1,64 @@
+table DimEspecialidade
+	lineageTag: 49861ea9-81ff-4da6-adc3-50e337258d43
+
+	column id_especialidade
+		formatString: 0
+		lineageTag: 7382d2ed-372c-461d-9dc4-5e9642315541
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [id_especialidade]
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		lineageTag: f9f53859-72ed-4b7c-8833-8962308ebf25
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [name]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimEspecialidade = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE (
+				    "id_especialidade", INTEGER,
+				    "name", STRING,
+				    {
+				        {0, "Geral"},
+				        {1, "Direito Administrativo"},
+				        {2, "Direito Cível"},
+				        {3, "Direito da Família"},
+				        {4, "Direito do Consumidor"},
+				        {5, "Direito Empresarial"},
+				        {6, "Direito Penal/Criminal"},
+				        {7, "Direito Previdenciário"},
+				        {8, "Direito Societário"},
+				        {9, "Direito Trabalhista"},
+				        {10, "Direito Tributário"},
+				        {11, "Fusão e Aquisição"},
+				        {12, "Planejamento Sucessório"},
+				        {13, "Proteção Patrimonial"},
+				        {14, "Direito Bancário e Financeiro"},
+				        {15, "Direito Imobiliário"},
+				        {16, "Direito Ambiental"},
+				        {17, "Direito da TI"},
+				        {18, "Direito Médico"},
+				        {19, "Direito de trânsito"},
+				        {20, "Direito de Trânsito"},
+				        {21, "Direito contratual"},
+				        {22, "Direito Contratual"},
+				        {23, "Direito Digital"},
+				        {24, "Direito da Saúde"},
+				        {25, "Direito de Imigração"}
+				    }
+				)
+				
+				
+				
+				
+				```
+
+	annotation PBI_Id = d5ca7a369e3e479f8398bb73f9a24754
+

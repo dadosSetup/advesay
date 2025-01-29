@@ -1,0 +1,393 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "9f310735b2acf0165eaf",
+  "position": {
+    "x": 363.59102244389027,
+    "y": 319.15211970074813,
+    "z": 12000,
+    "height": 207.38154613466335,
+    "width": 1110.9725685785536,
+    "tabOrder": 12000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "Estados cancelados"
+                }
+              },
+              "queryRef": "Testes.Estados",
+              "nativeQueryRef": "Estados1",
+              "displayName": "Estados"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "Nomes Advogados Cancelados"
+                }
+              },
+              "queryRef": "Testes.Nomes Advogados",
+              "nativeQueryRef": "Advogados",
+              "displayName": "Advogados"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "Data cancelados"
+                }
+              },
+              "queryRef": "Testes.Data cancelados",
+              "nativeQueryRef": "Cancelamento",
+              "displayName": "Cancelamento"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "Plano cancelados"
+                }
+              },
+              "queryRef": "Testes.Mensalidade cancelados",
+              "nativeQueryRef": "Plano",
+              "displayName": "Plano"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "Valor Mensalidade cancelados"
+                }
+              },
+              "queryRef": "Testes.Valor Mensalidade cancelados",
+              "nativeQueryRef": "Mensalidade",
+              "displayName": "Mensalidade"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "Data inicio assinatura Cancelados"
+                }
+              },
+              "queryRef": "Testes.Data inicio assinatura Cancelados",
+              "nativeQueryRef": "Inicio Assinatura",
+              "displayName": "Inicio Assinatura"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "Data Fim assinatura Cancelados"
+                }
+              },
+              "queryRef": "Testes.Data Fim assinatura Cancelados",
+              "nativeQueryRef": "Fim assinatura ",
+              "displayName": "Fim assinatura "
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "LTV Cancelados"
+                }
+              },
+              "queryRef": "Testes.LTV Cancelados",
+              "nativeQueryRef": "LTV Cancelados",
+              "displayName": "LTV"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "% Realizados cancelados"
+                }
+              },
+              "queryRef": "Testes.% Realizados cancelados",
+              "nativeQueryRef": "% Realizados",
+              "displayName": "% Realizados"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Testes"
+                    }
+                  },
+                  "Property": "% Cancelados cancelados"
+                }
+              },
+              "queryRef": "Testes.% Cancelados cancelados",
+              "nativeQueryRef": "% Cancelados",
+              "displayName": "% Cancelados"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Testes"
+                  }
+                },
+                "Property": "Data Fim assinatura Cancelados"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0D253D'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fontColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0D253D'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0D253D'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "gridVertical": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 8,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'87013ed802d6a6496ec6'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5de13f620886ea034661",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FatInscricaoAntiga"
+              }
+            },
+            "Property": "STATUS ASSINATURA"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      }
+    ]
+  },
+  "isHidden": true
+}

@@ -1,0 +1,199 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "c178add990928ac8601c",
+  "position": {
+    "x": 344.61538461538464,
+    "y": 446.25310173697272,
+    "z": 30000,
+    "height": 593.9454094292804,
+    "width": 693.99503722084376,
+    "tabOrder": 29000
+  },
+  "visual": {
+    "visualType": "funnel",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "BaseIndicacao"
+                        }
+                      },
+                      "Property": "Link Clicks"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(BaseIndicacao.Link Clicks)",
+              "nativeQueryRef": "Link Clicks",
+              "displayName": "Link Clicks"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "BaseIndicacao"
+                        }
+                      },
+                      "Property": "Acessos LP"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(BaseIndicacao.Acessos LP)",
+              "nativeQueryRef": "Acessos LP",
+              "displayName": "Acessos LP"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "BaseIndicacao"
+                        }
+                      },
+                      "Property": "passo2_registro_completo"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(BaseIndicacao.passo2_registro_completo)",
+              "nativeQueryRef": "registro_completo",
+              "displayName": "registro_completo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas base indicacao"
+                    }
+                  },
+                  "Property": "passo3_cliques_copiar"
+                }
+              },
+              "queryRef": "Medidas base indicacao.passo3_cliques_copiar",
+              "nativeQueryRef": "passo3_cliques_copiar"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "BaseIndicacao"
+                      }
+                    },
+                    "Property": "Link Clicks"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Funil de Conversão'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading2'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "38D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

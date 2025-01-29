@@ -1,0 +1,132 @@
+table Periodo
+	lineageTag: c2ee4b7e-7577-44d5-868c-82c9b4f30468
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 94be6fb2-5aa3-4fa2-9d0b-97e7996b44e2
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variation
+			isDefault
+			relationship: 8667cd6e-4b4f-4823-ba2b-ea3565578576
+			defaultHierarchy: LocalDateTable_5c91950f-e922-4cc2-8716-6ddfafda7e59.'Hierarquia de datas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Periodo
+		dataType: string
+		lineageTag: dc0d976b-dacd-465c-91ea-055a344a2eb9
+		summarizeBy: none
+		sourceColumn: Periodo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		dataType: double
+		lineageTag: 06fb45ee-6670-4fbb-a592-434307fa29f9
+		summarizeBy: sum
+		sourceColumn: Ordem
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Periodo = m
+		mode: import
+		source = ```
+				let
+				
+				// Criando minha função encapsulada
+				fnGerarPeriodos = (Periodo as text, DataInicial as date, DataFinal as date, Ordem as number) =>
+				    let
+				        QtdDias = Duration.Days(DataFinal-DataInicial)+1,
+				        Datas = List.Dates(DataInicial, QtdDias, #duration(1,0,0,0)),
+				        Cabecalho = type table[Data=date, Periodo=text, Ordem=number],
+				        Lista = List.Transform(
+				            Datas,
+				            each
+				            {
+				                _,
+				                Periodo,
+				                Ordem
+				            }
+				        ),
+				        Tabela = #table(Cabecalho,Lista)
+				    in
+				        Tabela
+				
+				    ,
+				    //Hoje e Ontem
+				    DtHoje = DateTime.Date(DateTime.LocalNow()), // Hoje
+				    DtOntem = Date.AddDays(DtHoje, -1), //Ontem
+				
+				    // Semana Atual
+				    InicioSemana = Date.StartOfWeek(DtHoje),
+				    FimSemana = Date.EndOfWeek(DtHoje),
+				
+				    // Semana Passada - 7 Dias
+				    InicioSemanaPassada = Date.AddDays(InicioSemana, -7),
+				    FimSemanaPassada = Date.AddDays(FimSemana, -7),
+				
+				    //Duas Semanas antes - 15 dias
+				    InicioDuasSemanasPassadas = Date.AddDays(InicioSemanaPassada, -7),
+				    FimDuasSemanasPassadas = Date.AddDays(FimSemanaPassada, -7),
+				
+				    // Mês Atual 
+				    InicioMês = Date.StartOfMonth(DtHoje),
+				    FimMês = Date.EndOfMonth(DtHoje),
+				
+				    // Mês Anterior
+				    InicioMêsAnterior = Date.AddMonths(Date.StartOfMonth(DtHoje), -1),
+				    FimMêsAnterior = Date.EndOfMonth(InicioMêsAnterior),
+				
+				    // Este Ano
+				    InicioAno = Date.StartOfYear(DtHoje),
+				    FimAno = Date.EndOfYear(DtHoje),
+				
+				    Intervalos =
+				    {
+				        {"Hoje", DtHoje, DtHoje, 1 },
+				        {"Ontem", DtOntem, DtOntem, 2 },
+				        {"Esta Semana", InicioSemana, FimSemana, 3 },
+				        {"Últimos 7 dias", Date.AddDays(DtHoje, -6), DtHoje, 4 },
+				        {"Semana Passada", InicioSemanaPassada, FimSemanaPassada, 5 },
+				        {"Últimos 15 dias", Date.AddDays(DtHoje, -14), DtHoje, 6 },
+				        {"Este Mês", InicioMês, FimMês, 7 },
+				        {"Últimos 30 dias", Date.AddDays(DtHoje, -29), DtHoje, 8 },
+				        {"Mês Passado", InicioMêsAnterior, FimMêsAnterior, 9 },
+				        {"Últimos 2 meses", Date.StartOfMonth(Date.AddMonths(DtHoje, -2)), Date.EndOfMonth(Date.AddMonths(DtHoje, -1)), 10 },
+				        {"Últimos 3 meses", Date.StartOfMonth(Date.AddMonths(DtHoje, -3)), Date.EndOfMonth(Date.AddMonths(DtHoje, -1)), 11 },
+				        {"Últimos 6 meses", Date.StartOfMonth(Date.AddMonths(DtHoje, -6)), Date.EndOfMonth(Date.AddMonths(DtHoje, -1)), 12 },
+				        {"Últimos 12 meses", Date.StartOfMonth(Date.AddMonths(DtHoje, -12)), Date.EndOfMonth(Date.AddMonths(DtHoje, -1)), 13 },
+				        {"Últimos 365 dias", Date.AddDays(DtHoje, -364), DtHoje, 14 },
+				        {"Este Ano", InicioAno, DtHoje, 15 },
+				        {"Ano Passado", Date.AddYears(InicioAno, -1), Date.AddYears(FimAno, -1), 16 },
+				        {"Do início até hoje", Date.AddYears(InicioAno, -10), DtHoje, 17 }
+				    }
+				        // Aplicando então, nossa função de períodos a partir de nossa lista móvel de datas
+				        , Períodos = List.Transform(
+				            Intervalos,
+				            each
+				            fnGerarPeriodos(_{0},_{1},_{2},_{3})
+				        ),
+				        Tabela = Table.Combine(Períodos)
+				
+				    in
+				        Tabela
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

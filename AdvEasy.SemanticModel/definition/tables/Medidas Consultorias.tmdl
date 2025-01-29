@@ -1,0 +1,524 @@
+table 'Medidas Consultorias'
+	lineageTag: b773249c-2a57-4aee-9d17-ebb0a698b460
+
+	measure 'Total Consultorias' =
+			
+			CALCULATE(
+			    COUNTROWS(FatConsultorias),
+			    USERELATIONSHIP(FatConsultorias[data_criacao_consultoria],Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: f344bfee-f3be-4533-9a3c-a84da8dec475
+
+	measure 'Total advogados consultorias' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FatConsultorias[doctor_id]),
+			    USERELATIONSHIP(FatConsultorias[data_criacao_consultoria],Calendario[Datas])
+			
+			)
+		formatString: 0
+		lineageTag: e92667d3-ae98-48aa-9f9f-044ca4c576d2
+
+	measure 'Total Clientes Consultorias abertas' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FatConsultorias[patient_id]),
+			    USERELATIONSHIP(FatConsultorias[data_criacao_consultoria],Calendario[Datas])
+			
+			)
+		formatString: 0
+		lineageTag: 8327b128-1024-4cc5-93ab-819e71b28469
+
+	measure 'dias online advogados' = ```
+			
+			CALCULATE(
+			        COUNT('FatHistoricoOnline'[id]),
+			        USERELATIONSHIP('FatHistoricoOnline'[online_at], 'Calendario'[Datas])
+			    )   
+			```
+		formatString: 0
+		lineageTag: 111aceff-1c6c-4f0f-b50a-e7066a1f1f49
+
+	measure 'Media Consultoria' = DIVIDE([Total Consultorias],[dias online advogados],0)
+		lineageTag: bc1dce6f-63a3-4774-88a5-07c04d473f78
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Realizadas' =
+			
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[status_consultoria] = "Realizado",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+		lineageTag: 94bdabef-2887-4364-b40e-b020b8379b4e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Realizada' = ```
+			
+			VAR realizadas = [Total Realizadas]
+			VAR totalconsultorias = [Total Consultorias]
+			VAR resultado = DIVIDE(realizadas, totalconsultorias, 0)
+			RETURN
+			    "(" & FORMAT(realizadas, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 876d76f8-25aa-43a6-a9d6-89db656425d4
+
+	measure 'Total Canceladas' = ```
+			
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			    'FatConsultorias'[status_consultoria] = "Cancelada",
+			    USERELATIONSHIP('FatConsultorias'[data_cancelamento_consultoria], 'Calendario'[Datas])
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 31a758b1-fc60-4fb9-913f-fc5b8f6ee308
+
+	measure '% Cancelados' = ```
+			
+			VAR cancelados = [Total Canceladas]
+			VAR totalconsultorias = [Total Consultorias]
+			VAR resultado = DIVIDE(cancelados, totalconsultorias, 0)
+			RETURN
+			    "(" & FORMAT(cancelados, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 83a85e8c-1d72-423e-8834-3b58d77915e0
+
+	measure '% Realizada tabela' = ```
+			DIVIDE([Total Realizadas], [Total Consultorias], 0) 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 711acf69-8a98-422a-b18e-4c7ff5d68e88
+
+	measure 'Media Consultoria por advogado' = DIVIDE([Total Consultorias],[Total advogados consultorias],0)
+		formatString: 0.00
+		lineageTag: 4bd5367c-a016-427a-91a6-eae4182fa8b8
+
+	measure '% Canceladas tabela' = ```
+			DIVIDE([Total Canceladas], [Total Consultorias], 0) 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 89142ec2-92d0-4699-8e44-179edb1c0305
+
+	measure 'Total Feminino' =
+			
+			CALCULATE(
+			    COUNTROWS(
+			        FILTER(
+			            'DimClientes_',
+			            'DimClientes_'[sexo] = "Feminino"
+			        )
+			    ),
+			    USERELATIONSHIP('DimClientes_'[created_at], 'Calendario'[Datas])
+			)
+		formatString: 0
+		lineageTag: c3e44965-a951-48ce-a5e6-486e686a641c
+
+	measure 'Total Masculino' =
+			
+			CALCULATE(
+			    COUNTROWS(
+			        FILTER(
+			            'DimClientes_',
+			            'DimClientes_'[sexo] = "Masculino"
+			        )
+			    ),
+			    USERELATIONSHIP('DimClientes_'[created_at], 'Calendario'[Datas])
+			)
+		formatString: 0
+		lineageTag: 9c47ebe3-4399-4898-a7e4-13f5dddaec1f
+
+	measure '% Feminino' =
+			
+			VAR feminino = [Total Feminino]
+			VAR totalclientes = [Total Clientes Consultorias abertas]
+			VAR resultado = DIVIDE(feminino, totalclientes, 0)
+			RETURN
+			    "(" & FORMAT(feminino, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+		lineageTag: 250f4fbb-6a34-40df-93cd-7be7a9a684c6
+
+	measure '% Masculino' =
+			
+			VAR masculino = [Total Masculino]
+			VAR totalclientes = [Total Clientes Consultorias abertas]
+			VAR resultado = DIVIDE(masculino, totalclientes, 0)
+			RETURN
+			    "(" & FORMAT(masculino, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+		lineageTag: f82a4aff-5447-4868-944d-3b34611a4ffc
+
+	measure 'Total sem sexo' = ```
+			
+			CALCULATE(
+			    COUNTROWS(
+			        FILTER(
+			            'DimClientes_',
+			            'DimClientes_'[sexo] = "Sem informação"
+			        )
+			    ),
+			    USERELATIONSHIP('DimClientes_'[created_at], 'Calendario'[Datas])
+			)
+			    
+			```
+		formatString: 0
+		lineageTag: 6a45a2bd-7930-438c-be2f-87ea052837a3
+
+	measure '% Sem informacao' =
+			
+			VAR outro = [Total sem sexo]
+			VAR totalclientes = [Total Clientes Consultorias abertas]
+			VAR resultado = DIVIDE(outro, totalclientes, 0)
+			RETURN
+			    "(" & FORMAT(outro, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+		lineageTag: 0abc6a5a-4bd5-4b4c-a0cb-74abf8e18a4a
+
+	measure 'Total Replicada' =
+			
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[replicacao] = "Replicada",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+		formatString: 0
+		lineageTag: 2be7c015-8237-47c3-b9af-b874e1ba8a6a
+
+	measure 'Total Especifica' =
+			
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[replicacao] = "Especifica",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+		formatString: 0
+		lineageTag: f1081651-ea0b-40a4-b2e3-5f0de545374a
+
+	measure '% Replicada' = ```
+			
+			VAR replicada = [Total Replicada]
+			VAR totalconsultorias = [Total Consultorias]
+			VAR resultado = DIVIDE(replicada, totalconsultorias, 0)
+			RETURN
+			    "(" & FORMAT(replicada, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 37c4b13d-c074-434f-ae57-f877b81a8d6a
+
+	measure '% Especifica' = ```
+			
+			VAR especifica = [Total Especifica]
+			VAR totalconsultorias = [Total Consultorias]
+			VAR resultado = DIVIDE(especifica, totalconsultorias, 0)
+			RETURN
+			    "(" & FORMAT(especifica, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 35129ffb-2010-4df1-84ee-5ee986b10614
+
+	measure 'Media Consultoria por Cliente' = DIVIDE([Total Consultorias], [Total Clientes Consultorias abertas], 0)
+		lineageTag: a2be8615-d114-4298-9adf-8c33e6083e84
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Realizada + % Replicada' = ```
+			
+			VAR RealizadoReplicada =
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[status_consultoria] = "Realizado",
+			            'FatConsultorias'[replicacao] = "Replicada",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+			VAR TotalConsultorias = [Total Consultorias]
+			VAR Resultado = DIVIDE(RealizadoReplicada, TotalConsultorias, 0)
+			RETURN
+			    "(" & FORMAT(RealizadoReplicada, "0") & " - " & FORMAT(Resultado, "0.00%") & ")"
+			
+			
+			```
+		lineageTag: a751117e-db87-46ba-a319-6c8e7c5431e4
+
+	measure '% Realizada + % Especifica' = ```
+			
+			VAR RealizadoEspecifico =
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[status_consultoria] = "Realizado",
+			            'FatConsultorias'[replicacao] = "Especifica",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+			VAR TotalConsultorias = [Total Consultorias]
+			VAR Resultado = DIVIDE(RealizadoEspecifico, TotalConsultorias, 0)
+			RETURN
+			    "(" & FORMAT(RealizadoEspecifico, "0") & " - " & FORMAT(Resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 778f3ff5-26a7-4ba0-a441-c895b9e1f782
+
+	measure '% Cancelados + Replicado' = ```
+			
+			VAR CanceladoReplicado =
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[status_consultoria] = "Cancelada",
+			            'FatConsultorias'[replicacao] = "Replicada",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+			VAR TotalConsultorias = [Total Consultorias]
+			VAR Resultado = DIVIDE(CanceladoReplicado, TotalConsultorias, 0)
+			RETURN
+			    "(" & FORMAT(CanceladoReplicado, "0") & " - " & FORMAT(Resultado, "0.00%") & ")"
+			
+			
+			```
+		lineageTag: 761ec6ed-a22e-4f30-a1e3-054a6dfabd6c
+
+	measure '% Cancelados + Especifica' = ```
+			
+			VAR CanceladoEspecifica =
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[status_consultoria] = "Cancelada",
+			            'FatConsultorias'[replicacao] = "Especifica",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+			VAR TotalConsultorias = [Total Consultorias]
+			VAR Resultado = DIVIDE(CanceladoEspecifica, TotalConsultorias, 0)
+			RETURN
+			    "(" & FORMAT(CanceladoEspecifica, "0") & " - " & FORMAT(Resultado, "0.00%") & ")"
+			
+			
+			```
+		lineageTag: a24f47ba-aff1-4058-8e93-89b501385292
+
+	measure 'Total Consultorias Mês Selecionado' = ```
+			
+			CALCULATE(
+			    COUNTROWS(FatConsultorias),
+			    USERELATIONSHIP(FatConsultorias[data_criacao_consultoria], Calendario[Datas]),
+			    FILTER(
+			        ALL(Calendario),
+			        Calendario[Mês] = MAX(Calendario[Mês])
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 48418c8e-2184-4dca-866d-6c3c96bfe310
+
+	measure TMR_Realizado = ```
+			
+			CALCULATE(
+			    AVERAGE(FatConsultorias[TMR]),
+			    FatConsultorias[status_consultoria] = "Realizado",
+			    USERELATIONSHIP(FatConsultorias[data_criacao_consultoria],Calendario[Datas])
+			)
+			
+			```
+		formatString: 0.00
+		lineageTag: eeb189cf-7c98-463b-9358-3018500a0fe5
+
+	measure TMR_Cancelado = ```
+			
+			CALCULATE(
+			    AVERAGE(FatConsultorias[TMR]),
+			    FatConsultorias[status_consultoria] = "Cancelada",
+			    USERELATIONSHIP(FatConsultorias[data_criacao_consultoria],Calendario[Datas])
+			)
+			
+			```
+		lineageTag: f30d0a51-2eb6-4c11-90c4-b6b0e34f0f3e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Dias = COUNT(Calendario[Datas])
+		formatString: 0
+		lineageTag: 91d52189-4367-4ab4-95e1-7d84a2e5d0cb
+
+	measure 'Media Consultoria por dia' = DIVIDE([Total Consultorias],[Dias],0)
+		lineageTag: dbf766f4-158d-45d4-9a6f-d182585c585a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MediaConsultoriasSemanalFiltrada = ```
+			
+			DIVIDE(
+			    [Total Consultorias],
+			    CALCULATE(
+			        DISTINCTCOUNT('Calendario'[Semana do Ano]),
+			        ALLSELECTED('Calendario')
+			    ),
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 1c59fac1-c79e-4c23-b29b-6d1eb4879abd
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Media horas Primeira consultoria' =
+			
+			CALCULATE(
+			    AVERAGE(FatPeriodoTeste[Quantidade_horas]),
+			    USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],Calendario[Datas])
+			)
+		lineageTag: 1b4ef8f5-cfca-43eb-b836-162b6a4ed6ae
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Média Consultorias' = ```
+			
+			VAR TotalConsultorias = 
+			    CALCULATE(
+			        SUMX(
+			            FatPeriodoTeste,
+			            CALCULATE(
+			                COUNTROWS(FatConsultorias),
+			                FILTER(
+			                    FatConsultorias,
+			                    FatConsultorias[doctor_id] = FatPeriodoTeste[doctor_id] &&
+			                    FatConsultorias[data_criacao_consultoria] >= FatPeriodoTeste[data inicio periodo teste] &&
+			                    FatConsultorias[data_criacao_consultoria] <= FatPeriodoTeste[data fim periodo teste]
+			                )
+			            )
+			        )
+			    )
+			
+			VAR NumeroDePeriodos =
+			    DISTINCTCOUNT(FatPeriodoTeste[doctor_id]) -- Número de períodos distintos ou outra lógica para determinar agrupamento
+			
+			RETURN
+			DIVIDE(TotalConsultorias, NumeroDePeriodos, 0)
+			
+			```
+		lineageTag: 593a0e5e-a532-4742-a8b5-046daca2961c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Geral' = ```
+			
+			VAR geral = [Total Geral]
+			VAR totalconsultorias = [Total Consultorias]
+			VAR resultado = DIVIDE(geral, totalconsultorias, 0)
+			RETURN
+			    "(" & FORMAT(geral, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 5fb9a5fb-f83d-456e-af31-e7226ef6b10b
+
+	measure 'Total Geral' =
+			
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[replicacao] = "Geral",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+		formatString: 0
+		lineageTag: 9a352de8-6ae3-4f53-994c-fc2d5a6f2bea
+
+	measure '% Realizada + % Geral' = ```
+			
+			VAR RealizadoGeral =
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[status_consultoria] = "Realizado",
+			            'FatConsultorias'[replicacao] = "Geral",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+			VAR TotalConsultorias = [Total Consultorias]
+			VAR Resultado = DIVIDE(RealizadoGeral, TotalConsultorias, 0)
+			RETURN
+			    "(" & FORMAT(RealizadoGeral, "0") & " - " & FORMAT(Resultado, "0.00%") & ")"
+			
+			```
+		lineageTag: 9068ad7d-7118-4b74-ac78-71dd8ddda042
+
+	measure '% Cancelados + Geral' = ```
+			
+			VAR CanceladoGeral =
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			            'FatConsultorias'[status_consultoria] = "Cancelada",
+			            'FatConsultorias'[replicacao] = "Geral",
+			            USERELATIONSHIP('FatConsultorias'[data_criacao_consultoria], 'Calendario'[Datas])
+			        )
+			VAR TotalConsultorias = [Total Consultorias]
+			VAR Resultado = DIVIDE(CanceladoGeral, TotalConsultorias, 0)
+			RETURN
+			    "(" & FORMAT(CanceladoGeral, "0") & " - " & FORMAT(Resultado, "0.00%") & ")"
+			
+			
+			```
+		lineageTag: 13da42be-8fd9-4ffa-9778-b1eb0165e029
+
+	measure ConsultoriasAvulsas = [Total Consultorias] - [Total Clientes Consultorias abertas]
+		formatString: 0
+		lineageTag: d1a8b526-dc5b-4e78-ba2b-1beb3996140c
+
+	measure Medida = ```
+			
+			
+			```
+		formatString: 0
+		lineageTag: b4c6babc-d81c-4ed3-8509-5246f43dc478
+
+	measure Total_Clientes_Recorrentes = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FatConsultorias[patient_id]),
+			    FILTER(
+			        FatConsultorias,
+			        COUNTROWS(
+			            FILTER(
+			                FatConsultorias,
+			                FatConsultorias[patient_id] = EARLIER(FatConsultorias[patient_id]) &&
+			                FatConsultorias[data_criacao_consultoria] <> EARLIER(FatConsultorias[data_criacao_consultoria])
+			            )
+			        ) > 0
+			    )
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Recorrentes
+		lineageTag: 92ad2835-cd12-4d4e-b3ad-c126b45de70b
+
+	measure Total_Clientes_ = DISTINCTCOUNT(FatConsultorias[patient_id])
+		formatString: 0
+		displayFolder: Recorrentes
+		lineageTag: 2a069fdb-2001-459e-8d12-f4c551a68b0b
+
+	measure Total_Clientes_Recorrentes_Sim_ou_nao = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FatConsultorias[patient_id]),
+			    FatConsultorias[É_Recorrente] = "Sim"
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Recorrentes
+		lineageTag: 8d5c73ec-41aa-453e-8429-8767458f55ee
+
+	column Column
+		formatString: 0
+		lineageTag: 8d997c61-14eb-4729-849e-7c3b96b8a2f7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Consultorias' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = c2903056c61a43b0a044707db46a78a1
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

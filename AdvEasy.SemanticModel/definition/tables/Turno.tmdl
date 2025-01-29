@@ -1,0 +1,39 @@
+table Turno
+	lineageTag: a17e4a60-93f1-4c45-9a03-d4de6a4d7cb7
+
+	column id_turno
+		formatString: 0
+		lineageTag: b85a4386-0af6-4c92-83c9-e751915f2f7f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [id_turno]
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		lineageTag: a102c130-96c1-4cdf-80fc-9203b2a25af1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [name]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Turno = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE (
+				    "id_turno", INTEGER,
+				    "name", STRING,
+				    {
+				        {1, "Manhã"},
+				        {2, "Tarde"},
+				        {3, "Noite"},
+				        {4, "Madrugada"}
+				       
+				    }
+				)
+				```
+
+	annotation PBI_Id = 4932059327fe44b68e17de581f58f199
+

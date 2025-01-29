@@ -1,0 +1,113 @@
+table 'Medidas Assinantes & Cancelados'
+	lineageTag: d4cc5926-3a8a-4a39-834b-7e3c1a3d37da
+
+	measure 'total advogados Assinante e cancelados' = DISTINCTCOUNT(FatInscricaoAntiga[ID_CLIENTE])
+		formatString: 0
+		lineageTag: 0fecae98-8489-4db5-a916-a0d3968875f9
+
+	measure 'Total Assinantes Cancelados' =
+			
+			CALCULATE(
+			    COUNTROWS(FatInscricaoAntiga),
+			    NOT(ISBLANK(FatInscricaoAntiga[DATA DE CANCELAMENTO])),
+			    USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO], Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: 7c2e720e-411e-4aba-8b73-2ba76be93665
+
+	measure 'Total de Advogados Assinantes' =
+			
+			CALCULATE(
+			    COUNTROWS(FatInscricaoAntiga),
+			    NOT(ISBLANK(FatInscricaoAntiga[DATA DE INICIO ASSINATURA])),
+			    USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA], Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: f8404c26-da81-4a2a-a59d-6a6b2385a87b
+
+	measure 'diferenca entre Cancelado e Assinantes' = [Total de Advogados Assinantes] - [Total Assinantes Cancelados]
+		formatString: 0
+		lineageTag: 4025eaa1-abf9-40c2-979d-b9e9212f6e69
+
+	measure 'Assinante Acumulado nos meses' = ```
+			
+			VAR MaxDate = MAX('Calendario'[Datas])
+			RETURN
+			CALCULATE(
+			    [Total de Advogados Assinantes],
+			    FILTER(
+			        ALL('Calendario'[Datas]),
+			        'Calendario'[Datas] <= MaxDate
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: b9b4abee-c052-45e7-9664-e3a865d21f57
+
+	measure 'Cancelados Acumulado nos meses' = ```
+			
+			VAR MaxDate = MAX('Calendario'[Datas])
+			RETURN
+			CALCULATE(
+			    [Total Assinantes Cancelados],
+			    FILTER(
+			        ALL('Calendario'[Datas]),
+			        'Calendario'[Datas] <= MaxDate
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: a156847f-868c-4ac0-a080-09776cbcf5c2
+
+	measure 'Saldo Assinantes Meses' = 'Medidas Assinantes & Cancelados'[Assinante Acumulado nos meses] - 'Medidas Assinantes & Cancelados'[Cancelados Acumulado nos meses]
+		formatString: 0
+		lineageTag: a15714cd-d519-4176-a75d-3a397724303d
+
+	measure 'total advogados Assinante e cancelados RemoveFiltros' =
+			
+			CALCULATE(DISTINCTCOUNT(FatInscricaoAntiga[ID_CLIENTE]),
+			REMOVEFILTERS(FatInscricaoAntiga))
+		formatString: 0
+		lineageTag: 086973e0-22af-4f7e-8630-4b5414770467
+
+	measure 'Total Cancelados Discounts' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FatInscricaoAntiga[ID_CLIENTE]),
+			    NOT(ISBLANK(FatInscricaoAntiga[DATA DE CANCELAMENTO])),
+			    REMOVEFILTERS(FatInscricaoAntiga)
+			)
+		formatString: 0
+		lineageTag: 1d0683c2-47a4-4e9e-a644-ccaa40ff8240
+
+	measure '% Crescimento' = ```
+			
+			VAR saldoatual = [Saldo Assinantes Meses]
+			VAR saldoanterior = CALCULATE([Saldo Assinantes Meses], PREVIOUSMONTH(Calendario[Datas]))
+			VAR resultado = IF(NOT(ISBLANK(saldoanterior)), (saldoatual - saldoanterior) / saldoanterior, BLANK())
+			RETURN
+			    resultado
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 51fb9cd6-439e-4475-992d-f344c97abfe7
+
+	column Column
+		formatString: 0
+		lineageTag: 0708ba90-a813-4697-a3ed-16c08d7c8343
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Assinantes & Cancelados' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 62d7f2295ad54755b196a10b00c265d9
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

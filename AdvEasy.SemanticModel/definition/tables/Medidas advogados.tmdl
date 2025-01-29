@@ -1,0 +1,1139 @@
+table 'Medidas advogados'
+	lineageTag: 7a5137b7-4fa4-4d8f-8b44-bebf0d77f789
+
+	measure 'Total de Advogados' =
+			
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    USERELATIONSHIP(DimAdvogados[created_at],Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: 3ff608eb-18c4-4bc6-b501-714751799981
+
+	measure 'Total de Advogados removefiltros' =
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    REMOVEFILTERS(DimAdvogados)
+			)
+		formatString: 0
+		lineageTag: 86fb8ce9-b0b8-44e2-9049-3013016a2f8c
+
+	measure 'Cadastro Advogado Mes Anterior' =
+			CALCULATE(
+			    [Total de Advogados], DATEADD(Calendario[Datas], -1,MONTH)
+			)
+		formatString: 0
+		lineageTag: ff2971ac-ebfc-4dca-b67c-cb32f978df1f
+
+	measure 'Taxa Crescimento Cadastro Advogados' = ```
+			
+			VAR PeriodoAtual = CALCULATE(COUNT('DimAdvogados'[id]))
+			VAR PeriodoAnterior = CALCULATE(COUNT('DimAdvogados'[id]), DATEADD('Calendario'[Datas], -1, MONTH))
+			VAR TaxaCrescimento = IF(NOT ISBLANK(PeriodoAnterior),
+			    (PeriodoAtual - PeriodoAnterior) / PeriodoAnterior,
+			    BLANK()
+			)
+			RETURN
+			    IF(NOT ISBLANK(TaxaCrescimento),
+			        FORMAT(TaxaCrescimento, "+0.00%;-0.00%;0.00%"),
+			        BLANK()
+			    )
+			
+			
+			
+			
+			// VAR PeriodoAtual =
+			//     CALCULATE (
+			//         COUNT ( 'FatInscricaoAntiga'[ID_CLIENTE] ),
+			//         USERELATIONSHIP ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], Calendario[Datas] )
+			//     )
+			// VAR PeriodoAnterior =
+			//     CALCULATE (
+			//         COUNT ( 'FatInscricaoAntiga'[ID_CLIENTE] ),
+			//         DATEADD ( 'Calendario'[Datas], -1, MONTH ),
+			//         USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],Calendario[Datas])
+			//     ) 
+			// VAR TaxaCrescimento =
+			//     IF (
+			//         NOT ISBLANK ( PeriodoAnterior )
+			//             && PeriodoAnterior <> 0,
+			//         ( PeriodoAtual - PeriodoAnterior ) / PeriodoAnterior,
+			//         BLANK ()
+			//     )
+			// RETURN
+			//     IF (
+			//         NOT ISBLANK ( TaxaCrescimento ),
+			//         FORMAT ( TaxaCrescimento, "0.00%;-0.00%;0.00%" ),
+			//         BLANK ()
+			//     )
+			
+			```
+		lineageTag: d947dee7-65e8-445b-a074-7cc88ee9c8cc
+
+	measure 'Total Contas Deletadas' =
+			
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    NOT(ISBLANK(DimAdvogados[deleted_at])),
+			    USERELATIONSHIP(DimAdvogados[deleted_at],Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: 188c5084-c098-4ded-8d22-ac98bb8e7e79
+
+	measure 'Total advogados Assinantes' =
+			
+			CALCULATE (
+			    DISTINCTCOUNT( FatInscricaoAntiga[ID_CLIENTE]),
+			    USERELATIONSHIP ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], Calendario[Datas] )
+			)
+		formatString: 0
+		lineageTag: e5e445f1-94a9-430d-b38b-be626fcd8336
+
+	measure 'Total advogados Cancelados' =
+			
+			CALCULATE (
+			    COUNTROWS ( FatInscricaoAntiga ),
+			    USERELATIONSHIP ( FatInscricaoAntiga[DATA DE CANCELAMENTO], Calendario[Datas] )
+			)
+		formatString: 0
+		lineageTag: f521d8db-74b0-41b9-8ee2-fdb7b7e4edd5
+
+	measure 'Assinantes Advogado Mes Anterior' = ```
+			
+			CALCULATE(
+			    [Total advogados Assinantes], DATEADD(Calendario[Datas], -1, MONTH)
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 2ff54bb9-7c52-4211-a1c6-9e681648736f
+
+	measure 'Taxa Crescimento Assinantes Advogados' = ```
+			
+			VAR PeriodoAtual =
+			    CALCULATE (
+			        COUNT ( 'FatInscricaoAntiga'[ID_CLIENTE] ),
+			        USERELATIONSHIP ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], Calendario[Datas] )
+			    )
+			VAR PeriodoAnterior =
+			    CALCULATE (
+			        COUNT ( 'FatInscricaoAntiga'[ID_CLIENTE] ),
+			        DATEADD ( 'Calendario'[Datas], -1, MONTH ),
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],Calendario[Datas])
+			    ) 
+			VAR TaxaCrescimento =
+			    IF (
+			        NOT ISBLANK ( PeriodoAnterior )
+			            && PeriodoAnterior <> 0,
+			        ( PeriodoAtual - PeriodoAnterior ) / PeriodoAnterior,
+			        BLANK ()
+			    )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( TaxaCrescimento ),
+			        FORMAT ( TaxaCrescimento, "+0.00%;-0.00%;0.00%" ),
+			        BLANK ()
+			    )
+			
+			```
+		lineageTag: 8fd8d048-a0c0-4145-9683-c599c75d7571
+
+	measure 'Cancelados Advogado Mes Anterior' = ```
+			
+			CALCULATE(
+			    [Total advogados Cancelados], DATEADD(Calendario[Datas], -1, MONTH)
+			)
+			
+			```
+		formatString: 0
+		lineageTag: c8423054-3873-4fe7-9886-7c4bf8206bc6
+
+	measure 'Taxa Crescimento Cancelados Advogados' = ```
+			
+			VAR PeriodoAtual =
+			    CALCULATE (
+			        COUNT ( 'FatInscricaoAntiga'[ID_CLIENTE] ),
+			        USERELATIONSHIP ( FatInscricaoAntiga[DATA DE CANCELAMENTO], Calendario[Datas] )
+			    )
+			VAR PeriodoAnterior =
+			    CALCULATE (
+			        COUNT ( 'FatInscricaoAntiga'[ID_CLIENTE] ),
+			        DATEADD ( 'Calendario'[Datas], -1, MONTH ),
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],Calendario[Datas])
+			    ) 
+			VAR TaxaCrescimento =
+			    IF (
+			        NOT ISBLANK ( PeriodoAnterior )
+			            && PeriodoAnterior <> 0,
+			        ( PeriodoAtual - PeriodoAnterior ) / PeriodoAnterior,
+			        BLANK ()
+			    )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( TaxaCrescimento ),
+			        FORMAT ( TaxaCrescimento, "+0.00%;-0.00%;0.00%" ),
+			        BLANK ()
+			    )
+			
+			```
+		lineageTag: 1fe08612-0d38-469a-b067-1dc438cbb2e9
+
+	measure 'Advogado Em Teste' = ```
+			
+			CALCULATE (
+			    COUNTROWS ( FatPeriodoTeste ),
+			    FatPeriodoTeste[Em Teste] = "Em Teste",
+			    FatPeriodoTeste[plano] <> "Cancelada",
+			    REMOVEFILTERS(Calendario[Mês Atual]),
+			    REMOVEFILTERS(Calendario[Ano Atual])
+			)
+			
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: 2107d585-610c-4399-836d-f087951122b2
+
+	measure '% Aprovados' = ```
+			
+			VAR aprovados = [Aprovado]
+			VAR cadastrocompleto = CALCULATE(
+			    COUNTROWS(DimAdvogados), 
+			    DimAdvogados[status_cadastro] = "Cadastro Completo",
+			    USERELATIONSHIP(DimAdvogados[created_at],Calendario[Datas])
+			)
+			VAR totalAdvogados = [Total de Advogados] -- Medida que calcula o total de advogados
+			RETURN
+			    DIVIDE(aprovados + cadastrocompleto, totalAdvogados, 0)
+			
+			```
+		formatString: 0%;-0%;0%
+		lineageTag: 79983d9c-f555-418c-96f2-ad132cc01831
+
+	measure '% Reprovado' = ```
+			
+			VAR reprovado = [Reprovado]
+			VAR totalAdvogados = [Total de Advogados]
+			RETURN
+			    DIVIDE(reprovado, totalAdvogados, 0)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 9cfb2732-7690-4c5a-86a8-8c6cdbdda2d4
+
+	measure '% Cadastro Completo' = ```
+			
+			VAR cadastrocompleto = [Cadastro Completo]
+			VAR totalAdvogados = [Total de Advogados] -- Medida que calcula o total de advogados
+			RETURN
+			    DIVIDE(cadastrocompleto, totalAdvogados, 0)
+			 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2ee392a5-8e6c-47ee-9eee-e83a3bdda209
+
+	measure 'Calculo Aprovado' = ```
+			
+			VAR aprovados = [Aprovado]
+			VAR cadastrocompleto = [Cadastro Completo]
+			VAR totalAdvogados = [Total de Advogados] -- Medida que calcula o total de advogados
+			
+			RETURN
+			    "(" & FORMAT(aprovados, "0") & " + " & FORMAT(cadastrocompleto, "0") & ")" & " / " & FORMAT(totalAdvogados, "0")
+			
+			```
+		lineageTag: 4557aea7-3a0b-47e1-9229-6d5c88888ac5
+
+	measure 'Calculo Reprovado' =
+			
+			VAR reprovado = [Reprovado]
+			VAR totalAdvogados = [Total de Advogados] -- Medida que calcula o total de advogados
+			
+			RETURN
+			    FORMAT(reprovado, "0") & " / " & FORMAT(totalAdvogados, "0")
+		lineageTag: ca89301f-6cac-4806-91b5-c08cf24d0cc5
+
+	measure 'Calculo Cadastro Completo' =
+			
+			VAR cadastrocompleto = [Cadastro Completo]
+			VAR totalAdvogados = [Total de Advogados] -- Medida que calcula o total de advogados
+			
+			RETURN
+			    FORMAT(cadastrocompleto, "0") & " / " & FORMAT(totalAdvogados, "0")
+		lineageTag: 605a3be8-b9bb-47dc-8c53-99b01ef9cb9f
+
+	measure '% Assinantes x Completo' = ```
+			
+			VAR cadastrocompleto = [Cadastro Completo]
+			VAR assinantes = CALCULATE (
+			    DISTINCTCOUNT( FatInscricaoAntiga[ID_CLIENTE]),
+			    USERELATIONSHIP ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], Calendario[Datas] )
+			)
+			RETURN
+			    DIVIDE(assinantes, cadastrocompleto, 0)
+			 
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 87f074eb-90ae-4c77-8d24-4df7b39dbab3
+
+	measure 'Calculo Assinantes' = ```
+			
+			VAR cadastrocompleto = [Cadastro Completo]
+			VAR assinante = CALCULATE (DISTINCTCOUNT( FatInscricaoAntiga[ID_CLIENTE]), USERELATIONSHIP ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], Calendario[Datas] )
+			) 
+			
+			RETURN
+			    FORMAT(assinante, "0") & " / " & FORMAT(cadastrocompleto, "0")
+			```
+		lineageTag: 54a77744-cd07-48cd-a639-22cde0b4eecd
+
+	measure '% Pré-Cadastro' =
+			
+			VAR precadastro = [Pré-Cadastro]
+			VAR totalAdvogados = [Total de Advogados] -- Medida que calcula o total de advogados
+			RETURN
+			    DIVIDE(precadastro, totalAdvogados, 0)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: db44ab2c-5a7a-4553-9572-c7046913c0c9
+
+	measure 'Calculo pré-cadastro' =
+			
+			VAR precadastro = CALCULATE(COUNTROWS(DimAdvogados), DimAdvogados[status_cadastro] = "Pré-Cadastro")
+			VAR totalAdvogados = [Total de Advogados] -- Medida que calcula o total de advogados
+			RETURN
+			    FORMAT(precadastro, "0") & " / " & FORMAT(totalAdvogados, "0")
+		lineageTag: e1368691-7bd4-43b0-b78a-be9d6881bc84
+
+	measure 'Contas Deletadas Advogado Mes Anterior' = ```
+			
+			CALCULATE(
+			    [Total Contas Deletadas], DATEADD(Calendario[Datas], -1, MONTH)
+			)
+			
+			```
+		formatString: 0
+		lineageTag: ca0bcc65-f791-4d4d-af77-5be179baa5b4
+
+	measure 'Taxa Crescimento Deletados Advogados' = ```
+			
+			VAR PeriodoAtual =
+			    CALCULATE (
+			    COUNTROWS(DimAdvogados),
+			    NOT(ISBLANK(DimAdvogados[deleted_at])),
+			    USERELATIONSHIP(DimAdvogados[deleted_at],Calendario[Datas])
+			    )
+			
+			VAR PeriodoAnterior =
+			    CALCULATE (
+			        COUNTROWS(DimAdvogados),
+			        NOT(ISBLANK(DimAdvogados[deleted_at])),
+			        DATEADD ( 'Calendario'[Datas], -1, MONTH ),
+			        USERELATIONSHIP(DimAdvogados[deleted_at],Calendario[Datas])
+			    ) 
+			    
+			VAR TaxaCrescimento =
+			    IF (
+			        NOT ISBLANK ( PeriodoAnterior )
+			            && PeriodoAnterior <> 0,
+			        ( PeriodoAtual - PeriodoAnterior ) / PeriodoAnterior,
+			        BLANK ()
+			    )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( TaxaCrescimento ),
+			        FORMAT ( TaxaCrescimento, "+0.00%;-0.00%;0.00%" ),
+			        BLANK ()
+			    )
+			
+			
+			
+			```
+		lineageTag: 86eca5b6-7aa9-4987-b132-759d2b9afd09
+
+	measure 'Nome advogados deletados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'DimAdvogados',
+			        NOT(ISBLANK('DimAdvogados'[deleted_at])), 
+			        USERELATIONSHIP('DimAdvogados'[deleted_at], 'Calendario'[Datas])
+			    ),
+			    'DimAdvogados'[name],
+			    ","
+			)
+			```
+		lineageTag: c7c1e49a-1374-49ab-aa99-5e24a8ba0a61
+
+	measure 'Total Teste' =
+			CALCULATE(
+			    COUNTROWS(FatPeriodoTeste)
+			)
+		formatString: 0
+		lineageTag: 43d78cdc-fc78-4cbe-80d3-b74f0457c161
+
+	measure 'Periodo teste card' = ```
+			
+			CALCULATE (
+			    COUNTROWS ( FatPeriodoTeste ),
+			    FatPeriodoTeste[Em Teste] = "Em Teste",
+			    FatPeriodoTeste[plano] <> "Cancelada",
+			    REMOVEFILTERS(Calendario[Mês Atual])
+			)
+			
+			
+			// Periodo teste card = 
+			// CALCULATE (
+			//     COUNTROWS ( FatPeriodoTeste ),
+			//     FatPeriodoTeste[Em Teste] = "Em Teste"
+			//     && ISBLANK ( FatPeriodoTeste[data Cancelamento])
+			// )
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: cd3aefb6-e30b-4bb6-b60a-e21c751cd33f
+
+	measure AdvogadosCancelados = ```
+			
+			IF (
+			    COUNTROWS (
+			        FILTER (
+			            RELATEDTABLE('FatInscricaoAntiga'),
+			            NOT(ISBLANK('FatInscricaoAntiga'[DATA DE CANCELAMENTO]))
+			        )
+			    ) > 0,
+			    1,
+			    0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 44400169-ab74-4136-9406-d4419a88f596
+
+	measure 'Nomes Advogados Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[NOME ADVOGADO],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: 23c9dbae-6671-432b-8707-963500995691
+
+	measure 'Estado Advogados Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[estado],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: aa5625f2-ac2e-4234-9d14-228552057c57
+
+	measure 'Mensalidade Advogados Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[Valor total],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: 7c03aeb5-a1ac-4271-831a-5c06795867c0
+
+	measure 'Plano Advogados Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[plano],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: 9ce07f60-c310-466b-b214-eec382f3b473
+
+	measure '% Realizado Advogados Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[% Realizada],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: fcd98a63-aaa1-4e4f-b717-921f80358bb7
+
+	measure '% Cancelados Advogados Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[% Cancelados],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: c6fd0fb8-0ba3-45dc-a9f7-5e896a63a9a8
+
+	measure 'Inicio Advogados Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[DATA DE INICIO ASSINATURA],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: e5fd060c-e835-4ab3-91d0-23a2aa895235
+
+	measure 'Soma Assinantes' =
+			
+			CALCULATE(
+			    SUM(FatInscricaoAntiga[Valor total]),
+			    USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA], Calendario[Datas])
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Assinantes
+		lineageTag: e2953e3d-28d9-4f27-bc56-6d048c26ae39
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'soma Assinantes Mês anterior' = ```
+			
+			CALCULATE(
+			    [Soma Assinantes], PREVIOUSMONTH(Calendario[Datas])
+			)
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Assinantes
+		lineageTag: 62fd5499-2c83-49f5-9834-360e25e9e183
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Especialidade Assinantes' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[especialidades],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: b80397cc-a037-434f-9072-fc19d03e7052
+
+	measure 'Qtda Periodo Teste' = ```
+			
+			 CALCULATE(
+			    COUNTROWS(FatPeriodoTeste),
+			    USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],Calendario[Datas])
+			)
+			```
+		lineageTag: cd6d4b93-bc34-49b1-994a-1b05fe16fdc5
+
+	measure 'Qtda Periodo Teste Mês anterior' =
+			
+			CALCULATE(
+			    [Qtda Periodo Teste], DATEADD(Calendario[Datas], -1,MONTH)
+			)
+		formatString: 0
+		lineageTag: 657b7f2a-7492-4f4b-b448-11c615a545d6
+
+	measure 'Taxa Crescimento Periodo Teste Advogados' = ```
+			
+			VAR PeriodoAtual =
+			    CALCULATE (
+			    COUNTROWS(FatPeriodoTeste),
+			    USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],Calendario[Datas])
+			    )
+			
+			VAR PeriodoAnterior =
+			    CALCULATE (
+			        COUNTROWS(FatPeriodoTeste),
+			        DATEADD ( 'Calendario'[Datas], -1, MONTH ),
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],Calendario[Datas])
+			    ) 
+			    
+			VAR TaxaCrescimento =
+			    IF (
+			        NOT ISBLANK ( PeriodoAnterior )
+			            && PeriodoAnterior <> 0,
+			        ( PeriodoAtual - PeriodoAnterior ) / PeriodoAnterior,
+			        BLANK ()
+			    )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( TaxaCrescimento ),
+			        FORMAT ( TaxaCrescimento, "+0.00%;-0.00%;0.00%" ),
+			        BLANK ()
+			    )
+			
+			
+			
+			```
+		lineageTag: bc40828d-9c2e-4759-9fe8-feea17c46363
+
+	measure 'Periodo Teste data inicio' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[data inicio periodo teste],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: 4c342ac3-23f5-4cd6-be11-d01b1287920a
+
+	measure 'Periodo Teste data fim' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[data fim periodo teste],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: 0babd1db-d454-488c-a3b6-5c7c670324ed
+
+	measure 'Periodo Teste Nome Advogado' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[name],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: ca38dba3-19ed-42a1-95d8-5dc264bd785d
+
+	measure 'Periodo Teste Estado Advogado' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[Estado],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: 0301f8c3-8e1e-4f9c-95ce-109e8d5e6235
+
+	measure '% Periodo Teste' = ```
+			
+			VAR aprovados = CALCULATE(COUNTROWS(DimAdvogados), DimAdvogados[status_cadastro] = "Aprovado")
+			VAR cadastrocompleto = CALCULATE(COUNTROWS(DimAdvogados), DimAdvogados[status_cadastro] = "Cadastro Completo")
+			VAR Resultado = aprovados + cadastrocompleto
+			RETURN DIVIDE([Qtda Periodo Teste], Resultado)
+			
+			```
+		formatString: 0%;-0%;0%
+		lineageTag: cf5f62c6-86a5-42f0-a31e-10e0fb6799ea
+
+	measure 'Calculo Periodo em teste' =
+			
+			VAR aprovados = CALCULATE(COUNTROWS(DimAdvogados), DimAdvogados[status_cadastro] = "Aprovado")
+			VAR cadastrocompleto = CALCULATE(COUNTROWS(DimAdvogados), DimAdvogados[status_cadastro] = "Cadastro Completo")
+			VAR resultado = aprovados + cadastrocompleto
+			
+			RETURN
+			    FORMAT([Qtda Periodo Teste], "0") & " / " & FORMAT(resultado, "0")
+		lineageTag: a40a375d-cb96-4f84-b80f-1b8bbf305784
+
+	measure 'Periodo Teste %Realizado e %Cancelado Advogado' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[Realizado x Cancelados],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: 9e3d1b90-5b01-475e-b059-633e48caccce
+
+	measure 'Periodo Teste Especialidade Advogado' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[Especialidade],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: 05431030-0dfe-4a1c-aa6c-58eeb905c73c
+
+	measure 'Periodo Teste consultorias Advogado' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[Quantidade_dias_horas_minutos],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: b69bdf91-f49c-4904-87a5-1d244981e4f5
+
+	measure 'Total de consultorias' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[Realizado x Cancelados],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: 2927fa49-ba12-4803-bb53-582cd8405e2f
+
+	measure Data =
+			
+			
+			VAR _MenorMes =
+			MONTH (
+			FIRSTDATE ( Calendario[Datas] )
+			)
+			VAR _MenorAno =
+			MIN ( Calendario[Ano] )
+			VAR _AnoSelecionado =
+			SELECTEDVALUE ( Calendario[Ano] )
+			VAR _MesSelecionado =
+			SELECTEDVALUE ( Calendario[Mês] )
+			VAR _MenorData =
+			MIN ( Calendario[Datas] )
+			VAR _MaiorData =
+			MAX ( Calendario[Datas] )
+			RETURN
+			_MenorData & " a " & _MaiorData
+		lineageTag: 1e27df61-f45e-47ab-a3c8-f1aa477a226f
+
+	measure 'Periodo em Teste estado' =
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			    ),
+			    FatPeriodoTeste[Estado],
+			    UNICHAR(10)
+			)
+		displayFolder: Em Teste
+		lineageTag: f5c13e0a-8b00-49cf-b291-b9d8fb53fe47
+
+	measure 'Periodo em Teste Nome' =
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			    ),
+			    FatPeriodoTeste[name],
+			    UNICHAR(10)
+			)
+		displayFolder: Em Teste
+		lineageTag: 793d0bf0-3cf4-4a2b-9879-42de0ce7610e
+
+	measure 'Periodo em Teste Inicio Teste' =
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			    ),
+			    FatPeriodoTeste[data inicio periodo teste],
+			    UNICHAR(10)
+			)
+		displayFolder: Em Teste
+		lineageTag: 72761d0f-9a0d-4e8e-a36b-83ef1ea5a9e3
+
+	measure 'Periodo em Teste Fim Teste' =
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			    ),
+			    FatPeriodoTeste[data fim periodo teste],
+			    UNICHAR(10)
+			)
+		displayFolder: Em Teste
+		lineageTag: e352538c-dc39-418e-ac48-86ccf12d33c4
+
+	measure 'Periodo em Teste Plano' =
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			    ),
+			    FatPeriodoTeste[plano],
+			    UNICHAR(10)
+			)
+		displayFolder: Em Teste
+		lineageTag: d51f8ebc-c390-4afd-a520-7cd216da6b69
+
+	measure 'Periodo em Teste Valor' =
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			    ),
+			    FatPeriodoTeste[amount],
+			    UNICHAR(10)
+			)
+		displayFolder: Em Teste
+		lineageTag: 707b10d9-970d-4f13-800a-e5f5b89460c9
+
+	measure 'Periodo em Teste especialidade' =
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			
+			    ),
+			    FatPeriodoTeste[Especialidade],
+			    UNICHAR(10)
+			)
+		displayFolder: Em Teste
+		lineageTag: 78c81801-b382-4ac5-886d-9c2c10956c2c
+
+	measure 'Periodo em Teste consultoria' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        FatPeriodoTeste[Em Teste] = "Em Teste" &&
+			        FatPeriodoTeste[plano] <> "Cancelada",
+			        REMOVEFILTERS(Calendario[Mês Atual]),
+			        REMOVEFILTERS((Calendario[Ano Atual]))
+			    ),
+			    FatPeriodoTeste[Realizado x Cancelados],
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Em Teste
+		lineageTag: 04971527-4233-4712-a7f5-fbe0bfb7cf26
+
+	measure 'Cadastro Completo' = ```
+			
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    NOT(ISBLANK(DimAdvogados[completed_at])),
+			    USERELATIONSHIP(DimAdvogados[created_at], Calendario[Datas])
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Status Cadastro
+		lineageTag: 5971e32b-d8fa-42ac-9878-f3cd449347e6
+
+	measure Aprovado = ```
+			
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    DimAdvogados[status_cadastro] = "Aprovado",
+			    USERELATIONSHIP(DimAdvogados[created_at], Calendario[Datas])
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Status Cadastro
+		lineageTag: 4b0e2f57-b2f1-4303-8a90-023f16d06f6e
+
+	measure Reprovado = ```
+			
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    DimAdvogados[status_cadastro] = "Reprovado",
+			    USERELATIONSHIP(DimAdvogados[created_at], Calendario[Datas])
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Status Cadastro
+		lineageTag: 6d32fe03-123f-4c62-b69a-7bfd9dae3534
+
+	measure Pré-Cadastro = ```
+			
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    DimAdvogados[status_cadastro] = "Pré-Cadastro",
+			    USERELATIONSHIP(DimAdvogados[created_at], Calendario[Datas])
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Status Cadastro
+		lineageTag: 00d4f22f-9c42-4cf9-a698-cde218fbce3a
+
+	measure 'Mensalidade Advogados Id' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE INICIO ASSINATURA],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[ID_CLIENTE],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Assinantes
+		lineageTag: 0d34dc23-7f38-4576-91a0-afe024da9bbd
+
+	measure nome_deletados = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'DimAdvogados',
+			        USERELATIONSHIP(DimAdvogados[deleted_at],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    DimAdvogados[name],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Deletados
+		lineageTag: e2f2de65-3e11-4771-ba9a-81a168573366
+
+	measure data_cancelamento = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'DimAdvogados',
+			        USERELATIONSHIP(DimAdvogados[deleted_at],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    DimAdvogados[deleted_at],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Deletados
+		lineageTag: 5547acd4-a607-4a70-bb0c-41400b25d29e
+
+	measure Estado_deletados = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'DimAdvogados',
+			        USERELATIONSHIP(DimAdvogados[deleted_at],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    DimAdvogados[estado],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Deletados
+		lineageTag: f972c388-e574-4f52-976e-7c05c9a537f0
+
+	measure especialidade_deletado = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'DimAdvogados',
+			        USERELATIONSHIP(DimAdvogados[deleted_at],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[DATA DE CANCELAMENTO],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Deletados
+		lineageTag: b0e6be38-e3fb-40b5-bb4e-4c1ae7a4599e
+
+	measure 'Primeira consultoria' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatPeriodoTeste',
+			        USERELATIONSHIP(FatPeriodoTeste[data inicio periodo teste],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatPeriodoTeste[Quantidade_horas_minutos],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Teste
+		lineageTag: 613f8c82-785e-4767-8cad-2af04b4d3567
+
+	measure '% Crescimento Total Cadastro' = ```
+			
+			VAR saldoatual = [Total de Advogados]
+			VAR saldoanterior =
+			    CALCULATE ( [Total de Advogados], DATEADD ( 'Calendario'[Datas], -1, MONTH ) )
+			VAR resultado =
+			    IF (
+			        NOT ( ISBLANK ( saldoanterior ) ),
+			        ( saldoatual - saldoanterior ) / saldoanterior,
+			        BLANK ()
+			    )
+			RETURN
+			        IF(
+			            resultado < 0,
+			            "❌ " & FORMAT(resultado, "0.00%"),
+			            "✅ " & FORMAT(resultado, "0.00%")
+			        )
+			        
+			
+			
+			```
+		lineageTag: a4af1dc8-01cd-4763-bf96-f9ae689152f3
+
+	measure 'Total de Advogados removefilters' =
+			
+			CALCULATE(
+			    COUNTROWS(DimAdvogados),
+			    REMOVEFILTERS(Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: ebe6faa7-f539-4b98-a1db-e94f0ae97404
+
+	column Column
+		formatString: 0
+		lineageTag: ca6a927c-1a7a-4b6b-8bbe-23a7cc63fd52
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas advogados' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = e0ce9cfce7244247a7c8ea6ed15aabba
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

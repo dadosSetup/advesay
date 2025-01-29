@@ -1,0 +1,446 @@
+table BaseAppCliente
+	lineageTag: ae2679f7-d6e5-46bb-9f67-40cd9b9dba7c
+
+	column Day
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3dd6a581-3d53-47e1-9f7e-685c5924d909
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Origem
+		dataType: string
+		lineageTag: 31ebfba9-13cb-436c-8e5b-21308cc2d04d
+		summarizeBy: none
+		sourceColumn: Origem
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Amount Spent'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 228088fe-7b02-4202-891a-45ce0d0da39c
+		summarizeBy: sum
+		sourceColumn: Amount Spent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Link Clicks'
+		dataType: int64
+		formatString: 0
+		lineageTag: 559ab18b-24df-4f1c-a971-dd9b995de840
+		summarizeBy: sum
+		sourceColumn: Link Clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column web_passo1_acessou_lp_cliente
+		dataType: double
+		lineageTag: 0fc3bf08-cc74-48a9-9663-6e6087ef6b6a
+		summarizeBy: sum
+		sourceColumn: web_passo1_acessou_lp_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_passo2_listagem_advogados
+		dataType: double
+		lineageTag: fe77523f-d9aa-49b0-ac31-526204b605ff
+		summarizeBy: sum
+		sourceColumn: web_passo2_listagem_advogados
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_taxa_passo2
+		dataType: double
+		lineageTag: 80de8721-3d18-475e-8761-64481af93da8
+		summarizeBy: sum
+		sourceColumn: web_taxa_passo2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_passo3_iniciou_solicitacao
+		dataType: double
+		lineageTag: b7d29a0b-b1dc-4b52-8d50-481abeeadafa
+		summarizeBy: sum
+		sourceColumn: web_passo3_iniciou_solicitacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_passo3_acessou_tela_advogado
+		dataType: double
+		lineageTag: cea6f396-b20b-4dbc-9d34-d37b621ad455
+		summarizeBy: sum
+		sourceColumn: web_passo3_acessou_tela_advogado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_passo3_acessou_tela_solicitacao
+		dataType: double
+		lineageTag: 22cf9378-a51a-40bd-9ceb-104410b30891
+		summarizeBy: sum
+		sourceColumn: web_passo3_acessou_tela_solicitacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_taxa_passo3
+		dataType: double
+		lineageTag: d6984fac-2848-4810-8878-949a8c88d0c4
+		summarizeBy: sum
+		sourceColumn: web_taxa_passo3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_passo4_cadastro_consultoria_realizado
+		dataType: double
+		lineageTag: b5504121-cc13-4bbe-93a6-cb403419e54e
+		summarizeBy: sum
+		sourceColumn: web_passo4_cadastro_consultoria_realizado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_taxa_passo4
+		dataType: double
+		lineageTag: 72dd950e-5624-466a-9c36-95d7da329378
+		summarizeBy: sum
+		sourceColumn: web_taxa_passo4
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_passo5_solicitou_consultoria
+		dataType: double
+		lineageTag: 4e4724df-5c36-4806-9a64-b865a39329f5
+		summarizeBy: sum
+		sourceColumn: web_passo5_solicitou_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column web_taxa_passo5
+		dataType: double
+		lineageTag: cbd9f53e-b285-4dfd-80c4-792b05981e7c
+		summarizeBy: sum
+		sourceColumn: web_taxa_passo5
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo1_primeira_abertura_do_app_cliente
+		dataType: double
+		lineageTag: bd080f2a-da93-4fca-b68f-98cd3c984a8f
+		summarizeBy: sum
+		sourceColumn: passo1_primeira_abertura_do_app_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo2_cadastro1_cliente
+		dataType: double
+		lineageTag: 798512be-b4c2-433e-98e5-930fe2fba72d
+		summarizeBy: sum
+		sourceColumn: passo2_cadastro1_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo3_cadastro_realizado
+		dataType: double
+		lineageTag: 6da846f0-0d24-4577-a55b-86808eabc5b5
+		summarizeBy: sum
+		sourceColumn: passo3_cadastro_realizado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo4_primeiro_login
+		dataType: double
+		lineageTag: 65c1b26c-0388-4228-81fd-d736651240f9
+		summarizeBy: sum
+		sourceColumn: passo4_primeiro_login
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo5_listagem_advogados
+		dataType: double
+		lineageTag: ca215053-98c6-44b9-9be7-f5860b0bad37
+		summarizeBy: sum
+		sourceColumn: passo5_listagem_advogados
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo6_acessou_tela_advogado
+		dataType: double
+		lineageTag: 8bc2a17b-b0f2-4ef3-95fa-e5e946171548
+		summarizeBy: sum
+		sourceColumn: passo6_acessou_tela_advogado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo6_acessou_tela_solicitacao
+		dataType: double
+		lineageTag: 18d25c33-f9fa-41e9-b3c6-55d253a2f8cf
+		summarizeBy: sum
+		sourceColumn: passo6_acessou_tela_solicitacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo6_acessou_consolidado
+		dataType: double
+		lineageTag: 3acb47aa-da31-4285-bd41-f6dd1fc35985
+		summarizeBy: sum
+		sourceColumn: passo6_acessou_consolidado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column passo7_solicitou_consultoria
+		dataType: double
+		lineageTag: 3c6d4d92-c365-4c7c-a484-18ede4b5ba97
+		summarizeBy: sum
+		sourceColumn: passo7_solicitou_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CRMCadastros
+		dataType: int64
+		formatString: 0
+		lineageTag: 51f7aa22-55d1-430b-ae0e-8ebfadc22fac
+		summarizeBy: sum
+		sourceColumn: CRMCadastros
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMConsultoriasPrimeira
+		dataType: int64
+		formatString: 0
+		lineageTag: fb6faf5c-9b38-4431-b124-222f3e4e14e5
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasPrimeira
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMConsultoriasCriadas
+		dataType: int64
+		formatString: 0
+		lineageTag: b2f2cffa-4bde-4ca3-8f4e-2e6b7932e2bc
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasCriadas
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMConsultoriasReplicadas
+		dataType: int64
+		formatString: 0
+		lineageTag: e83f3325-c46f-490b-9233-c64262b853db
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasReplicadas
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMConsultoriasEnviadas
+		dataType: int64
+		formatString: 0
+		lineageTag: 91e7731e-30e9-4692-be9e-62edc70c7a87
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasEnviadas
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMConsultoriasRealizadas
+		dataType: int64
+		formatString: 0
+		lineageTag: 9eb4c707-27a8-4ea0-86fc-f1c778fa8405
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasRealizadas
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaxaRealizadas
+		dataType: double
+		lineageTag: bb9c3394-2406-4553-b945-6555e91401ad
+		summarizeBy: sum
+		sourceColumn: TaxaRealizadas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CRMConsultoriasDePrimeiraOportunidade
+		dataType: int64
+		formatString: 0
+		lineageTag: d80e2bdf-3d2b-4ff9-bebf-e2c0a27cbb33
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasDePrimeiraOportunidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMConsultoriasdePrimeiraRate
+		dataType: double
+		lineageTag: 36a33fb4-8834-4da3-b5e5-6f974b3d9238
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasdePrimeiraRate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CRMConsultoriasRecorrentes
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f704485-fe56-422b-ac2f-98d4f9447839
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasRecorrentes
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMCadastrosCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 1fd67dc2-ae6e-468f-818f-93dadc052af0
+		summarizeBy: sum
+		sourceColumn: CRMCadastrosCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMConsultoriasPrimeiraCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 39f18ace-bd49-4b09-8833-f6c2e6aadd6e
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasPrimeiraCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMConsultoriasCriadasCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 182f5278-2ccb-4b70-9316-b1ff0e1dce67
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasCriadasCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMConsultoriasReplicadasCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: b0a81721-1fa2-4e7f-8246-c18b6daf1ede
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasReplicadasCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMConsultoriasEnviadasCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 1df2dadf-77aa-4c1d-b1b9-ef1540d26145
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasEnviadasCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMConsultoriasRealizadasCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 5bb85601-cf84-419e-aff7-7565a16aef05
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasRealizadasCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMConsultoriasDePrimeiraOportunidadeCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: d54f1395-0d1b-44bb-aa7c-094e3522aba2
+		summarizeBy: sum
+		sourceColumn: CRMConsultoriasDePrimeiraOportunidadeCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMConsultoriasRecorrentesCost
+		dataType: string
+		lineageTag: 2b9d883c-1f25-4155-a5e2-eaa5fd9f9631
+		summarizeBy: none
+		sourceColumn: CRMConsultoriasRecorrentesCost
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BaseAppCliente = m
+		mode: import
+		source =
+				let
+				    Fonte = Web.BrowserContents("https://docs.google.com/spreadsheets/d/e/2PACX-1vS-qX9h2G6SyeWFa23GjeDOvNh5QF012usApdllNbIZMi4Wnuec3gecqZa8Hpj0VhiD1UTVd6X6hzOy/pubhtml#"),
+				    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Column1", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(1)"}, {"Column2", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(2)"}, {"Column3", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(3)"}, {"Column4", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(4)"}, {"Column5", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(5)"}, {"Column6", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(6)"}, {"Column7", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(7)"}, {"Column8", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(8)"}, {"Column9", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(9)"}, {"Column10", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(10)"}, {"Column11", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(11)"}, {"Column12", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(12)"}, {"Column13", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(13)"}, {"Column14", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(14)"}, {"Column15", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(15)"}, {"Column16", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(16)"}, {"Column17", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(17)"}, {"Column18", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(18)"}, {"Column19", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(19)"}, {"Column20", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(20)"}, {"Column21", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(21)"}, {"Column22", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(22)"}, {"Column23", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(23)"}, {"Column24", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(24)"}, {"Column25", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(25)"}, {"Column26", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(26)"}, {"Column27", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(27)"}, {"Column28", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(28)"}, {"Column29", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(29)"}, {"Column30", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(30)"}, {"Column31", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(31)"}, {"Column32", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(32)"}, {"Column33", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(33)"}, {"Column34", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(34)"}, {"Column35", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(35)"}, {"Column36", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(36)"}, {"Column37", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(37)"}, {"Column38", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(38)"}, {"Column39", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(39)"}, {"Column40", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(40)"}, {"Column41", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(41)"}, {"Column42", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(42)"}, {"Column43", "DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(43)"}}, [RowSelector="DIV:nth-child(1) > DIV.ritz.grid-container > TABLE.waffle > * > TR"]),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tabela extraída de HTML",{"Column1"}),
+				    #"Linhas em Branco Removidas" = Table.SelectRows(#"Colunas Removidas", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas em Branco Removidas", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Day", type date}}),
+				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Tipo Alterado", {{"Amount Spent", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade",{{"Link Clicks", Int64.Type}, {"web_passo1_acessou_lp_cliente", type number}, {"web_passo2_listagem_advogados", type number}, {"web_taxa_passo2", Percentage.Type}, {"web_passo3_iniciou_solicitacao", type number}, {"web_taxa_passo3", Percentage.Type}, {"web_taxa_passo4", Percentage.Type}, {"web_passo3_acessou_tela_advogado", type number}, {"web_passo3_acessou_tela_solicitacao", type number}, {"web_passo4_cadastro_consultoria_realizado", type number}, {"web_passo5_solicitou_consultoria", type number}, {"web_taxa_passo5", Percentage.Type}, {"passo1_primeira_abertura_do_app_cliente", type number}, {"passo2_cadastro1_cliente", type number}, {"passo3_cadastro_realizado", type number}, {"passo4_primeiro_login", type number}, {"passo5_listagem_advogados", type number}, {"passo6_acessou_tela_advogado", type number}, {"passo6_acessou_tela_solicitacao", type number}, {"passo6_acessou_consolidado", type number}, {"passo7_solicitou_consultoria", type number}, {"CRMCadastros", Int64.Type}, {"CRMConsultoriasPrimeira", Int64.Type}, {"CRMConsultoriasCriadas", Int64.Type}, {"CRMConsultoriasReplicadas", Int64.Type}, {"CRMConsultoriasEnviadas", Int64.Type}, {"CRMConsultoriasRealizadas", Int64.Type}, {"TaxaRealizadas", Percentage.Type}, {"CRMConsultoriasDePrimeiraOportunidade", Int64.Type}, {"CRMConsultoriasdePrimeiraRate", Percentage.Type}, {"CRMConsultoriasRecorrentes", Int64.Type}}),
+				    #"Tipo Alterado com Localidade1" = Table.TransformColumnTypes(#"Tipo Alterado1", {{"CRMCadastrosCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade2" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1", {{"CRMConsultoriasPrimeiraCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade3" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade2", {{"CRMConsultoriasCriadasCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade4" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade3", {{"CRMConsultoriasReplicadasCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade5" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade4", {{"CRMConsultoriasEnviadasCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade6" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade5", {{"CRMConsultoriasRealizadasCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade6",{{"CRMConsultoriasDePrimeiraOportunidadeCost", Currency.Type}}),
+				    #"Tipo Alterado com Localidade7" = Table.TransformColumnTypes(#"Tipo Alterado2", {{"CRMConsultoriasDePrimeiraOportunidadeCost", Currency.Type}}, "pt-BR")
+				in
+				    #"Tipo Alterado com Localidade7"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

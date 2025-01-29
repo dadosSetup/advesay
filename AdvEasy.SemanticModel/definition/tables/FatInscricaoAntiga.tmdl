@@ -1,0 +1,233 @@
+table FatInscricaoAntiga
+	lineageTag: 9f90f2fc-61ee-41f8-b171-4de8d4ce1bdb
+
+	column ID_CLIENTE
+		dataType: int64
+		formatString: 0
+		lineageTag: 075c8287-fe7e-4e64-8e1c-ae00eb26032b
+		summarizeBy: none
+		sourceColumn: ID_CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NOME ADVOGADO'
+		dataType: string
+		lineageTag: 36b31880-eba5-4b60-bfff-8e071bbfbe58
+		summarizeBy: none
+		sourceColumn: NOME ADVOGADO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DATA DE INICIO ASSINATURA'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a92cdd50-feab-4a51-802d-8d8c5bb39707
+		summarizeBy: none
+		sourceColumn: DATA DE INICIO ASSINATURA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'DATA FIM DA ASSINATURA'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3574c8af-6ba6-47a7-8abc-9905fbb7266b
+		summarizeBy: none
+		sourceColumn: DATA FIM DA ASSINATURA
+
+		variation Variation
+			isDefault
+			relationship: eb68ed52-c703-472d-b346-51a3749112bf
+			defaultHierarchy: LocalDateTable_477cb0c7-38d0-4719-821d-bd00956d2673.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'DATA DE CANCELAMENTO'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 34df3252-b48c-443d-8e2f-03ba280737d7
+		summarizeBy: none
+		sourceColumn: DATA DE CANCELAMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'STATUS ASSINATURA'
+		dataType: string
+		lineageTag: 280a0f24-3d68-4be3-b61e-6865b0c1f6d5
+		summarizeBy: none
+		sourceColumn: STATUS ASSINATURA
+
+		annotation SummarizationSetBy = Automatic
+
+	column lifetime = ```
+			
+			VAR DataFim =
+			    IF (
+			        ISBLANK ( FatInscricaoAntiga[DATA DE CANCELAMENTO] ),
+			        TODAY (),
+			        FatInscricaoAntiga[DATA DE CANCELAMENTO]
+			    )
+			VAR Meses =
+			    DATEDIFF ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], DataFim, MONTH )
+			VAR Dias =
+			    DATEDIFF ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], DataFim, DAY )
+			VAR Anos =
+			    DATEDIFF ( FatInscricaoAntiga[DATA DE INICIO ASSINATURA], DataFim, YEAR )
+			VAR MesesRestantes =
+			    MOD ( Meses, 12 )
+			RETURN
+			    IF (
+			        Meses >= 13,
+			        UNICHAR ( 128994 ) & " " & Anos & " Ano"
+			            & // Segunda etapa do IF verifica a segunda parte do ano 
+			            IF ( Anos > 1, "s", "" ) & " e " & MesesRestantes & " Mes"
+			            & IF ( MesesRestantes > 1, "es", "" ),
+			        IF (
+			            Meses = 1,
+			            UNICHAR ( 128992 ) & " " & Meses & " Mês",
+			            IF (
+			                Meses < 1,
+			                UNICHAR ( 128308 ) & " " & Dias & " Dia"
+			                    & IF ( Dias > 1, "s", "" ),
+			                UNICHAR ( 128993 ) & " " & Meses & " Mes"
+			                    & IF ( Meses > 1, "es", "" )
+			            )
+			        )
+			    )
+			
+			```
+		lineageTag: d22cedfa-71fe-427b-b5f0-7d0e990a554a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '% Cancelados' = ```
+			
+			
+			VAR cancelados = 
+			CALCULATE(
+			    COUNTROWS('FatConsultorias'),
+			    'FatConsultorias'[status_consultoria] = "Cancelada"
+			)
+			
+			VAR totalconsultorias = 
+			CALCULATE(
+			    COUNTROWS(FatConsultorias)
+			)
+			
+			VAR resultado = DIVIDE(cancelados, totalconsultorias, 0)
+			RETURN
+			    "(" & FORMAT(cancelados, "0") & " - " & FORMAT(resultado, "0.00%") & ")"
+			
+			
+			
+			
+			```
+		lineageTag: 0836bb43-ed41-407f-a19f-da9354fcef66
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column '% Realizada' = ```
+			
+			VAR realizadas =
+			    CALCULATE (
+			        COUNTROWS ( 'FatConsultorias' ),
+			        'FatConsultorias'[status_consultoria] = "Realizado"
+			    )
+			VAR totalconsultorias =
+			    CALCULATE ( COUNTROWS ( FatConsultorias ) )
+			    
+			VAR resultado =
+			    DIVIDE ( realizadas, totalconsultorias, 0 )
+			RETURN
+			    "(" & FORMAT ( realizadas, "0" ) & " - "
+			        & FORMAT ( resultado, "0.00%" ) & ")"
+			
+			
+			```
+		lineageTag: f82322b8-7d85-4bcc-90b0-4f05fef13394
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column sexo = RELATED(DimAdvogados[sexo])
+		lineageTag: 65f9556b-4470-43c1-ad1c-bf46411e2830
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado = RELATED(DimAdvogados[estado])
+		lineageTag: fa7e6bf1-1c73-4c8b-bd62-f5a4eb4bfd75
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column especialidades = RELATED(FatEspecialidadeConcatenada[especialidades])
+		lineageTag: 5397bdba-cde9-40d5-8442-3ab3091ab970
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor total' = RELATED(FatMensalidades[valor total])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 3cbc11c0-66d8-449c-b84c-cf2571c4b3df
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'mensalidade com desconto' = RELATED(FatMensalidades[Mensalidade com desconto])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 5c2ec133-1c98-4580-8f26-bc3013f03931
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column motivo_cancelamento = ```
+			
+			IF (
+			    ISBLANK (
+			        LOOKUPVALUE (
+			            FatMotivoCancelamentoAssinatura[motivo_cancelamento],
+			            FatMotivoCancelamentoAssinatura[doctor_id], FatInscricaoAntiga[ID_CLIENTE]
+			        )
+			    ),
+			    "Forma de Pagamento",
+			    LOOKUPVALUE (
+			        FatMotivoCancelamentoAssinatura[motivo_cancelamento],
+			        FatMotivoCancelamentoAssinatura[doctor_id], FatInscricaoAntiga[ID_CLIENTE]
+			    )
+			)
+			
+			```
+		lineageTag: 3ef91ec4-663a-4277-bda5-577ef82766ad
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatInscricaoAntiga = m
+		mode: import
+		source =
+				let
+				    Fonte = Web.BrowserContents("https://docs.google.com/spreadsheets/d/e/2PACX-1vSbUngFA1BQjuHQWdJY5TW7tIY1KQVXPSguXwUSYMrVc3o64dL7BQu47gyZ_owEq_cE7mt_58GO2Ux8/pubhtml?gid=897586309&single=true"),
+				    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Column1", "TABLE.waffle.no-grid > * > TR > :nth-child(1)"}, {"Column2", "TABLE.waffle.no-grid > * > TR > :nth-child(2)"}, {"Column3", "TABLE.waffle.no-grid > * > TR > :nth-child(3)"}, {"Column4", "TABLE.waffle.no-grid > * > TR > :nth-child(4)"}, {"Column5", "TABLE.waffle.no-grid > * > TR > :nth-child(5)"}, {"Column6", "TABLE.waffle.no-grid > * > TR > :nth-child(6)"}, {"Column7", "TABLE.waffle.no-grid > * > TR > :nth-child(7)"}}, [RowSelector="TABLE.waffle.no-grid > * > TR"]),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tabela extraída de HTML",{"Column1"}),
+				    #"Linhas em Branco Removidas" = Table.SelectRows(#"Colunas Removidas", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas em Branco Removidas", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"ID_CLIENTE", Int64.Type}, {"NOME ADVOGADO", type text}, {"DATA DE INICIO ASSINATURA", type date}, {"DATA FIM DA ASSINATURA", type date}, {"DATA DE CANCELAMENTO", type date}, {"STATUS ASSINATURA", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

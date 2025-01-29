@@ -1,0 +1,79 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Calendario","Periodo","HoraAtualizacao","DimAdvogados","FatConsultorias","DimClientes_","DimEstados","FatInvites","FatPescaria","FatRankAdvogados","FatEspecialidadeConcatenada","FatEspecialidade","FatHistoricoOnline","FatPeriodoTeste","FatMotivoCancelamentoAssinatura","FatMensalidades","FatInscricaoAntiga","BaseAppCliente","BaseAppAdv","DimClientsInvite","FatHistoryClientsInvite","BaseIndicacao"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.139.1733.0 (24.12)+af51d793b3eacaf90fc70909aa713164bbd22a66
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Calendario
+ref table DateTableTemplate_b00e1330-3f29-44b0-bc07-7f2dc93df2a4
+ref table Periodo
+ref table 'Medidas advogados'
+ref table 'Medidas Assinantes & Cancelados'
+ref table UX
+ref table DimEspecialidade
+ref table 'Medidas Consultorias'
+ref table Testes
+ref table 'Medidas Clientes'
+ref table 'Medidas RankAdvogados'
+ref table 'Medidas Pescaria'
+ref table HoraAtualizacao
+ref table LocalDateTable_6ea66ddb-de4f-4b3a-b8dd-01014173b90c
+ref table 'Medidas Invites'
+ref table MedidasBaseAdv
+ref table MedidasBaseClientes
+ref table DimAdvogados
+ref table LocalDateTable_dca804a2-a19f-4b7b-826c-2d3816fee0a8
+ref table LocalDateTable_924c4c51-decf-490d-92d8-56be419e7518
+ref table FatConsultorias
+ref table DimClientes_
+ref table DimEstados
+ref table FatInvites
+ref table FatPescaria
+ref table FatRankAdvogados
+ref table FatEspecialidadeConcatenada
+ref table FatEspecialidade
+ref table FatHistoricoOnline
+ref table LocalDateTable_fd13ea43-5229-42b7-b4fa-b4b3d5e384f0
+ref table FatPeriodoTeste
+ref table LocalDateTable_30ba6f36-0e94-44f6-bd16-91c389c75d0a
+ref table LocalDateTable_26d4d378-fa14-44a7-92fc-aa830a3fcc2f
+ref table LocalDateTable_b0165265-9da3-428a-a4a4-28fefd5b21e8
+ref table FatMotivoCancelamentoAssinatura
+ref table LocalDateTable_0b6690a5-6b15-4790-9287-ea459d521415
+ref table FatMensalidades
+ref table LocalDateTable_4b6767eb-313e-482b-97db-a2a1f951607d
+ref table LocalDateTable_206ac550-ff3f-44a0-a4a2-25c9e981bf1e
+ref table LocalDateTable_bd7adb3a-6f01-4f96-8ac2-c726ef6f13a4
+ref table LocalDateTable_518e92cc-4a52-4a97-b172-9a90046c64f3
+ref table LocalDateTable_7421b95e-db13-4e51-9a53-fb9d6aaa75b9
+ref table LocalDateTable_8cdeb55d-f799-4d4a-a63b-9f7a2dd93f85
+ref table FatInscricaoAntiga
+ref table LocalDateTable_7a8a89c2-d6e5-4c26-af57-99865995f225
+ref table LocalDateTable_db8ae29f-2ff4-426e-ac62-7ec5192129da
+ref table LocalDateTable_b99e69b7-134a-4654-b35d-56e5dc4146d4
+ref table LocalDateTable_477cb0c7-38d0-4719-821d-bd00956d2673
+ref table BaseAppCliente
+ref table BaseAppAdv
+ref table LocalDateTable_1104d676-1bc6-49c2-997a-12d7951c8b84
+ref table LocalDateTable_2087820c-fd70-431a-a8da-02f2763abe43
+ref table LocalDateTable_5c91950f-e922-4cc2-8716-6ddfafda7e59
+ref table Turno
+ref table DimClientsInvite
+ref table FatHistoryClientsInvite
+ref table LocalDateTable_a1150639-4d44-4c11-96a7-a612d6a638ad
+ref table LocalDateTable_5473193d-57ec-487e-8db3-fbf4da560b21
+ref table BaseIndicacao
+ref table 'Medidas base indicacao'
+
+ref cultureInfo pt-BR
+

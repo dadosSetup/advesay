@@ -1,0 +1,98 @@
+table FatHistoryClientsInvite
+	lineageTag: 3e937631-453e-4d97-952a-0bd7e477057f
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: a25feff3-6007-4983-a920-48db1aa3d10a
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column referrer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 553c782e-28f6-4ac6-989d-a596986919cd
+		summarizeBy: sum
+		sourceColumn: referrer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column update_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7317021e-11dd-4a88-bee3-8a0111c92971
+		summarizeBy: none
+		sourceColumn: update_at
+
+		variation Variation
+			isDefault
+			relationship: e6ff6b62-5d81-41ee-934d-e94c6150e932
+			defaultHierarchy: LocalDateTable_a1150639-4d44-4c11-96a7-a612d6a638ad.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_update_at
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 4147d173-a1cc-42e9-9430-47109b013757
+		summarizeBy: none
+		sourceColumn: hour_update_at
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column created_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3cdc5ccf-99c5-40d3-a316-363d1ae9a4f2
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 324df258-286f-4098-9e35-77a86bf9915d
+			defaultHierarchy: LocalDateTable_5473193d-57ec-487e-8db3-fbf4da560b21.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_created_at
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 803b785b-dd34-4a58-a6f2-1fab58465dfc
+		summarizeBy: none
+		sourceColumn: hour_created_at
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column periodo_envio
+		dataType: string
+		lineageTag: 6bda7fe8-f323-46de-be3c-1a47ce3636b4
+		summarizeBy: none
+		sourceColumn: periodo_envio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatHistoryClientsInvite = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-history_clients_invite/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "referrer_id", "update_at", "hour_update_at", "created_at", "hour_created_at", "periodo_envio"}, {"id", "referrer_id", "update_at", "hour_update_at", "created_at", "hour_created_at", "periodo_envio"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"referrer_id", Int64.Type}, {"update_at", type date}, {"hour_update_at", type time}, {"created_at", type date}, {"hour_created_at", type time}, {"periodo_envio", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

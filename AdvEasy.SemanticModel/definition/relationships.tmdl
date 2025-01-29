@@ -1,0 +1,327 @@
+relationship e0e80aee-c86c-4edc-bef1-82217da1e720
+	joinOnDateBehavior: datePartOnly
+	fromColumn: HoraAtualizacao.Column1
+	toColumn: LocalDateTable_6ea66ddb-de4f-4b3a-b8dd-01014173b90c.Date
+
+relationship 95168184-f537-456d-bf84-8fa931150680
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimAdvogados.birthday_formatado
+	toColumn: LocalDateTable_dca804a2-a19f-4b7b-826c-2d3816fee0a8.Date
+
+relationship b544534e-617d-4826-837e-02cc4d16c761
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimAdvogados.approved_at
+	toColumn: LocalDateTable_924c4c51-decf-490d-92d8-56be419e7518.Date
+
+relationship 7ef8f5c6-1dc9-45d3-a645-2029a6919157
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatHistoricoOnline.offline_at
+	toColumn: LocalDateTable_fd13ea43-5229-42b7-b4fa-b4b3d5e384f0.Date
+
+relationship fdeb9b75-ca3e-4388-b879-55adfc58e518
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatPeriodoTeste.'data Cancelamento'
+	toColumn: LocalDateTable_30ba6f36-0e94-44f6-bd16-91c389c75d0a.Date
+
+relationship f4be791e-0c4a-48aa-9851-bb766ce0f5a3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatPeriodoTeste.paid_at
+	toColumn: LocalDateTable_26d4d378-fa14-44a7-92fc-aa830a3fcc2f.Date
+
+relationship 3b4049d7-1c53-4305-88d3-193183c9566b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatPeriodoTeste.created_at
+	toColumn: LocalDateTable_b0165265-9da3-428a-a4a4-28fefd5b21e8.Date
+
+relationship b88ef99d-5c02-49dc-a42b-0e0503598d3f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatMotivoCancelamentoAssinatura.data_update
+	toColumn: LocalDateTable_0b6690a5-6b15-4790-9287-ea459d521415.Date
+
+relationship ed5b99c9-64ea-46fb-a347-c28767bc2430
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatMensalidades.deleted_at
+	toColumn: LocalDateTable_4b6767eb-313e-482b-97db-a2a1f951607d.Date
+
+relationship b6afbcb0-2152-441b-a179-72dabb6d99a9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatMensalidades.created_at
+	toColumn: LocalDateTable_206ac550-ff3f-44a0-a4a2-25c9e981bf1e.Date
+
+relationship f6eac48f-dae1-4b71-a8fb-c46fe711272b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatMensalidades.started_at
+	toColumn: LocalDateTable_bd7adb3a-6f01-4f96-8ac2-c726ef6f13a4.Date
+
+relationship 0bfd464b-e148-4695-a9ee-5117c9ff173c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatMensalidades.canceled_at
+	toColumn: LocalDateTable_518e92cc-4a52-4a97-b172-9a90046c64f3.Date
+
+relationship 4022de5e-395f-451c-8119-9752cbd31980
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatPeriodoTeste.Data_Primeira_Consultoria
+	toColumn: LocalDateTable_7421b95e-db13-4e51-9a53-fb9d6aaa75b9.Date
+
+relationship 66aa331b-c24f-4809-bbb1-2c600e1912f2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatPeriodoTeste.'Data Primeira_Consultoria'
+	toColumn: LocalDateTable_8cdeb55d-f799-4d4a-a63b-9f7a2dd93f85.Date
+
+relationship 00cbe700-8597-4651-82d4-4a9d764f10c6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatConsultorias.data_aceitacao_consultoria
+	toColumn: LocalDateTable_7a8a89c2-d6e5-4c26-af57-99865995f225.Date
+
+relationship 47fbc286-19dc-455c-8054-a9813058cc6e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatConsultorias.data_inicio_consultoria
+	toColumn: LocalDateTable_db8ae29f-2ff4-426e-ac62-7ec5192129da.Date
+
+relationship d6f8ca96-367f-4f3e-bc92-4e3def225dcc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatConsultorias.data_fim_consultoria
+	toColumn: LocalDateTable_b99e69b7-134a-4654-b35d-56e5dc4146d4.Date
+
+relationship eb68ed52-c703-472d-b346-51a3749112bf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatInscricaoAntiga.'DATA FIM DA ASSINATURA'
+	toColumn: LocalDateTable_477cb0c7-38d0-4719-821d-bd00956d2673.Date
+
+relationship f650e76f-73ca-fc10-2639-1a41859a7c7e
+	isActive: false
+	fromColumn: DimAdvogados.completed_at
+	toColumn: Calendario.Datas
+
+relationship 9d8b9ab2-581a-bcdf-4f3a-57515d158b4a
+	fromColumn: DimAdvogados.created_at
+	toColumn: Calendario.Datas
+
+relationship de4d7cca-486a-07a1-04be-3f10edf45dd9
+	isActive: false
+	fromColumn: DimAdvogados.deleted_at
+	toColumn: Calendario.Datas
+
+relationship 90eba917-def0-3281-7e49-2b65739626b5
+	fromColumn: DimAdvogados.estado
+	toColumn: DimEstados.code
+
+relationship 53959cec-78e9-2699-4997-357d8dadc309
+	isActive: false
+	fromColumn: DimClientes_.created_at
+	toColumn: Calendario.Datas
+
+relationship caab6d3a-0d03-f97e-c504-19d3276ad460
+	isActive: false
+	fromColumn: DimClientes_.deleted_at
+	toColumn: Calendario.Datas
+
+relationship 1846c7ba-0267-4377-1d7b-7a837ed0b8ef
+	isActive: false
+	fromColumn: FatConsultorias.data_cancelamento_consultoria
+	toColumn: Calendario.Datas
+
+relationship 6e67eebc-a268-5781-3529-dd95f9e791dc
+	isActive: false
+	fromColumn: FatConsultorias.data_criacao_consultoria
+	toColumn: Calendario.Datas
+
+relationship aab8f0dd-69bc-e79e-a172-bdb636997bdc
+	fromColumn: FatConsultorias.doctor_id
+	toColumn: DimAdvogados.id
+
+relationship 2a53c986-0ef2-879e-9934-7538530e0dfe
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: FatConsultorias.doctor_id
+	toColumn: FatPeriodoTeste.doctor_id
+
+relationship 4d62a968-dac4-810a-3773-74eb8e00cf78
+	fromColumn: FatConsultorias.especialidade
+	toColumn: DimEspecialidade.id_especialidade
+
+relationship 10caa591-d41e-742e-94f9-49b94e69d91d
+	fromColumn: FatConsultorias.patient_id
+	toColumn: DimClientes_.id
+
+relationship 5adaacbc-b9df-f48f-9be2-ef9474949454
+	fromColumn: FatEspecialidade.doctor_id
+	toColumn: DimAdvogados.id
+
+relationship 8fffd6b6-32cd-1052-df1c-854af9762ee9
+	fromColumn: FatEspecialidade.specialty_id
+	toColumn: DimEspecialidade.id_especialidade
+
+relationship a9ad2e7c-5e63-f176-5e16-4bda5c876c0d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FatEspecialidadeConcatenada.doctor_id
+	toColumn: DimAdvogados.id
+
+relationship 4a8d2f66-f3fd-04a0-f2cc-2fb562eb17b2
+	fromColumn: FatHistoricoOnline.doctor_id
+	toColumn: DimAdvogados.id
+
+relationship 0c5b4c99-4885-c10e-3b71-5e895fecbbc0
+	isActive: false
+	fromColumn: FatHistoricoOnline.online_at
+	toColumn: Calendario.Datas
+
+relationship 7115579a-35b6-26b2-1dbc-ad6dafe8c0ae
+	isActive: false
+	fromColumn: FatInscricaoAntiga.'DATA DE CANCELAMENTO'
+	toColumn: Calendario.Datas
+
+relationship ec7ce8cb-dff3-6e21-065c-a3c88cb1841e
+	isActive: false
+	fromColumn: FatInscricaoAntiga.'DATA DE INICIO ASSINATURA'
+	toColumn: Calendario.Datas
+
+relationship af06789e-a000-b176-a8c7-1895447e1b76
+	fromColumn: FatInscricaoAntiga.ID_CLIENTE
+	toColumn: DimAdvogados.id
+
+relationship a0e318b8-9a85-5d13-6274-38da6eee3822
+	isActive: false
+	fromColumn: FatInscricaoAntiga.ID_CLIENTE
+	toColumn: FatMotivoCancelamentoAssinatura.doctor_id
+
+relationship e7cf65b8-1a3f-9fee-1cb2-f94eb8ceacf8
+	isActive: false
+	fromColumn: FatInscricaoAntiga.ID_CLIENTE
+	toColumn: FatEspecialidadeConcatenada.doctor_id
+
+relationship fc71448c-e634-f186-f0ee-b324f3cb799a
+	fromColumn: FatInscricaoAntiga.ID_CLIENTE
+	toColumn: FatMensalidades.id_advogado
+
+relationship 980c8ac7-9f3b-0197-778e-6aeda4533835
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: FatInscricaoAntiga.ID_CLIENTE
+	toColumn: FatConsultorias.doctor_id
+
+relationship fdeed17d-b6ef-6418-4f6b-0e8393fa21e1
+	isActive: false
+	fromColumn: FatInvites.data_atualizacao
+	toColumn: Calendario.Datas
+
+relationship 839bd237-2feb-d489-c1e9-be572b3d632c
+	isActive: false
+	fromColumn: FatInvites.data_envio
+	toColumn: Calendario.Datas
+
+relationship 7935bd77-4f10-02f8-861a-2fdbb19ffdc6
+	fromColumn: FatInvites.id_cliente
+	toColumn: DimClientes_.id
+
+relationship 5675f353-0740-616a-4090-9acd3882470f
+	isActive: false
+	fromColumn: FatMotivoCancelamentoAssinatura.data_criacao
+	toColumn: Calendario.Datas
+
+relationship 48ed960e-edd0-d58c-0b13-69b7cc0143ae
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FatMotivoCancelamentoAssinatura.doctor_id
+	toColumn: DimAdvogados.id
+
+relationship 95d2d020-b1a1-7d94-e873-bd8fcd39d184
+	isActive: false
+	fromColumn: FatPeriodoTeste.'data fim periodo teste'
+	toColumn: Calendario.Datas
+
+relationship 612813e6-09a5-da3d-bed7-d430d7fff18d
+	isActive: false
+	fromColumn: FatPeriodoTeste.'data inicio periodo teste'
+	toColumn: Calendario.Datas
+
+relationship b1f1d465-f558-9b74-fabb-c9069f99a1c0
+	fromColumn: FatPeriodoTeste.doctor_id
+	toColumn: DimAdvogados.id
+
+relationship 38a9e7a1-3ef3-28d2-4c21-227d0987bcae
+	isActive: false
+	fromColumn: FatPescaria.data_cancelamento
+	toColumn: Calendario.Datas
+
+relationship c27fbf8c-483f-44ef-06a6-f20db652ea6f
+	isActive: false
+	fromColumn: FatPescaria.data_criacao
+	toColumn: Calendario.Datas
+
+relationship ed616bd9-6901-475e-97d0-3e5520f29eb9
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: FatRankAdvogados.data_criacao
+	toColumn: Calendario.Datas
+
+relationship 05f9b8e3-e70a-47b7-920e-f5666cf4ff68
+	joinOnDateBehavior: datePartOnly
+	fromColumn: BaseAppAdv.Day
+	toColumn: LocalDateTable_1104d676-1bc6-49c2-997a-12d7951c8b84.Date
+
+relationship 5e49e91b-a527-752e-5756-1cc482d473db
+	fromColumn: BaseAppCliente.Day
+	toColumn: Calendario.Datas
+
+relationship 1efad262-639f-d29c-e2ab-fe321e7e0293
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Calendario.Datas
+	toColumn: BaseAppAdv.Day
+
+relationship 194acc8a-a2b2-4a1e-8a07-9fbddba1d785
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatPeriodoTeste.Hora_Primeira_Consultoria
+	toColumn: LocalDateTable_2087820c-fd70-431a-a8da-02f2763abe43.Date
+
+relationship 8a16d55a-0bbd-0be0-7ae8-8bb4e0c8793d
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: FatRankAdvogados.data_criacao
+	toColumn: Periodo.Data
+
+relationship 8667cd6e-4b4f-4823-ba2b-ea3565578576
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Periodo.Data
+	toColumn: LocalDateTable_5c91950f-e922-4cc2-8716-6ddfafda7e59.Date
+
+relationship 7edcf1bb-6485-15c0-12d2-4e1716ad3c7c
+	fromColumn: FatInvites.periodo_aceitacao
+	toColumn: Turno.name
+
+relationship e6ff6b62-5d81-41ee-934d-e94c6150e932
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatHistoryClientsInvite.update_at
+	toColumn: LocalDateTable_a1150639-4d44-4c11-96a7-a612d6a638ad.Date
+
+relationship 324df258-286f-4098-9e35-77a86bf9915d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FatHistoryClientsInvite.created_at
+	toColumn: LocalDateTable_5473193d-57ec-487e-8db3-fbf4da560b21.Date
+
+relationship f1a2cee6-0c8b-fd54-e50e-ec2f1c7f5bf5
+	fromColumn: DimClientsInvite.periodo_envio
+	toColumn: Turno.name
+
+relationship e8573ad0-10ac-5698-a49a-8b0e5c9ea821
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FatHistoryClientsInvite.periodo_envio
+	toColumn: Turno.name
+
+relationship 5f1b88eb-925a-3013-7f7c-3158829fdfc5
+	fromColumn: DimClientsInvite.created_at_formated
+	toColumn: Calendario.Datas
+
+relationship f96f2b0a-0803-7576-8257-3b80ae848b78
+	fromColumn: FatInvites.Estado
+	toColumn: DimEstados.code
+
+relationship 329190da-10ea-d1b3-6fff-bafc1b07b997
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: BaseIndicacao.Day
+	toColumn: Calendario.Datas
+

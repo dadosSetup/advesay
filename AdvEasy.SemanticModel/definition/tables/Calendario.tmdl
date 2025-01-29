@@ -1,0 +1,252 @@
+table Calendario
+	lineageTag: cbf6bcc3-1c6a-434d-85ed-566b7c063bce
+
+	column Datas
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: efde87b7-260e-4232-8d29-2d1f62618208
+		summarizeBy: none
+		sourceColumn: Datas
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 7dca1c40-9c68-4897-98f8-d8fa154050ed
+		summarizeBy: sum
+		sourceColumn: Dia
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês
+		dataType: int64
+		formatString: 0
+		lineageTag: 241c45a7-ef36-4c7c-88d6-c573d8cb9ea5
+		summarizeBy: sum
+		sourceColumn: Mês
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 1818ae7c-e51e-4a64-b30b-d7c8123eafd0
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do Mês'
+		dataType: string
+		lineageTag: a66960b2-53d3-486a-a7ef-7d1871481605
+		summarizeBy: none
+		sourceColumn: Nome do Mês
+		sortByColumn: Mês
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana do Mês'
+		dataType: int64
+		formatString: 0
+		lineageTag: 031e474f-a5e5-4d6b-8e47-a9acac8a791c
+		summarizeBy: sum
+		sourceColumn: Semana do Mês
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Semana'
+		dataType: string
+		lineageTag: f9fcf743-995d-4550-bcab-d2cb32421b11
+		summarizeBy: none
+		sourceColumn: Nome Semana
+		sortByColumn: 'Semana do Mês'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 796bed0e-cf5e-4627-ae29-9806cebb5c97
+		summarizeBy: sum
+		sourceColumn: Trimestre
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Trimestre'
+		dataType: string
+		lineageTag: f925e82e-61de-4de2-9697-d82357c20612
+		summarizeBy: none
+		sourceColumn: Nome Trimestre
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semestre
+		dataType: string
+		lineageTag: 76ead6c4-c4f9-4377-8d62-f139b01d24bf
+		summarizeBy: none
+		sourceColumn: Semestre
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAno = ```
+			
+			VAR MesAnoTexto = FORMAT('Calendario'[Datas], "MMMM-YYYY")
+			RETURN UPPER(LEFT(MesAnoTexto, 1)) & LOWER(MID(MesAnoTexto, 2, LEN(MesAnoTexto) - 1))
+			
+			```
+		lineageTag: 3a9d336f-eabe-4f62-b6d0-b617104251c6
+		summarizeBy: none
+		sortByColumn: 'classificador mes-ano'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'classificador mes-ano' = 100 * 'Calendario'[Ano] + 'Calendario'[Mês]
+		formatString: 0
+		lineageTag: bff39b70-5fae-4d6d-9c3c-9b6a0094e947
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MêsAnoAbre =
+			
+			VAR MesAnoTexto = FORMAT([Datas], "MMM-yyyy")
+			RETURN UPPER(LEFT(MesAnoTexto, 1)) & LOWER(MID(MesAnoTexto, 2, LEN(MesAnoTexto) - 1))
+		lineageTag: 2d4de03d-ed76-4bd3-9066-723f5a3e9524
+		summarizeBy: none
+		sortByColumn: 'classificador mes-ano'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do Dia'
+		dataType: string
+		lineageTag: 67062823-53a3-4335-87cc-04623b87d889
+		summarizeBy: none
+		sourceColumn: Nome do Dia
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia Util' = IF(Calendario[Nome do Dia] = "sábado" || Calendario[Nome do Dia] = "Domingo", 0,1)
+		formatString: 0
+		lineageTag: 4997d47c-a0d3-4094-9a2c-0b24aff6be47
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semana do Ano' = WEEKNUM('Calendario'[Datas])
+		formatString: 0
+		lineageTag: 3187fdd5-df1b-44a0-b58c-130b11902750
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Atual' =
+			
+			IF(
+			    Calendario[Ano]=YEAR(TODAY())&&
+			    Calendario[Mês]=MONTH(TODAY()),
+			    "Mês Atual",
+			    'Calendario'[Nome do Mês])
+		lineageTag: 1c4d1c49-9ea7-4379-bb33-879ced4ca639
+		summarizeBy: none
+		sortByColumn: Mês
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano Atual' = ```
+			
+			IF(
+			    Calendario[Ano] = YEAR(TODAY()), 
+			    "Ano Atual", 
+			    FORMAT(Calendario[Ano], "0")
+			)
+			
+			```
+		lineageTag: 3cf03433-1293-4995-9eb4-c51e60ad78ae
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = m
+		mode: import
+		source =
+				let
+				    DataMin = #date(2022, 8, 1),
+				    DataMax = DateTime.Date(DateTime.LocalNow()),
+				    // DataMax = List.Max(advogados[created_at]),
+				    QtdDias = Duration.Days(DataMax-DataMin)+1,
+				    Personalizar1 = List.Dates(DataMin, QtdDias, #duration(1, 0, 0, 0)),
+				    #"Convertido para Tabela" = Table.FromList(Personalizar1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Convertido para Tabela",{{"Column1", "Datas"}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Datas", type date}}),
+				    #"Ano Inserido" = Table.AddColumn(#"Tipo Alterado", "Ano", each Date.Year([Datas]), Int64.Type),
+				    #"Mês Inserido" = Table.AddColumn(#"Ano Inserido", "Mês", each Date.Month([Datas]), Int64.Type),
+				    #"Nome do Mês Inserido" = Table.AddColumn(#"Mês Inserido", "Nome do Mês", each Date.MonthName([Datas]), type text),
+				    #"Semana do Mês Inserida" = Table.AddColumn(#"Nome do Mês Inserido", "Semana do Mês", each Date.WeekOfMonth([Datas]), Int64.Type),
+				    #"Dia Inserido" = Table.AddColumn(#"Semana do Mês Inserida", "Dia", each Date.Day([Datas]), Int64.Type),
+				    #"Colunas Reordenadas" = Table.ReorderColumns(#"Dia Inserido",{"Datas", "Dia", "Mês", "Ano", "Nome do Mês", "Semana do Mês"}),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Colunas Reordenadas", "Personalizar", each if [Semana do Mês] = 1 then "1° Semana" else if [Semana do Mês] = 2 then "2° Semana" else if [Semana do Mês] = 3 then "3° Semana" else if [Semana do Mês] = 4 then "4° Semana" else if [Semana do Mês] = 5 then "5° Semana" else "6° Semana"),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Coluna Condicional Adicionada",{{"Personalizar", "Nome Semana"}}),
+				    #"Trimestre Inserido" = Table.AddColumn(#"Colunas Renomeadas1", "Trimestre", each Date.QuarterOfYear([Datas]), Int64.Type),
+				    #"Coluna Mesclada Inserida" = Table.AddColumn(#"Trimestre Inserido", "Mesclado", each Text.Combine({Text.From([Trimestre], "pt-BR"), "° Trimestre"}), type text),
+				    #"Colunas Renomeadas2" = Table.RenameColumns(#"Coluna Mesclada Inserida",{{"Mesclado", "Nome Trimestre"}}),
+				    #"Coluna Condicional Adicionada1" = Table.AddColumn(#"Colunas Renomeadas2", "Semestre", each if [Mês] < 7 then "1° Semestre" else "2° Semestre"),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Coluna Condicional Adicionada1",{{"Nome do Mês", Text.Proper, type text}}),
+				    #"Coluna Personalizada Adicionada" = Table.AddColumn(#"Colocar Cada Palavra Em Maiúscula", "Mês abreviado", each Text.Combine({Text.Start([Nome do Mês], 3), "-", Text.From([Ano], "pt-BR")}), type text),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Coluna Personalizada Adicionada",{"Mês abreviado"}),
+				    #"Nome do Dia Inserido" = Table.AddColumn(#"Colunas Removidas", "Nome do Dia", each Date.DayOfWeekName([Datas]), type text)
+				in
+				    #"Nome do Dia Inserido"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

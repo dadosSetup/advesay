@@ -1,0 +1,309 @@
+table FatConsultorias
+	lineageTag: 635a6774-97bc-4078-81b9-ca68430f3028
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c86902f-28bd-443a-bad5-7f60573df80c
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column doctor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a3b3d81b-9598-4256-9e37-e3ea62a95479
+		summarizeBy: none
+		sourceColumn: doctor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column patient_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f823da04-5594-4aca-8569-11ff5089eaa4
+		summarizeBy: none
+		sourceColumn: patient_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column momento_cliente
+		dataType: string
+		lineageTag: 2347e21e-054e-434d-8d9a-fa56d199830f
+		summarizeBy: none
+		sourceColumn: momento_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_criacao_consultoria
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 45003678-771b-4c77-bfe8-0b45ab3c63fd
+		summarizeBy: none
+		sourceColumn: data_criacao_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_criacao_consultoria
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 2eba14e3-e5f5-430e-8cae-34139072a0fd
+		summarizeBy: none
+		sourceColumn: hora_criacao_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column data_inicio_consultoria
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 422fb025-6482-48c2-acda-3122e3e0a24b
+		summarizeBy: none
+		sourceColumn: data_inicio_consultoria
+
+		variation Variation
+			isDefault
+			relationship: 47fbc286-19dc-455c-8054-a9813058cc6e
+			defaultHierarchy: LocalDateTable_db8ae29f-2ff4-426e-ac62-7ec5192129da.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_inicio_consultoria
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 845b8a13-5d9d-41e8-8a41-3e4fe75ae0bd
+		summarizeBy: none
+		sourceColumn: hora_inicio_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column data_fim_consultoria
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 156aaf2c-7030-43e1-b59a-a0a2f1b0f24b
+		summarizeBy: none
+		sourceColumn: data_fim_consultoria
+
+		variation Variation
+			isDefault
+			relationship: d6f8ca96-367f-4f3e-bc92-4e3def225dcc
+			defaultHierarchy: LocalDateTable_b99e69b7-134a-4654-b35d-56e5dc4146d4.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_fim_consultoria
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: ced717be-f131-411c-ab21-16184489297f
+		summarizeBy: none
+		sourceColumn: hora_fim_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column data_cancelamento_consultoria
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 34da9049-6c8e-43bd-91d3-64e8a678aaee
+		summarizeBy: none
+		sourceColumn: data_cancelamento_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_cancelamento_consultoria
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: ecd0f7b7-2e38-4314-bac3-8ab65847760d
+		summarizeBy: none
+		sourceColumn: hora_cancelamento_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column data_aceitacao_consultoria
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 726cf39d-936a-4127-85cc-fa24c8a2bb1d
+		summarizeBy: none
+		sourceColumn: data_aceitacao_consultoria
+
+		variation Variation
+			isDefault
+			relationship: 00cbe700-8597-4651-82d4-4a9d764f10c6
+			defaultHierarchy: LocalDateTable_7a8a89c2-d6e5-4c26-af57-99865995f225.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_aceitacao_consultoria
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 9a0ea78c-2e73-4fe0-8725-a444eba482c0
+		summarizeBy: none
+		sourceColumn: hora_aceitacao_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column diferenca_em_minutos
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f06eef6-4579-434a-a505-d2460affbe08
+		summarizeBy: sum
+		sourceColumn: diferenca_em_minutos
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_consultoria
+		dataType: string
+		lineageTag: 41adc5ad-13d2-43c5-8323-43bc40b7c972
+		summarizeBy: none
+		sourceColumn: status_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column especialidade
+		dataType: int64
+		formatString: 0
+		lineageTag: efe083c8-78c0-404b-866a-dac2026f9518
+		summarizeBy: none
+		sourceColumn: especialidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column replicated_from
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f820fdc-104e-49c7-918e-b5a54c17cd57
+		summarizeBy: sum
+		sourceColumn: replicated_from
+
+		annotation SummarizationSetBy = Automatic
+
+	column replicacao
+		dataType: string
+		lineageTag: 72fb8c6f-c3de-4fad-bb31-a510053f0673
+		summarizeBy: none
+		sourceColumn: replicacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column motivo_cancelamento_consultoria
+		dataType: string
+		lineageTag: 0d476126-1f22-4381-892b-4beae10ebb0f
+		summarizeBy: none
+		sourceColumn: motivo_cancelamento_consultoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column visualizacao
+		dataType: string
+		lineageTag: 64aabaac-96f1-48e8-98f7-23bb33517394
+		summarizeBy: none
+		sourceColumn: visualizacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column consultoria_aceita
+		dataType: string
+		lineageTag: 4a11eab8-b453-4f9a-bdc4-a2b5deb390c1
+		summarizeBy: none
+		sourceColumn: consultoria_aceita
+
+		annotation SummarizationSetBy = Automatic
+
+	column observation
+		dataType: string
+		lineageTag: e60899a2-39ed-4449-8ffa-acf24e1ef0b9
+		summarizeBy: none
+		sourceColumn: observation
+
+		annotation SummarizationSetBy = Automatic
+
+	column TMR = ```
+			
+			DATEDIFF(
+			    'FatConsultorias'[data_inicio_consultoria] + 'FatConsultorias'[hora_inicio_consultoria],
+			    'FatConsultorias'[data_aceitacao_consultoria] + 'FatConsultorias'[hora_aceitacao_consultoria],
+			    MINUTE
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 377870b3-d4f1-45ab-af46-1ffbac7fc2a1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Periodo_Consultoria = ```
+			
+			SWITCH(
+			    TRUE(),
+			    HOUR('FatConsultorias'[hora_inicio_consultoria]) < 12, "Manhã",
+			    HOUR('FatConsultorias'[hora_inicio_consultoria]) < 18, "Tarde",
+			    "Noite"
+			)
+			
+			```
+		lineageTag: 9a53d9cb-4122-4fc6-bdcc-1518d108a63a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome_especialidade = RELATED(DimEspecialidade[name])
+		lineageTag: 943f99f6-39ab-4553-9410-4cdbe8998c94
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column É_Recorrente = ```
+			
+			IF(
+			    COUNTROWS(
+			        FILTER(
+			            FatConsultorias,
+			            FatConsultorias[patient_id] = EARLIER(FatConsultorias[patient_id]) &&
+			            FatConsultorias[data_criacao_consultoria] <> EARLIER(FatConsultorias[data_criacao_consultoria])
+			        )
+			    ) > 0,
+			    "Sim",
+			    "Não"
+			)
+			
+			```
+		lineageTag: 2b6d1586-5cfd-4e77-9e40-18461109d7f2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatConsultorias = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-schedules/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "doctor_id", "patient_id", "momento_cliente", "data_criacao_consultoria", "hora_criacao_consultoria", "data_inicio_consultoria", "hora_inicio_consultoria", "data_fim_consultoria", "hora_fim_consultoria", "data_cancelamento_consultoria", "hora_cancelamento_consultoria", "data_aceitacao_consultoria", "hora_aceitacao_consultoria", "diferenca_em_minutos", "status_consultoria", "especialidade", "replicated_from", "replicacao", "motivo_cancelamento_consultoria", "visualizacao", "consultoria_aceita", "observation"}, {"id", "doctor_id", "patient_id", "momento_cliente", "data_criacao_consultoria", "hora_criacao_consultoria", "data_inicio_consultoria", "hora_inicio_consultoria", "data_fim_consultoria", "hora_fim_consultoria", "data_cancelamento_consultoria", "hora_cancelamento_consultoria", "data_aceitacao_consultoria", "hora_aceitacao_consultoria", "diferenca_em_minutos", "status_consultoria", "especialidade", "replicated_from", "replicacao", "motivo_cancelamento_consultoria", "visualizacao", "consultoria_aceita", "observation"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"doctor_id", Int64.Type}, {"id", Int64.Type}, {"patient_id", Int64.Type}, {"momento_cliente", type text}, {"data_criacao_consultoria", type date}, {"hora_criacao_consultoria", type time}, {"data_inicio_consultoria", type date}, {"hora_inicio_consultoria", type time}, {"data_fim_consultoria", type date}, {"hora_fim_consultoria", type time}, {"data_cancelamento_consultoria", type date}, {"hora_cancelamento_consultoria", type time}, {"data_aceitacao_consultoria", type date}, {"hora_aceitacao_consultoria", type time}, {"diferenca_em_minutos", Int64.Type}, {"status_consultoria", type text}, {"especialidade", Int64.Type}, {"replicacao", type text}, {"motivo_cancelamento_consultoria", type text}, {"visualizacao", type text}, {"consultoria_aceita", type text}, {"replicated_from", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

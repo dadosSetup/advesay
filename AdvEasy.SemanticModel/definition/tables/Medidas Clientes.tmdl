@@ -1,0 +1,121 @@
+table 'Medidas Clientes'
+	lineageTag: 8ef9f6d1-c2a5-42a7-81aa-3c43ca82a5e3
+
+	measure 'Total Clientes com RemoveFiltros' =
+			
+			CALCULATE(
+			    COUNTROWS(DimClientes_),
+			    REMOVEFILTERS(Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: 0267c072-6afd-4f76-9571-76e56fbfb84a
+
+	measure 'Total Clientes com filtro' =
+			CALCULATE(
+			    COUNTROWS(DimClientes_),
+			    USERELATIONSHIP(DimClientes_[created_at],Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: abc84d07-0ebb-450a-bb14-c598d3efc14b
+
+	measure 'Taxa Crescimento Cadastro Clientes' = ```
+			
+			VAR PeriodoAtual =
+			    CALCULATE (
+			        COUNT ( 'DimClientes_'[id] ),
+			        USERELATIONSHIP ( DimClientes_[created_at], Calendario[Datas] )
+			    )
+			VAR PeriodoAnterior =
+			    CALCULATE (
+			        COUNT ( 'DimClientes_'[id] ),
+			        DATEADD ( 'Calendario'[Datas], -1, MONTH ),
+			        USERELATIONSHIP ( DimClientes_[created_at], Calendario[Datas] )
+			    ) 
+			VAR TaxaCrescimento =
+			    IF (
+			        NOT ISBLANK ( PeriodoAnterior )
+			            && PeriodoAnterior <> 0,
+			        ( PeriodoAtual - PeriodoAnterior ) / PeriodoAnterior,
+			        BLANK ()
+			    )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( TaxaCrescimento ),
+			        FORMAT ( TaxaCrescimento, "+0.00%;-0.00%;0.00%" ),
+			        BLANK ()
+			    )
+			
+			
+			```
+		lineageTag: d15049e1-3877-4225-ac30-10c2d4dbd240
+
+	measure 'Cadastro Cliente Mes Anterior' =
+			CALCULATE(
+			    [Total Clientes com filtro], PREVIOUSMONTH(Calendario[Datas])
+			)
+		formatString: 0
+		lineageTag: a415308c-f0bf-4985-8db4-1f9efae18910
+
+	measure 'Total Clientes Semana Atual' = ```
+			
+			CALCULATE(
+			    [Total Clientes com filtro],
+			    FILTER(
+			        ALL(Calendario),
+			        Calendario[Semana do Mês] = MAX(Calendario[Semana do Mês]) &&
+			        MONTH(Calendario[Datas]) = MONTH(MAX(Calendario[Datas])) &&
+			        YEAR(Calendario[Datas]) = YEAR(MAX(Calendario[Datas]))
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: b85040f8-b78f-4697-a113-03189a667f59
+
+	measure 'Total Clientes Semana Mes Anterior' = ```
+			
+			VAR DataMesAnterior = EDATE(MAX(Calendario[Datas]), -1)
+			RETURN
+			CALCULATE(
+			    [Total Clientes com filtro],
+			    FILTER(
+			        ALL(Calendario),
+			        Calendario[Semana do Mês] = MAX(Calendario[Semana do Mês]) &&
+			        MONTH(Calendario[Datas]) = MONTH(DataMesAnterior) &&
+			        YEAR(Calendario[Datas]) = YEAR(DataMesAnterior)
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 1564547c-7cac-466f-888d-12be5968ea8b
+
+	measure 'Taxa Crescimento Semana Atual vs Mes Anterior' = ```
+			
+			DIVIDE(
+			    [Total Clientes Semana Atual] - [Total Clientes Semana Mes Anterior],
+			    [Total Clientes Semana Mes Anterior],
+			    0
+			)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: aca3589d-3d8a-4b7f-a058-92a9ea03f76d
+
+	column Column
+		formatString: 0
+		lineageTag: d4b92a11-261f-47c0-9832-b8900ec0bda7
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas Clientes' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = ceac39e8e751446fa98b1454c1e525ed
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

@@ -1,0 +1,176 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "b794a8fce17f15d262a0",
+  "position": {
+    "x": 344.61538461538464,
+    "y": 446.25310173697272,
+    "z": 30000,
+    "height": 593.9454094292804,
+    "width": 693.99503722084376,
+    "tabOrder": 29000
+  },
+  "visual": {
+    "visualType": "funnel",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasBaseClientes"
+                    }
+                  },
+                  "Property": "Link Clicks"
+                }
+              },
+              "queryRef": "MedidasBaseClientes.Link Clicks",
+              "nativeQueryRef": "Link Clicks"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasBaseClientes"
+                    }
+                  },
+                  "Property": "Acessos LP Cliente"
+                }
+              },
+              "queryRef": "MedidasBaseClientes.Acessos LP Cliente",
+              "nativeQueryRef": "Acessos LP Cliente"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Clientes"
+                    }
+                  },
+                  "Property": "Total Clientes com filtro"
+                }
+              },
+              "queryRef": "Medidas Clientes.Total Clientes com filtro",
+              "nativeQueryRef": "Total Clientes com filtro"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas Consultorias"
+                    }
+                  },
+                  "Property": "Total Clientes Consultorias abertas"
+                }
+              },
+              "queryRef": "Medidas Consultorias.Total Clientes Consultorias abertas",
+              "nativeQueryRef": "Total Clientes Consultorias abertas"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasBaseClientes"
+                  }
+                },
+                "Property": "Link Clicks"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Funil de Conversão'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading2'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "38D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,118 @@
+table FatMotivoCancelamentoAssinatura
+	lineageTag: ee4b9f9d-95f8-4471-862f-e080b1c6f493
+
+	column doctor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 37c5555e-ecd1-4318-9e86-6a5a1c605ef2
+		summarizeBy: none
+		sourceColumn: doctor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column free_trial_period_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f8f47fab-7d0c-4b00-83cd-d508c4a9641f
+		summarizeBy: sum
+		sourceColumn: free_trial_period_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column subscription_id
+		dataType: int64
+		formatString: 0
+		lineageTag: c30d8bbd-a079-453b-91a1-03016ff43761
+		summarizeBy: sum
+		sourceColumn: subscription_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column motivo_cancelamento
+		dataType: string
+		lineageTag: f054c7d0-bf0c-411d-b937-84b3198fd759
+		summarizeBy: none
+		sourceColumn: motivo_cancelamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_criacao
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3a67de2b-faea-4251-928f-1d2cf977ad11
+		summarizeBy: none
+		sourceColumn: data_criacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_criacao
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 386b8fe2-93b9-46c1-918a-2114fa5a6e5f
+		summarizeBy: none
+		sourceColumn: hora_criacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column data_update
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d60f1191-f07b-4aef-b52c-9ed9e3a70b3b
+		summarizeBy: none
+		sourceColumn: data_update
+
+		variation Variation
+			isDefault
+			relationship: b88ef99d-5c02-49dc-a42b-0e0503598d3f
+			defaultHierarchy: LocalDateTable_0b6690a5-6b15-4790-9287-ea459d521415.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_update
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 43d4ef2a-6c28-4d17-9e9d-d1635cceb6da
+		summarizeBy: none
+		sourceColumn: hora_update
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column observation
+		dataType: string
+		lineageTag: e3c029aa-a2ab-4346-a608-2fcc2240b256
+		summarizeBy: none
+		sourceColumn: observation
+
+		annotation SummarizationSetBy = Automatic
+
+	column plano
+		dataType: string
+		lineageTag: 9e789c7a-f186-4759-bd9b-40758d216272
+		summarizeBy: none
+		sourceColumn: plano
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatMotivoCancelamentoAssinatura = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-reason_cancelation/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"doctor_id", "free_trial_period_id", "subscription_id", "motivo_cancelamento", "data_criacao", "hora_criacao", "data_update", "hora_update", "observation", "plano"}, {"doctor_id", "free_trial_period_id", "subscription_id", "motivo_cancelamento", "data_criacao", "hora_criacao", "data_update", "hora_update", "observation", "plano"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"doctor_id", Int64.Type}, {"free_trial_period_id", Int64.Type}, {"subscription_id", Int64.Type}, {"motivo_cancelamento", type text}, {"data_criacao", type date}, {"hora_criacao", type time}, {"data_update", type date}, {"hora_update", type time}, {"observation", type text}, {"plano", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

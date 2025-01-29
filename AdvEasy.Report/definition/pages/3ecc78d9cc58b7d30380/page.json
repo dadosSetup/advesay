@@ -1,0 +1,133 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.3.0/schema.json",
+  "name": "3ecc78d9cc58b7d30380",
+  "displayName": "Rank Advogados",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Teste.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "Teste395902010348552.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 0,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "3fd41091e0477fcf0653",
+      "target": "0c0eaa5a859d04ed508e",
+      "type": "NoFilter"
+    },
+    {
+      "source": "13ab123034eb0842d5cf",
+      "target": "fc29f5058bb620c7f787",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3fd41091e0477fcf0653",
+      "target": "d357bf9d249dfbae2285",
+      "type": "DataFilter"
+    },
+    {
+      "source": "85ac857438b53d7571fc",
+      "target": "3fd41091e0477fcf0653",
+      "type": "NoFilter"
+    },
+    {
+      "source": "f4b08f7b1be5e5e3b02b",
+      "target": "fc29f5058bb620c7f787",
+      "type": "NoFilter"
+    },
+    {
+      "source": "41f211c5343e6268ec8f",
+      "target": "80a01f01aeca25166f42",
+      "type": "NoFilter"
+    },
+    {
+      "source": "41f211c5343e6268ec8f",
+      "target": "631dd45f4c7b52bd3424",
+      "type": "NoFilter"
+    },
+    {
+      "source": "80a01f01aeca25166f42",
+      "target": "631dd45f4c7b52bd3424",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6d534ace6ec8047e5eca",
+      "target": "631dd45f4c7b52bd3424",
+      "type": "DataFilter"
+    }
+  ]
+}

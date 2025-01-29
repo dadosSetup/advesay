@@ -1,0 +1,431 @@
+table UX
+	lineageTag: c19db6e0-a7a8-4cfe-87c0-b6dede4e9273
+
+	measure cor_diferenca_assinantes_e_cancelados = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [diferenca entre Cancelado e Assinantes] > 0, [diferenca entre Cancelado e Assinantes] & " 📈",  // Emoji de gráfico subindo
+			    [diferenca entre Cancelado e Assinantes] < 0, [diferenca entre Cancelado e Assinantes] & " 📉",  // Emoji de gráfico descendo
+			    [diferenca entre Cancelado e Assinantes] = 0, [diferenca entre Cancelado e Assinantes] & " ➖"    // Emoji neutro
+			)
+			
+			```
+		lineageTag: 29cc47cd-8309-442e-8b09-f0ce1e9b1cf4
+
+	measure Cor_Condicional_Rank = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [Rank] = 1, "#ffd41f",
+			    [Rank] = 2, "#969696",
+			    [Rank] = 3, "#f5593a",
+			    "#0A1830"
+			)
+			
+			```
+		lineageTag: 3cbd9615-d55a-4dd3-901c-7784b231cacb
+
+	measure RankHtml = ```
+			
+			VAR AdvogadoTop1 = 
+			    TOPN(
+			        1,
+			        ALLSELECTED(FatRankAdvogados),
+			        [PontuacaoMaxima], DESC,
+			        [SomaPontuação], DESC,
+			        [Media_pontuacao], DESC,
+			        FatRankAdvogados[nome_advogado], ASC
+			    )
+			
+			VAR AdvogadoTop2 = 
+			    TOPN(
+			        1,
+			        EXCEPT(
+			            ALLSELECTED(FatRankAdvogados),
+			            AdvogadoTop1
+			        ),
+			        [PontuacaoMaxima], DESC,
+			        [SomaPontuação], DESC,
+			        [Media_pontuacao], DESC,
+			        FatRankAdvogados[nome_advogado], ASC
+			    )
+			
+			VAR AdvogadoTop3 = 
+			    TOPN(
+			        1,
+			        EXCEPT(
+			            ALLSELECTED(FatRankAdvogados),
+			            UNION(AdvogadoTop1, AdvogadoTop2)
+			        ),
+			        [PontuacaoMaxima], DESC,
+			        [SomaPontuação], DESC,
+			        [Media_pontuacao], DESC,
+			        FatRankAdvogados[nome_advogado], ASC
+			    )
+			
+			VAR NomePrimeiroLugar = 
+			    MAXX(AdvogadoTop1, FatRankAdvogados[nome_advogado])
+			
+			VAR NomeSegundoLugar = 
+			    MAXX(AdvogadoTop2, FatRankAdvogados[nome_advogado])
+			
+			VAR NomeTerceiroLugar = 
+			    MAXX(AdvogadoTop3, FatRankAdvogados[nome_advogado])
+			
+			RETURN
+			"<!-- Componente OpenXBI, ajude-nos compartilhando nossa plataforma -->
+			<!-- https://openxbi.com.br -->
+			<div class='chart-container'>
+			    <div class='chart-content'>
+			        <strong>Rank Advogados</strong> <!-- Título -->
+			        <div class='places'>
+			            <div class='silver'>
+			                <img src='https://i.pinimg.com/564x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg'
+			                class='photo'> <!-- Foto 2º lugar-->
+			                <small>" & NomeSegundoLugar & "</small> <!-- Nome 2º lugar-->
+			                <div class='bar'>2º</div>
+			            </div>
+			            <div class='gold'>
+			                <img src='https://i.pinimg.com/564x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg'
+			                class='photo'> <!-- Foto 1º lugar-->
+			                <small>" & NomePrimeiroLugar & "</small> <!-- Nome 1º lugar-->
+			                <div class='bar'>1º</div>
+			            </div>
+			            <div class='bronze'>
+			                <img src='https://i.pinimg.com/564x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg' 
+			                class='photo'> <!-- Foto 3º lugar-->
+			                <small>" & NomeTerceiroLugar & "</small> <!-- Nome 3º lugar-->
+			                <div class='bar'>3º</div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			
+			<style>
+			@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+			* {
+			    margin: 0;
+			    font-family: 'Inter', sans-serif;
+			}
+			.chart-container {
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    height: 100%;
+			}
+			.chart-content strong {
+			    color: rgb(43, 43, 43);
+			    margin-top: .5rem;
+			    font-size: .875rem;
+			    width: 100%;
+			    text-align: center;
+			}
+			.chart-content small {
+			    margin: .5rem 0;
+			    color: rgb(77, 77, 77); /* Cor dos nomes */
+			    animation: flutuar 5s infinite;
+			}
+			.chart-content {
+			    display: flex;
+			    flex-direction: column;
+			    background: white;  /* Cor do Chart */
+			    padding: .5rem 1rem;
+			    border-radius: 8px;
+			    margin: .2rem;
+			    max-width: 500px; /* Largura do Chart */
+			    width: 100%;
+			}
+			.places {
+			    cursor: pointer;
+			    display: flex;
+			    justify-content: space-around;
+			    margin: 1rem 0;
+			    height: auto;
+			}
+			.chart-content img {
+			    border-radius: 50%; /* Raio da borda */
+			    width: 50px; /* Largura da imagem, modifica também a altura */
+			}
+			.gold, .silver, .bronze {
+			    display: flex;
+			    flex-direction: column;
+			    align-items: center;
+			    justify-content: flex-end;
+			    color: rgb(255, 246, 229);
+			    height: 300px; /* Altura total dos 3 pódios, com imagem e nome */
+			}
+			.gold img { border: 3px solid #ffa914; box-shadow: 1px 1px 7px #ffa200;}
+			.silver img { border: 3px solid #19a9dd; box-shadow: 1px 1px 7px #19a9dd;}
+			.bronze img { border: 3px solid #e45c1d; box-shadow: 1px 1px 7px #e45c1d;}
+			/* Barras */
+			.bar {
+			    border-radius: 8px 8px 0 0; /* Raio das bordas superiores */
+			}
+			.gold > .bar {
+			    height: 280px; /* Altura do 1º lugar, e abaixo as cores */
+			    background: linear-gradient(#ffa914, #fdd38a);
+			    padding: 1rem;
+			    border-bottom: 3px solid #ffa914;
+			}
+			.silver > .bar {
+			    height: 150px; /* Altura do 2º lugar, e abaixo as cores */
+			    background: linear-gradient(#19a9dd, #81ddff);
+			    padding: .8rem;
+			    border-bottom: 3px solid #19a9dd;
+			}
+			.bronze > .bar {
+			    height: 100px; /* Altura do 3º lugar, e abaixo as cores */
+			    background: linear-gradient(#e45c1d, #ffaa83);
+			    padding: .8rem;
+			    border-bottom: 3px solid #e45c1d;
+			}
+			.chart-content img { /* Borda e sombra da imagem, com animação */
+			    animation: flutuar 5s infinite;
+			}
+			/* keyframes são conjunto de propriedades para animar um objeto */
+			@keyframes flutuar { /* Keyframe da animação */
+			    0% {transform: translateY(0px);}
+			    50% {transform: translateY(-5px);}
+			    100% {transform: translateY(0px);}
+			}
+			</style>"
+			
+			```
+		displayFolder: Html
+		lineageTag: c87da484-aa14-415f-b88b-ec4d7a34f99f
+
+	measure Topclientes = ```
+			
+			
+			VAR AdvogadoTop1 = 
+			    TOPN(
+			        1,
+			        ALLSELECTED(FatRankAdvogados),
+			        [PontuacaoMaxima], DESC,
+			        // [SomaPontuação], DESC,
+			        [Media_pontuacao], DESC,
+			        FatRankAdvogados[nome_advogado], ASC
+			    )
+			
+			VAR AdvogadoTop2 = 
+			    TOPN(
+			        1,
+			        EXCEPT(
+			            ALLSELECTED(FatRankAdvogados),
+			            AdvogadoTop1
+			        ),
+			        [PontuacaoMaxima], DESC,
+			        // [SomaPontuação], DESC,
+			        [Media_pontuacao], DESC,
+			        FatRankAdvogados[nome_advogado], ASC
+			    )
+			
+			VAR AdvogadoTop3 = 
+			    TOPN(
+			        1,
+			        EXCEPT(
+			            ALLSELECTED(FatRankAdvogados),
+			            UNION(AdvogadoTop1, AdvogadoTop2)
+			        ),
+			        [PontuacaoMaxima], DESC,
+			        // [SomaPontuação], DESC,
+			        [Media_pontuacao], DESC,
+			        FatRankAdvogados[nome_advogado], ASC
+			    )
+			
+			VAR NomePrimeiroLugar = 
+			    MAXX(AdvogadoTop1, FatRankAdvogados[nome_advogado])
+			
+			VAR NomeSegundoLugar = 
+			    MAXX(AdvogadoTop2, FatRankAdvogados[nome_advogado])
+			
+			VAR NomeTerceiroLugar = 
+			    MAXX(AdvogadoTop3, FatRankAdvogados[nome_advogado])
+			
+			VAR Pontuacao1 = 
+			    MAXX(AdvogadoTop1, [PontuacaoMaxima])
+			
+			VAR Pontuacao2 = 
+			    MAXX(AdvogadoTop2, [PontuacaoMaxima])
+			
+			VAR Pontuacao3 = 
+			    MAXX(AdvogadoTop3, [PontuacaoMaxima])
+			
+			RETURN
+			"<div class='container'>
+			    <h1>Rank Advogados</h1>
+			    
+			    <div class='podium'>
+			      <div class='rank second'>
+			        <div class='trophy'>🥈</div>
+			        <div class='platform'>2</div>
+			        <div class='name'>"& NomeSegundoLugar &"</div>
+			        <div class='score'>"& Pontuacao2 & " pts</div>
+			      </div>
+			
+			      <div class='rank first'>
+			        <div class='trophy'>🏆</div>
+			        <div class='platform'>1</div>
+			        <div class='name'>"& NomePrimeiroLugar &"</div>
+			        <div class='score'>"& Pontuacao1 & " pts</div>
+			      </div>
+			
+			      <div class='rank third'>
+			        <div class='trophy'>🥉</div>
+			        <div class='platform'>3</div>
+			        <div class='name'>"& NomeTerceiroLugar &"</div>
+			        <div class='score'>"& Pontuacao3 & " pts</div>
+			      </div>
+			    </div>
+			  </div>
+			<style>
+			* {
+			  margin: 0;
+			  padding: 0;
+			  box-sizing: border-box;
+			}
+			.container {
+			  text-align: center;
+			  padding: 2rem;
+			}
+			
+			h1 {
+			  color: #1a1a1a;
+			  margin-bottom: 3rem;
+			  font-size: 2.5rem;
+			  font-weight: 600;
+			}
+			
+			.podium {
+			  display: flex;
+			  align-items: flex-end;
+			  justify-content: center;
+			  gap: 1rem;
+			  margin-top: 2rem;
+			}
+			
+			.rank {
+			  display: flex;
+			  flex-direction: column;
+			  align-items: center;
+			  transition: transform 0.3s ease;
+			}
+			
+			.rank:hover {
+			  transform: translateY(-10px);
+			}
+			
+			.trophy {
+			  font-size: 2.5rem;
+			  margin-bottom: 0.5rem;
+			}
+			
+			.platform {
+			  width: 120px;
+			  padding: 1rem;
+			  background: white;
+			  border-radius: 8px 8px 0 0;
+			  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			  font-size: 1.5rem;
+			  font-weight: bold;
+			}
+			
+			.first {
+			  order: 2;
+			}
+			
+			.first .platform {
+			  height: 160px;
+			  background: #ffd700;
+			  color: #1a1a1a;
+			}
+			
+			.second {
+			  order: 1;
+			}
+			
+			.second .platform {
+			  height: 120px;
+			  background: #c0c0c0;
+			  color: #1a1a1a;
+			}
+			
+			.third {
+			  order: 3;
+			}
+			
+			.third .platform {
+			  height: 80px;
+			  background: #cd7f32;
+			  color: #1a1a1a;
+			}
+			
+			.name {
+			  margin-top: 1rem;
+			  font-weight: 600;
+			  color: #1a1a1a;
+			}
+			
+			.score {
+			  color: #666;
+			  font-size: 0.9rem;
+			  margin-top: 0.25rem;
+			}
+			
+			@media (max-width: 600px) {
+			  .podium {
+			    gap: 0.5rem;
+			  }
+			  
+			  .platform {
+			    width: 90px;
+			  }
+			  
+			  .trophy {
+			    font-size: 2rem;
+			  }
+			  
+			  .name {
+			    font-size: 0.9rem;
+			  }
+			  
+			  .score {
+			    font-size: 0.8rem;
+			  }
+			}
+			</style>"
+			
+			```
+		displayFolder: Html
+		lineageTag: 818c07f1-f39f-4850-b7ea-d09ccfc3ffa6
+
+	measure '% Crescimento Total Cadastro com Ícones' = ```
+			
+			VAR SaldoAtual = [Total de Advogados]
+			VAR SaldoAnterior = CALCULATE([Total de Advogados], DATEADD('Calendario'[Datas], -1, MONTH))
+			VAR Resultado = DIVIDE(SaldoAtual - SaldoAnterior, SaldoAnterior)
+			VAR Percentual = FORMAT(Resultado, "#%")
+			    
+			RETURN
+			    IF (Resultado > 0, "⬆️" & Percentual, "🔻" & Percentual)
+			```
+		lineageTag: a230d975-b784-41d2-ab64-2b6c04d16953
+
+	column Column
+		formatString: 0
+		lineageTag: 053de7d1-f67d-4734-8005-7b67b106ad20
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition UX = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 83aaa9500e6344f6a5ed61e37d41a063
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

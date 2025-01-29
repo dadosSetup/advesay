@@ -1,0 +1,239 @@
+table Testes
+	lineageTag: e05b7992-ba12-477d-be6c-8373ca09a8c2
+
+	measure 'Nomes Advogados Cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[NOME ADVOGADO],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: 3a9e89f2-8e64-4eca-8e0f-d5120ff8fbae
+
+	measure 'Estados cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[estado],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: 42ae8b74-7df3-4c6e-bec8-625ed6be4608
+
+	measure 'Data cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[DATA DE CANCELAMENTO],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: fb1b6b7d-ccbc-4d9d-a4a4-de9f0fb20490
+
+	measure 'LTV Cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[lifetime],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: f332cd7d-3683-4e31-97ba-d3044355410e
+
+	measure 'Plano cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[plano],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: d336fc5b-b45a-48b3-9ff0-52e3ccc467e4
+
+	measure 'Valor Mensalidade cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[Valor total],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: 44f180ea-5437-47ef-8154-f421e3a7275a
+
+	measure '% Realizados cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[% Realizada],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: 2a07a992-9194-4e3f-aacc-f2c1e93ad0c6
+
+	measure '% Cancelados cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[% Cancelados],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: 8e78d340-843a-4c3d-a585-5a018bbab455
+
+	measure 'Data inicio assinatura Cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[DATA DE INICIO ASSINATURA],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: 878aef70-11a6-41b6-bdc2-6aa878700147
+
+	measure 'Data Fim assinatura Cancelados' = ```
+			
+			CONCATENATEX(
+			    CALCULATETABLE(
+			        'FatInscricaoAntiga',
+			        USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO],'Calendario'[Datas])
+			        // ISBLANK(Mensalidades[canceled_at])
+			    ),
+			    FatInscricaoAntiga[DATA FIM DA ASSINATURA],
+			    // "/"
+			    UNICHAR(10)
+			)
+			
+			```
+		displayFolder: Cancelados
+		lineageTag: 841fe967-167c-4fba-81ba-261f9f003840
+
+	measure 'Soma cancelados' =
+			
+			CALCULATE(
+			    SUM(FatInscricaoAntiga[Valor total]),
+			    USERELATIONSHIP(FatInscricaoAntiga[DATA DE CANCELAMENTO], Calendario[Datas])
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Cancelados
+		lineageTag: a46683f4-31d2-4d88-b114-31c64f3ad00e
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'soma cancelado Mês anterior' = ```
+			
+			CALCULATE(
+			    [Soma cancelados], PREVIOUSMONTH(Calendario[Datas])
+			)
+			
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Cancelados
+		lineageTag: 0f74ff6a-6fbb-4ec2-9bf8-99bfcebcdb9e
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure TESTETETETE = ```
+			
+			    CALCULATE(
+			        SUMX(
+			            FatPeriodoTeste,
+			            CALCULATE(
+			                COUNTROWS(FatConsultorias),
+			                FILTER(
+			                    FatConsultorias,
+			                    FatConsultorias[doctor_id] = FatPeriodoTeste[doctor_id] &&
+			                    FatConsultorias[data_criacao_consultoria] >= FatPeriodoTeste[data inicio periodo teste] &&
+			                    FatConsultorias[data_criacao_consultoria] <= FatPeriodoTeste[data fim periodo teste]
+			                )
+			            )
+			        )
+			    )
+			```
+		formatString: 0
+		lineageTag: 82fdb470-f9d6-4592-97f5-ba11b311c232
+
+	measure 'Total Periodoteste Advogado' = DISTINCTCOUNT(FatPeriodoTeste[doctor_id])
+		formatString: 0
+		lineageTag: b6ec0d18-a277-452a-a6b5-c43ac698ead8
+
+	column Column
+		formatString: 0
+		lineageTag: 58c349e7-f3d9-40c2-96f9-7153ec44b555
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Testes = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = dc89fc39d0a04bce9a5ec9bdfbe37830
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

@@ -1,0 +1,120 @@
+table DimClientsInvite
+	lineageTag: 5b58aa16-969e-4e2d-92ee-7a985d81e46e
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7685f121-c482-4beb-82d6-93b084e44a9f
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: e80f3c4e-7149-4d98-a9c8-0ba66d0e550b
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: int64
+		formatString: 0
+		lineageTag: d108054a-e143-4856-ab35-f023ee411de0
+		summarizeBy: sum
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpf
+		dataType: int64
+		formatString: 0
+		lineageTag: 433be5e8-e9c3-4403-b474-1f66c3be0de5
+		summarizeBy: sum
+		sourceColumn: cpf
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at_formated
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8bebde0e-e8ca-4d09-bb26-397d88e5e070
+		summarizeBy: none
+		sourceColumn: created_at_formated
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_created
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 33b8b875-ef77-41f6-9f6e-1845f4d3b905
+		summarizeBy: none
+		sourceColumn: hour_created
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column periodo_envio
+		dataType: string
+		lineageTag: 47a980b6-9822-4ccf-98ec-7f35a583e920
+		summarizeBy: none
+		sourceColumn: periodo_envio
+
+		annotation SummarizationSetBy = Automatic
+
+	column person_type
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f390c1a-7e9d-42cc-bab2-8e78347c9e2a
+		summarizeBy: sum
+		sourceColumn: person_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 856fa261-2fef-47e2-b5a7-b26aa0a59b3a
+		summarizeBy: sum
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado_from_phone
+		dataType: string
+		lineageTag: 840794a9-ec80-4ecb-90b4-8d34fe774880
+		summarizeBy: none
+		sourceColumn: estado_from_phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo =
+			IF(
+			    ISBLANK(DimClientsInvite[id_cliente]),
+			    "Externo",
+			    "Interno"
+			)
+		lineageTag: 7565c952-32a9-4e5c-b71b-fb1ae8119a08
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimClientsInvite = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-register_clients_invite/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "name", "phone", "cpf", "created_at_formated", "hour_created", "periodo_envio", "person_type", "id_cliente", "estado_from_phone"}, {"id", "name", "phone", "cpf", "created_at_formated", "hour_created", "periodo_envio", "person_type", "id_cliente", "estado_from_phone"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"name", type text}, {"phone", Int64.Type}, {"cpf", Int64.Type}, {"created_at_formated", type date}, {"hour_created", type time}, {"periodo_envio", type text}, {"estado_from_phone", type text}, {"id_cliente", Int64.Type}, {"person_type", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,397 @@
+table FatPeriodoTeste
+	lineageTag: 7777f2e6-c57e-40ee-a2cc-7786b0e380cb
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b38a855-012b-4841-9c83-8536d28a6181
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column doctor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cc1ad14-d6ed-4ddd-a296-74c3630b8801
+		summarizeBy: none
+		sourceColumn: doctor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'data inicio periodo teste'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 4143faa3-9328-4c60-a6c8-1437f0919943
+		summarizeBy: none
+		sourceColumn: data inicio periodo teste
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'hora inicio periodo teste'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 652eea49-785c-4385-837d-006c855ee817
+		summarizeBy: none
+		sourceColumn: hora inicio periodo teste
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'data fim periodo teste'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 309b79dd-abad-4ada-808f-feff4aa54dab
+		summarizeBy: none
+		sourceColumn: data fim periodo teste
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'hora fim periodo teste'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: c6cfeee4-5ef6-4131-9c2d-5f8065c27245
+		summarizeBy: none
+		sourceColumn: hora fim periodo teste
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'data Cancelamento'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bb086acf-9bbb-4fad-8dd5-dde6ce0d7308
+		summarizeBy: none
+		sourceColumn: data Cancelamento
+
+		variation Variation
+			isDefault
+			relationship: fdeb9b75-ca3e-4388-b879-55adfc58e518
+			defaultHierarchy: LocalDateTable_30ba6f36-0e94-44f6-bd16-91c389c75d0a.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'hora Cancelamento'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 0b9d1763-950d-4117-93bd-5e85fcd1d6c7
+		summarizeBy: none
+		sourceColumn: hora Cancelamento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column amount
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 5e0d5f1e-a980-4b22-bb84-860148b6f9ad
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column plano
+		dataType: string
+		lineageTag: ae713978-4f26-4714-8c23-c639d6fc61b4
+		summarizeBy: none
+		sourceColumn: plano
+
+		annotation SummarizationSetBy = Automatic
+
+	column paid_at
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2fa565fb-4bb0-4f3d-8b5c-edd5875c9b5b
+		summarizeBy: none
+		sourceColumn: paid_at
+
+		variation Variation
+			isDefault
+			relationship: f4be791e-0c4a-48aa-9851-bb766ce0f5a3
+			defaultHierarchy: LocalDateTable_26d4d378-fa14-44a7-92fc-aa830a3fcc2f.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column created_at
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 32afb7bc-caa5-41cf-a84b-ba96d3af796e
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: 3b4049d7-1c53-4305-88d3-193183c9566b
+			defaultHierarchy: LocalDateTable_b0165265-9da3-428a-a4a4-28fefd5b21e8.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column name
+		dataType: string
+		lineageTag: 22f91d9d-404b-400a-8211-549b2578a85e
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data_Primeira_Consultoria = ```
+			
+			CALCULATE(
+			    MIN(FatConsultorias[data_inicio_consultoria]),
+			    ALL(FatConsultorias)
+			)
+			
+			```
+		formatString: Short Date
+		lineageTag: d6260859-09b2-4d4a-948b-21c7f81fec17
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 4022de5e-395f-451c-8119-9752cbd31980
+			defaultHierarchy: LocalDateTable_7421b95e-db13-4e51-9a53-fb9d6aaa75b9.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantidade_dias_horas_minutos = ```
+			
+			VAR TotalMinutos = DATEDIFF(
+			    FatPeriodoTeste[data inicio periodo teste] + FatPeriodoTeste[hora inicio periodo teste],
+			    FatPeriodoTeste[Data_Primeira_Consultoria] + FatPeriodoTeste[Hora_Primeira_Consultoria],
+			    MINUTE
+			)
+			VAR TotalHoras = INT(TotalMinutos / 60) // Converte minutos em horas inteiras
+			VAR Dias = INT(TotalHoras / 24) // Converte horas em dias inteiros
+			VAR Horas = MOD(TotalHoras, 24) // Calcula as horas restantes além dos dias completos
+			VAR Minutos = MOD(TotalMinutos, 60) // Calcula os minutos restantes além das horas completas
+			
+			RETURN
+			IF(
+			    TotalMinutos = 0,
+			    "Sem Consultoria", // Caso não haja diferença, retorna "0 Minuto"
+			    IF(
+			        Dias > 0,
+			        Dias & " Dia" & IF(Dias > 1, "s", "") & 
+			        ", " & Horas & " Hora" & IF(Horas > 1, "s", "") & 
+			        " e " & Minutos & " Minuto" & IF(Minutos > 1, "s", ""),
+			        IF(
+			            Horas > 0,
+			            Horas & " Hora" & IF(Horas > 1, "s", "") & 
+			            " e " & Minutos & " Minuto" & IF(Minutos > 1, "s", ""),
+			            Minutos & " Minuto" & IF(Minutos > 1, "s", "")
+			        )
+			    )
+			)
+			
+			```
+		lineageTag: 4cc86145-f8ae-43c7-85de-b0cbff482d15
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hora_Primeira_Consultoria = ```
+			
+			CALCULATE(
+			    MIN(FatConsultorias[hora_inicio_consultoria]),
+			    ALL(FatConsultorias)
+			)
+			
+			```
+		formatString: Long Time
+		lineageTag: b16266f6-e87f-4e77-aa0b-b61de62ae5a9
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 194acc8a-a2b2-4a1e-8a07-9fbddba1d785
+			defaultHierarchy: LocalDateTable_2087820c-fd70-431a-a8da-02f2763abe43.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantidade_horas = ```
+			
+			DATEDIFF(
+			    FatPeriodoTeste[data inicio periodo teste] + FatPeriodoTeste[hora inicio periodo teste], 
+			    FatPeriodoTeste[Data Primeira_Consultoria],
+			    HOUR
+			)
+			
+			
+			```
+		formatString: 0
+		lineageTag: f2ab2e9f-aaeb-4da8-8941-13870ba7208e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Realizado x Cancelados' = ```
+			
+			
+			VAR consultoria_Teste_realizado = 
+			    CALCULATE(
+			        COUNTROWS(FatConsultorias),
+			        FILTER(
+			            FatConsultorias,
+			            FatConsultorias[status_consultoria] = "Realizado" &&
+			            FatConsultorias[doctor_id] = FatPeriodoTeste[doctor_id] &&
+			            FatConsultorias[data_criacao_consultoria] >= FatPeriodoTeste[data inicio periodo teste] &&
+			            FatConsultorias[data_criacao_consultoria] <= FatPeriodoTeste[data fim periodo teste]
+			        )
+			    )
+			
+			VAR consultoria_Teste_cancelada = 
+			    CALCULATE(
+			        COUNTROWS(FatConsultorias),
+			        FILTER(
+			            FatConsultorias,
+			            FatConsultorias[status_consultoria] = "Cancelada" &&
+			            FatConsultorias[doctor_id] = FatPeriodoTeste[doctor_id] &&
+			            FatConsultorias[data_criacao_consultoria] >= FatPeriodoTeste[data inicio periodo teste] &&
+			            FatConsultorias[data_criacao_consultoria] <= FatPeriodoTeste[data fim periodo teste]
+			        )
+			    )
+			
+			VAR resultado =
+			    consultoria_Teste_cancelada + consultoria_Teste_realizado
+			
+			
+			
+			RETURN
+			"✅: " & FORMAT(consultoria_Teste_realizado, "0") & 
+			" - " & FORMAT(
+			    DIVIDE(consultoria_Teste_realizado, (consultoria_Teste_realizado + consultoria_Teste_cancelada), 0),
+			    "0.00%"
+			) & 
+			" | 🚫: " & FORMAT(consultoria_Teste_cancelada, "0") & 
+			" - " & FORMAT(
+			    DIVIDE(consultoria_Teste_cancelada,(consultoria_Teste_realizado + consultoria_Teste_cancelada), 0),
+			    "0.00%"
+			)
+			
+			
+			
+			
+			
+			```
+		lineageTag: 7ccf7f5b-e72d-4665-bc4e-271fda7e741c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Primeira_Consultoria' = ```
+			
+			CALCULATE(
+			    MINX(
+			        FatConsultorias,
+			        FatConsultorias[data_inicio_consultoria] + FatConsultorias[hora_inicio_consultoria]
+			    ),
+			    ALL(FatConsultorias)
+			)
+			
+			```
+		formatString: General Date
+		lineageTag: 5749a8bb-5731-4918-ad90-847fcd4134ad
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: 66aa331b-c24f-4809-bbb1-2c600e1912f2
+			defaultHierarchy: LocalDateTable_8cdeb55d-f799-4d4a-a63b-9f7a2dd93f85.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Em Teste' =
+			IF(
+			    FatPeriodoTeste[data fim periodo teste] >= TODAY() &&
+			    ISBLANK(FatPeriodoTeste[data Cancelamento]),
+			    "Em Teste","Expirado"
+			)
+		lineageTag: 96943fcc-9e6b-42d2-b684-8626a2d1cb75
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Especialidade = ```
+			LOOKUPVALUE(FatEspecialidadeConcatenada[especialidades],FatEspecialidadeConcatenada[doctor_id],FatPeriodoTeste[doctor_id]) 
+			```
+		lineageTag: 094945d1-6dde-4e10-a115-7589df7e0155
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado = ```
+			LOOKUPVALUE(DimAdvogados[estado],DimAdvogados[id],FatPeriodoTeste[doctor_id]) 
+			```
+		lineageTag: 5f3d4da0-cf09-4d55-949f-7865692e7a5a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantidade_horas_minutos = ```
+			
+			IF(
+			    ISBLANK(FatPeriodoTeste[data inicio periodo teste]) 
+			    || ISBLANK(FatPeriodoTeste[hora inicio periodo teste]) 
+			    || ISBLANK(FatPeriodoTeste[Data Primeira_Consultoria]),
+			    "Sem consultoria",
+			    VAR TotalMinutos = 
+			        DATEDIFF(
+			            FatPeriodoTeste[data inicio periodo teste] + FatPeriodoTeste[hora inicio periodo teste], 
+			            FatPeriodoTeste[Data Primeira_Consultoria],
+			            MINUTE
+			        )
+			    VAR Horas = QUOTIENT(TotalMinutos, 60)
+			    VAR Minutos = MOD(TotalMinutos, 60)
+			    RETURN
+			        FORMAT(Horas, "0") & "h " & FORMAT(Minutos, "0") & "m"
+			)
+			
+			
+			
+			// Quantidade_horas_minutos = 
+			// VAR TotalMinutos = 
+			//     DATEDIFF(
+			//         FatPeriodoTeste[data inicio periodo teste] + FatPeriodoTeste[hora inicio periodo teste], 
+			//         FatPeriodoTeste[Data Primeira_Consultoria],
+			//         MINUTE
+			//     )
+			// VAR Horas = QUOTIENT(TotalMinutos, 60)
+			// VAR Minutos = MOD(TotalMinutos, 60)
+			// RETURN
+			//     FORMAT(Horas, "0") & "h " & FORMAT(Minutos, "0") & "m"
+			```
+		lineageTag: 7151ed24-6403-4980-9741-1fe9abed7642
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatPeriodoTeste = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-period_test/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "doctor_id", "data inicio periodo teste", "hora inicio periodo teste", "data fim periodo teste", "hora fim periodo teste", "data Cancelamento", "hora Cancelamento", "amount", "plano", "paid_at", "created_at", "name"}, {"id", "doctor_id", "data inicio periodo teste", "hora inicio periodo teste", "data fim periodo teste", "hora fim periodo teste", "data Cancelamento", "hora Cancelamento", "amount", "plano", "paid_at", "created_at", "name"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"doctor_id", Int64.Type}, {"data inicio periodo teste", type date}, {"hora inicio periodo teste", type time}, {"data fim periodo teste", type date}, {"hora fim periodo teste", type time}, {"data Cancelamento", type date}, {"hora Cancelamento", type time}, {"paid_at", type date}, {"created_at", type date}, {"amount", Currency.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

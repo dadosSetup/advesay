@@ -1,0 +1,478 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 960.88105668077287,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 2754.7061303546338,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Medidas advogados",
+          "nodeLineageTag": "7a5137b7-4fa4-4d8f-8b44-bebf0d77f789",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 24
+        },
+        {
+          "location": {
+            "x": 1059.6290624085652,
+            "y": 576.10288123824239
+          },
+          "nodeIndex": "Calendario",
+          "nodeLineageTag": "cbf6bcc3-1c6a-434d-85ed-566b7c063bce",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 25
+        },
+        {
+          "location": {
+            "x": 1169.8983678604195,
+            "y": 1660.7329440987505
+          },
+          "nodeIndex": "Periodo",
+          "nodeLineageTag": "c2ee4b7e-7577-44d5-868c-82c9b4f30468",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 21
+        },
+        {
+          "location": {
+            "x": 3038.7061303546338,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Medidas Assinantes & Cancelados",
+          "nodeLineageTag": "d4cc5926-3a8a-4a39-834b-7e3c1a3d37da",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 3322.7061303546338,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "UX",
+          "nodeLineageTag": "c19db6e0-a7a8-4cfe-87c0-b6dede4e9273",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 10,
+            "y": 777.93124467664484
+          },
+          "nodeIndex": "DimEstados",
+          "nodeLineageTag": "4130c8a4-6fcf-497e-bce4-0ed209feb4b1",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 26
+        },
+        {
+          "location": {
+            "x": 975.32098873359382,
+            "y": -10
+          },
+          "nodeIndex": "DimEspecialidade",
+          "nodeLineageTag": "49861ea9-81ff-4da6-adc3-50e337258d43",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 418.29216628787174,
+            "y": -9.8385183587067786
+          },
+          "nodeIndex": "FatEspecialidade",
+          "nodeLineageTag": "12485c6c-2d2f-43be-978f-679872fb0f69",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 20
+        },
+        {
+          "location": {
+            "x": 650.57034402588113,
+            "y": 193.12358922464819
+          },
+          "nodeIndex": "FatPeriodoTeste",
+          "nodeLineageTag": "d604cffa-8575-4166-823b-a8f4eb952610",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 960.88105668077287,
+            "y": 193.09949181696652
+          },
+          "nodeIndex": "FatConsultorias",
+          "nodeLineageTag": "635a6774-97bc-4078-81b9-ca68430f3028",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 31
+        },
+        {
+          "location": {
+            "x": 320.893222855157,
+            "y": 954.36748471443912
+          },
+          "nodeIndex": "FatHistoricoOnline",
+          "nodeLineageTag": "050f8fdc-349c-4034-bb6b-d58b3fa8a570",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 3606.7061303546338,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Medidas Consultorias",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 3890.7061303546338,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Testes",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 4174.7061303546343,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Medidas Clientes",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1271.4063088900698,
+            "y": 193.04902791046857
+          },
+          "nodeIndex": "DimClientes_",
+          "nodeLineageTag": "c6697423-577d-43bf-915c-9fec77452165",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 972.08484338335506,
+            "y": 1339.7351542997212
+          },
+          "nodeIndex": "FatRankAdvogados",
+          "nodeLineageTag": "ead2553b-11ff-4c5b-a0df-063fa2d2f30f",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 28
+        },
+        {
+          "location": {
+            "x": 4458.7061303546343,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Medidas RankAdvogados",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 332.9802982400065,
+            "y": 576.08889229987062
+          },
+          "nodeIndex": "FatPescaria",
+          "nodeLineageTag": "8a19911c-107f-4968-abb1-40d2488dbdc8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 4742.7061303546343,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Medidas Pescaria",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 5026.7061303546343,
+            "y": 859.36647204937537
+          },
+          "nodeIndex": "HoraAtualizacao",
+          "nodeLineageTag": "ff91dc40-ca70-40f4-a869-fc8046695c80",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1601.7847185466953,
+            "y": 187.40133434940526
+          },
+          "nodeIndex": "FatInvites",
+          "nodeLineageTag": "25fdf827-c3f2-42a7-8792-d1d7a51cfeb2",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 22
+        },
+        {
+          "location": {
+            "x": 5310.7061303546343,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "Medidas Invites",
+          "nodeLineageTag": "f82efe37-a9ad-40e1-bf53-9e8d96240015",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 5594.7061303546343,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "MedidasBaseClientes",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 5878.7061303546343,
+            "y": 761.36647204937537
+          },
+          "nodeIndex": "MedidasBaseAdv",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 27
+        },
+        {
+          "location": {
+            "x": 642.7484198243061,
+            "y": 576.0687787538036
+          },
+          "nodeIndex": "DimAdvogados",
+          "nodeLineageTag": "b30f2fa6-a9bc-4f75-9017-e471d9e25a08",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 30
+        },
+        {
+          "location": {
+            "x": 1346.4538624903325,
+            "y": 770.14807478272166
+          },
+          "nodeIndex": "FatEspecialidadeConcatenada",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 764.09861937987432,
+            "y": 959.06391272631618
+          },
+          "nodeIndex": "FatMotivoCancelamentoAssinatura",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1597.6973231910179,
+            "y": 1439.6147904529412
+          },
+          "nodeIndex": "FatMensalidades",
+          "nodeLineageTag": "7e171395-7859-40c1-84e0-684533a50916",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1318.5337630043928,
+            "y": 1056.4988916509449
+          },
+          "nodeIndex": "FatInscricaoAntiga",
+          "nodeLineageTag": "9f90f2fc-61ee-41f8-b171-4de8d4ce1bdb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 29
+        },
+        {
+          "location": {
+            "x": 1625.8790126108586,
+            "y": 953.38633530601737
+          },
+          "nodeIndex": "BaseAppCliente",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1786.329548738313,
+            "y": 570.43124457455224
+          },
+          "nodeIndex": "BaseAppAdv",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1912.7061303546338,
+            "y": 41.811814704448807
+          },
+          "nodeIndex": "Turno",
+          "nodeLineageTag": "a17e4a60-93f1-4c45-9a03-d4de6a4d7cb7",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2274.8103830180185,
+            "y": 650.81273497800521
+          },
+          "nodeIndex": "DimClientsInvite",
+          "nodeLineageTag": "5b58aa16-969e-4e2d-92ee-7a985d81e46e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2255.3184062467863,
+            "y": 1101.3970442135485
+          },
+          "nodeIndex": "FatHistoryClientsInvite",
+          "nodeLineageTag": "3e937631-453e-4d97-952a-0bd7e477057f",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1994.9174220743571,
+            "y": 1464.6740147435517
+          },
+          "nodeIndex": "BaseIndicacao",
+          "nodeLineageTag": "aeb50f61-dcd9-4aa8-afa2-b5c80c1e97f1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 6426.7061303546343,
+            "y": 811.36647204937526
+          },
+          "nodeIndex": "Medidas base indicacao",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 38.407935747777991,
+      "pinKeyFieldsToTop": true,
+      "showExtraHeaderInfo": true,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

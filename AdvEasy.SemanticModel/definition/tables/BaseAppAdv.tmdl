@@ -1,0 +1,240 @@
+table BaseAppAdv
+	lineageTag: d7c96860-64a9-4532-a772-0af5e2d48cf1
+
+	column Day
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fcecda7f-2fcb-4d95-9859-ebc953988688
+		summarizeBy: none
+		sourceColumn: Day
+
+		variation Variation
+			isDefault
+			relationship: 05f9b8e3-e70a-47b7-920e-f5666cf4ff68
+			defaultHierarchy: LocalDateTable_1104d676-1bc6-49c2-997a-12d7951c8b84.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Origem
+		dataType: string
+		lineageTag: afd99a45-4c24-4a7c-ae09-8240a1dd91ad
+		summarizeBy: none
+		sourceColumn: Origem
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Amount Spent'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 641aacd4-5068-4207-9ab5-8170373f9d8f
+		summarizeBy: sum
+		sourceColumn: Amount Spent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Link Clicks'
+		dataType: int64
+		formatString: 0
+		lineageTag: c290e07f-9f45-4416-aa7d-12ff02538a7c
+		summarizeBy: sum
+		sourceColumn: Link Clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo1_acessou_lp_advogados
+		dataType: int64
+		formatString: 0
+		lineageTag: 60f58cb1-16d8-4819-b8b0-82a0c87bbb6e
+		summarizeBy: sum
+		sourceColumn: passo1_acessou_lp_advogados
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo2_acessou_tela_de_obrigado
+		dataType: int64
+		formatString: 0
+		lineageTag: ead6da0c-1499-43c4-9ed3-38cb1904b953
+		summarizeBy: sum
+		sourceColumn: passo2_acessou_tela_de_obrigado
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo3_primeira_abertura_do_app_adv
+		dataType: int64
+		formatString: 0
+		lineageTag: 383324a7-8596-4ca5-b36b-bc4b8bd235c0
+		summarizeBy: sum
+		sourceColumn: passo3_primeira_abertura_do_app_adv
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo4_cadastro1_adv
+		dataType: int64
+		formatString: 0
+		lineageTag: 985276a0-ac50-4ebb-9033-969d6ed6cdcc
+		summarizeBy: sum
+		sourceColumn: passo4_cadastro1_adv
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo5_cadastro2_adv
+		dataType: int64
+		formatString: 0
+		lineageTag: f8e76d0a-69a6-418c-8c3e-4ea955f9a8da
+		summarizeBy: sum
+		sourceColumn: passo5_cadastro2_adv
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo6_cadastro3_adv
+		dataType: int64
+		formatString: 0
+		lineageTag: 7539ce21-c1bc-462e-97ed-82f149c30eff
+		summarizeBy: sum
+		sourceColumn: passo6_cadastro3_adv
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo7_cadastro_pendente
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e7227e5-6c33-4276-929c-a06def8fc3f9
+		summarizeBy: sum
+		sourceColumn: passo7_cadastro_pendente
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo8_primeiro_login_cadastro_completo
+		dataType: int64
+		formatString: 0
+		lineageTag: 95fb37ef-42b8-4d1e-b437-54f35bac1739
+		summarizeBy: sum
+		sourceColumn: passo8_primeiro_login_cadastro_completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo9_tela_de_assinatura
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cb27f65-f53b-4997-bb55-5bec21872cc5
+		summarizeBy: sum
+		sourceColumn: passo9_tela_de_assinatura
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo10_assinatura_realizada
+		dataType: int64
+		formatString: 0
+		lineageTag: a38ee6a2-62b4-4bfa-aae3-35e484d1d2e4
+		summarizeBy: sum
+		sourceColumn: passo10_assinatura_realizada
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMCadastros
+		dataType: int64
+		formatString: 0
+		lineageTag: 6a30ea17-363d-417c-b7a4-d86e1895f414
+		summarizeBy: sum
+		sourceColumn: CRMCadastros
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMCadastroConfirmado
+		dataType: int64
+		formatString: 0
+		lineageTag: dbc630b3-20e3-4e75-b7ba-b47b045989da
+		summarizeBy: sum
+		sourceColumn: CRMCadastroConfirmado
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMAssinaturas
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c123956-dde0-4e60-b876-494f041612cb
+		summarizeBy: sum
+		sourceColumn: CRMAssinaturas
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMAssinaturasAtivas
+		dataType: int64
+		formatString: 0
+		lineageTag: df742096-2c92-465c-b954-201b6d2d4476
+		summarizeBy: sum
+		sourceColumn: CRMAssinaturasAtivas
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRMCadastrosCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: f808cc10-2430-42e8-9e17-560f66ec1861
+		summarizeBy: sum
+		sourceColumn: CRMCadastrosCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMCadastroConfirmadoCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: df9f7a70-20ef-498f-b784-7bfe99bd911e
+		summarizeBy: sum
+		sourceColumn: CRMCadastroConfirmadoCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMAssinaturasCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 8bbb465b-8443-47f2-8d64-b3667defe0d1
+		summarizeBy: sum
+		sourceColumn: CRMAssinaturasCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column CRMAssinaturasAtivasCost
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: e6b7e409-c009-4250-9c73-aadfc5da65d8
+		summarizeBy: sum
+		sourceColumn: CRMAssinaturasAtivasCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition BaseAppAdv = m
+		mode: import
+		source =
+				let
+				    Fonte = Web.BrowserContents("https://docs.google.com/spreadsheets/d/e/2PACX-1vS-qX9h2G6SyeWFa23GjeDOvNh5QF012usApdllNbIZMi4Wnuec3gecqZa8Hpj0VhiD1UTVd6X6hzOy/pubhtml#"),
+				    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Column1", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(1)"}, {"Column2", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(2)"}, {"Column3", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(3)"}, {"Column4", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(4)"}, {"Column5", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(5)"}, {"Column6", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(6)"}, {"Column7", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(7)"}, {"Column8", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(8)"}, {"Column9", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(9)"}, {"Column10", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(10)"}, {"Column11", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(11)"}, {"Column12", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(12)"}, {"Column13", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(13)"}, {"Column14", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(14)"}, {"Column15", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(15)"}, {"Column16", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(16)"}, {"Column17", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(17)"}, {"Column18", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(18)"}, {"Column19", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(19)"}, {"Column20", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(20)"}, {"Column21", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(21)"}, {"Column22", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(22)"}, {"Column23", "DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(23)"}}, [RowSelector="DIV:nth-child(2) > DIV.ritz.grid-container > TABLE.waffle > * > TR"]),
+				    #"Linhas em Branco Removidas" = Table.SelectRows(#"Tabela extraída de HTML", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Linhas em Branco Removidas",{"Column1"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Colunas Removidas", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Amount Spent", Currency.Type}}),
+				    #"Tipo Alterado com Localidade" = Table.TransformColumnTypes(#"Tipo Alterado", {{"Amount Spent", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade",{{"Day", type date}, {"Origem", type text}, {"Link Clicks", Int64.Type}, {"CRMAssinaturasAtivas", Int64.Type}, {"CRMAssinaturas", Int64.Type}, {"CRMCadastroConfirmado", Int64.Type}, {"CRMCadastros", Int64.Type}, {"passo10_assinatura_realizada", Int64.Type}, {"passo1_acessou_lp_advogados", Int64.Type}, {"passo2_acessou_tela_de_obrigado", Int64.Type}, {"passo3_primeira_abertura_do_app_adv", Int64.Type}, {"passo4_cadastro1_adv", Int64.Type}, {"passo5_cadastro2_adv", Int64.Type}, {"passo6_cadastro3_adv", Int64.Type}, {"passo7_cadastro_pendente", Int64.Type}, {"passo8_primeiro_login_cadastro_completo", Int64.Type}, {"passo9_tela_de_assinatura", Int64.Type}}),
+				    #"Tipo Alterado com Localidade1" = Table.TransformColumnTypes(#"Tipo Alterado1", {{"CRMCadastrosCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade2" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade1", {{"CRMCadastroConfirmadoCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade3" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade2", {{"CRMAssinaturasCost", Currency.Type}}, "pt-BR"),
+				    #"Tipo Alterado com Localidade4" = Table.TransformColumnTypes(#"Tipo Alterado com Localidade3", {{"CRMAssinaturasAtivasCost", Currency.Type}}, "pt-BR")
+				in
+				    #"Tipo Alterado com Localidade4"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

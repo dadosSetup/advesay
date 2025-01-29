@@ -1,0 +1,153 @@
+table FatInvites
+	lineageTag: 25fdf827-c3f2-42a7-8792-d1d7a51cfeb2
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 6aac2277-b467-4929-98b3-c9b2ba675479
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column referrer_type
+		dataType: string
+		lineageTag: 3b2b610d-e647-4511-98a4-13d8eccba99c
+		summarizeBy: none
+		sourceColumn: referrer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: d179b8e2-bcd7-4018-b27f-22e1821cf343
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_cliente
+		dataType: string
+		lineageTag: a7f2ae80-e0a2-4842-a322-2c74a4795d92
+		summarizeBy: none
+		sourceColumn: nome_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: int64
+		formatString: 0
+		lineageTag: f2923bf4-a061-45bb-936d-d04065826794
+		summarizeBy: sum
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: int64
+		formatString: 0
+		lineageTag: 484c7cd6-85a4-4d5b-a6d7-d17d18627832
+		summarizeBy: sum
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_convite
+		dataType: string
+		lineageTag: 3cd0b08f-b528-4c5f-966e-129c06f8c269
+		summarizeBy: none
+		sourceColumn: status_convite
+
+		annotation SummarizationSetBy = Automatic
+
+	column diferenca_horas_visualizacao
+		dataType: int64
+		formatString: 0
+		lineageTag: b0ab91d8-21bb-4d70-8d9d-7befba2c4cdc
+		summarizeBy: sum
+		sourceColumn: diferenca_horas_visualizacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_envio
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 58b84d39-1ffa-4d96-8673-ff3af72f7923
+		summarizeBy: none
+		sourceColumn: data_envio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_envio
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 2cfa1766-3f82-4a52-86f6-ccef2d6553f5
+		summarizeBy: none
+		sourceColumn: hora_envio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column data_atualizacao
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c594b895-8658-4fc0-9a0e-8cecce71bedd
+		summarizeBy: none
+		sourceColumn: data_atualizacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_atualizacao
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 29d2d266-3458-472e-a6c9-37aadbd849b0
+		summarizeBy: none
+		sourceColumn: hora_atualizacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column periodo_envio
+		dataType: string
+		lineageTag: e66075b6-6caf-4866-9915-67992d0885e3
+		summarizeBy: none
+		sourceColumn: periodo_envio
+
+		annotation SummarizationSetBy = Automatic
+
+	column periodo_aceitacao
+		dataType: string
+		lineageTag: 10889106-0964-485e-93c3-8d2a6d2b0fa3
+		summarizeBy: none
+		sourceColumn: periodo_aceitacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column Estado = LOOKUPVALUE(DimClientes_[estado], DimClientes_[id], FatInvites[id_cliente])
+		lineageTag: b1611975-17aa-49e2-ba5c-6329c0504530
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatInvites = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-invites/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "referrer_type", "id_cliente", "nome_cliente", "phone", "status", "status_convite", "diferenca_horas_visualizacao", "data_envio", "hora_envio", "data_atualizacao", "hora_atualizacao", "periodo_envio", "periodo_aceitacao"}, {"id", "referrer_type", "id_cliente", "nome_cliente", "phone", "status", "status_convite", "diferenca_horas_visualizacao", "data_envio", "hora_envio", "data_atualizacao", "hora_atualizacao", "periodo_envio", "periodo_aceitacao"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"id_cliente", Int64.Type}, {"nome_cliente", type text}, {"phone", Int64.Type}, {"status", Int64.Type}, {"status_convite", type text}, {"diferenca_horas_visualizacao", Int64.Type}, {"data_envio", type date}, {"hora_envio", type time}, {"data_atualizacao", type date}, {"hora_atualizacao", type time}, {"periodo_envio", type text}, {"periodo_aceitacao", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

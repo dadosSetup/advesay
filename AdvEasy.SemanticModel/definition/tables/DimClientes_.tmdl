@@ -1,0 +1,135 @@
+table DimClientes_
+	lineageTag: a7f9c121-af70-4b4f-ae35-5ef2a823795a
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 328e9299-abef-4dc6-a80f-a8f87a83bf87
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: a0d24e9c-60eb-4bcf-bb1f-83cb830af1b8
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column idade
+		dataType: int64
+		formatString: 0
+		lineageTag: a42635d9-96ea-4683-ae07-4bdb2ff613a8
+		summarizeBy: sum
+		sourceColumn: idade
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone
+		dataType: int64
+		formatString: 0
+		lineageTag: 807515a7-86e8-4b11-8b2d-7e46b141b779
+		summarizeBy: sum
+		sourceColumn: phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 28fb77c0-0187-49c2-90c2-24548581b6ec
+		summarizeBy: none
+		sourceColumn: created_at
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_created
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 93d6b304-b9df-4c6c-93d3-dfc205049c97
+		summarizeBy: none
+		sourceColumn: hour_created
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column deleted_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 502a9ad1-4ef3-42a6-ba5a-b86996549bca
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_deleted
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 20e63082-a9e5-44da-a0bb-299162eaca3f
+		summarizeBy: none
+		sourceColumn: hour_deleted
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column sexo
+		dataType: string
+		lineageTag: 5f446ef1-5529-4d65-94c6-f6592ddc51d6
+		summarizeBy: none
+		sourceColumn: sexo
+
+		annotation SummarizationSetBy = Automatic
+
+	column plataforma
+		dataType: string
+		lineageTag: 3c13c9f2-8731-48e1-9580-cb37d84e748f
+		summarizeBy: none
+		sourceColumn: plataforma
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: d7db4f31-bc4d-4e35-bb25-8a6cfdc194ea
+		summarizeBy: none
+		sourceColumn: estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Estado sem acento' = ```
+			
+			LOOKUPVALUE(
+			    DimEstados[EstadoSemAcento],
+			    DimEstados[code], DimClientes_[estado]
+			)
+			
+			```
+		lineageTag: 4c0e4b8c-c3c8-4d50-984d-c658b6de6f3b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimClientes_ = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-clients/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "name", "idade", "phone", "created_at_formated", "hour_created", "deleted_format", "hour_deleted", "sexo", "plataforma", "estado_from_phone"}, {"id", "name", "idade", "phone", "created_at_formated", "hour_created", "deleted_format", "hour_deleted", "sexo", "plataforma", "estado_from_phone"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"name", type text}, {"idade", Int64.Type}, {"phone", Int64.Type}, {"created_at_formated", type date}, {"hour_created", type time}, {"deleted_format", type date}, {"hour_deleted", type time}, {"sexo", type text}, {"plataforma", type text}, {"estado_from_phone", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"created_at_formated", "created_at"}, {"deleted_format", "deleted_at"}, {"estado_from_phone", "estado"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

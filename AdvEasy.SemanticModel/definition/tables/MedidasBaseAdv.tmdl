@@ -1,0 +1,157 @@
+table MedidasBaseAdv
+	lineageTag: f3bb3bf3-1336-4cb4-8477-56538d3a8698
+
+	measure 'Acessos LP' = ```
+			SUM('BaseAppAdv'[passo1_acessou_lp_advogados])
+				
+			
+			// Acessos LP = 
+			// CALCULATE(
+			// 	COUNTA('BaseAppAdv'[passo1_acessou_lp_advogados]),
+			// 	FILTER(
+			// 		ALLSELECTED('BaseAppAdv'[Day]),
+			// 		ISONORAFTER('BaseAppAdv'[Day], MAX('BaseAppAdv'[Day]), DESC)
+			// 	)
+			// )
+			```
+		formatString: 0
+		lineageTag: 88b69378-eacc-4981-b75c-b85ca26d3b94
+
+	measure CadastroCRM = ```
+			SUM('BaseAppAdv'[CRMCadastros])
+			
+			
+			// CadastroCRM = 
+			// CALCULATE(
+			// 	COUNTA('BaseAppAdv'[CRMCadastros]),
+			// 	FILTER(
+			// 		ALLSELECTED('BaseAppAdv'[Day]),
+			// 		ISONORAFTER('BaseAppAdv'[Day], MAX('BaseAppAdv'[Day]), DESC)
+			// 	)
+			// )
+			```
+		formatString: 0
+		lineageTag: 29cee545-3c28-4afb-8eaf-1bf6ae1ea100
+
+	measure 'Contagem de Amount Spent MTD' =
+			
+			IF(
+				ISFILTERED('BaseAppAdv'[Day]),
+				ERROR("Medidas rápidas de inteligência de tempo somente podem ser agrupadas ou filtradas pela hierarquia de data fornecida pelo Power BI ou pela coluna de data primária."),
+				TOTALMTD(COUNTA('BaseAppAdv'[Amount Spent]), 'BaseAppAdv'[Day].[Date])
+			)
+		formatString: 0
+		lineageTag: 89e7bb19-02b9-4f12-812b-5bbae0de9694
+
+	measure 'Gasto no Mes' = ```
+			SUM(BaseAppAdv[Amount Spent])
+			
+			
+			// Gasto no Mes = 
+			// CALCULATE(
+			// 	COUNTA('BaseAppAdv'[Amount Spent]),
+			// 	FILTER(
+			// 		ALLSELECTED('BaseAppAdv'[Day]),
+			// 		ISONORAFTER('BaseAppAdv'[Day], MAX('BaseAppAdv'[Day]), DESC)
+			// 	)
+			// )
+			```
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 04701581-e6ec-4cb7-a74e-7ff6278cc7e7
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total acumulado de Contagem de passo1_acessou_lp_advogados em passo1_acessou_lp_advogados' =
+			
+			CALCULATE(
+				COUNTA('BaseAppAdv'[passo1_acessou_lp_advogados]),
+				FILTER(
+					ALLSELECTED('BaseAppAdv'[passo1_acessou_lp_advogados]),
+					ISONORAFTER('BaseAppAdv'[passo1_acessou_lp_advogados], MAX('BaseAppAdv'[passo1_acessou_lp_advogados]), DESC)
+				)
+			)
+		formatString: 0
+		lineageTag: c3445134-7994-4f07-8333-fc02e7f473f3
+
+	measure 'Total Link Clicks' = SUM(BaseAppAdv[Link Clicks])
+		formatString: 0
+		lineageTag: 0e08aa20-9bf8-4284-a2a4-fa5920c26f92
+
+	measure CustoPorClique = ```
+			SUM('BaseAppAdv'[Amount Spent])/SUM('BaseAppAdv'[Link Clicks])
+				
+			
+			// Custo por Clique = 
+			// CALCULATE(
+			// 	COUNTA('BaseAppAdv'[passo1_acessou_lp_advogados]),
+			// 	FILTER(
+			// 		ALLSELECTED('BaseAppAdv'[Day]),
+			// 		ISONORAFTER('BaseAppAdv'[Day], MAX('BaseAppAdv'[Day]), DESC)
+			// 	)
+			// )
+			```
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: b7ec71b9-76a3-4c6f-9b25-f2c536a6b2d1
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoAcessoLP = SUM('BaseAppAdv'[Amount Spent])/SUM('BaseAppAdv'[passo1_acessou_lp_advogados])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: bfd47bbe-bf51-4fb5-bf12-91d1b4ae34e3
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoTelaObg = SUM('BaseAppAdv'[Amount Spent])/SUM('BaseAppAdv'[passo2_acessou_tela_de_obrigado])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 01dc2b51-26ae-4766-85d5-1c7b0d35da79
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure TelaDeObg = SUM('BaseAppAdv'[passo2_acessou_tela_de_obrigado])
+		formatString: 0
+		lineageTag: de23a5ce-4d03-44e0-af31-b62299083bc5
+
+	measure 1aAberturaDoApp = SUM('BaseAppAdv'[passo3_primeira_abertura_do_app_adv])
+		formatString: 0
+		lineageTag: 3e35d82b-85f1-4ba8-a369-6952c38f5861
+
+	measure CustoAdv = SUM('BaseAppAdv'[Amount Spent])/SUM('Medidas advogados'[Total advogados Assinantes])
+		lineageTag: 3c8ac8b4-f559-44b0-8155-28c06fef3680
+
+	measure CustoAdvAprovado =
+			
+			DIVIDE([Gasto no Mes], [Aprovado])
+		formatString: #,0.00
+		lineageTag: 3c394a28-4e6d-41cc-8eed-d8046aa362ea
+
+	measure CustoAdvAssinante =
+			
+			DIVIDE([Gasto no Mes], [Total advogados Assinantes])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 82f466ba-3d52-43f4-808c-01f82c7cf4cc
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoAdvCadastrado =
+			
+			DIVIDE([Gasto no Mes], [Total de Advogados removefilters])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 694dbb65-46c7-4cd1-a995-f1044c78dbe8
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Column
+		formatString: 0
+		lineageTag: 9ea0d70a-4796-4538-8653-7047a45544d6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasBaseAdv = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = d6a48c38e7214eef88ea9a505bfed7ed
+

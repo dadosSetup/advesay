@@ -1,0 +1,255 @@
+table DimAdvogados
+	lineageTag: b30f2fa6-a9bc-4f75-9017-e471d9e25a08
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 27434f56-6029-4226-864b-b5290975e974
+		summarizeBy: none
+		sourceColumn: id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 642607e8-a1d1-4856-8c3c-08d872695ccd
+		summarizeBy: none
+		sourceColumn: name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column cep
+		dataType: int64
+		formatString: 0
+		lineageTag: 197a5472-041b-4aeb-87b5-043575ad1a2c
+		summarizeBy: sum
+		sourceColumn: cep
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column sexo
+		dataType: string
+		lineageTag: a236e886-ecbf-4bb1-94c1-74f147d51a0c
+		summarizeBy: none
+		sourceColumn: sexo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column birthday_formatado
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: deafd609-5466-48f5-b1c4-fe0064c328c6
+		summarizeBy: none
+		sourceColumn: birthday_formatado
+
+		variation Variation
+			isDefault
+			relationship: 95168184-f537-456d-bf84-8fa931150680
+			defaultHierarchy: LocalDateTable_dca804a2-a19f-4b7b-826c-2d3816fee0a8.'Hierarquia de datas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column idade
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e3e94f3-9f79-41a8-95f7-dd0e939ea8c3
+		summarizeBy: sum
+		sourceColumn: idade
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_at
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2e01e221-493d-4bcb-a190-18b5de25a2a2
+		summarizeBy: none
+		sourceColumn: created_at
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_created
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: f314dcd5-a2bd-4cec-bf5a-fc1268982c2a
+		summarizeBy: none
+		sourceColumn: hour_created
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column approved_at
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ca569393-8d25-4517-baf3-4474de1501fe
+		summarizeBy: none
+		sourceColumn: approved_at
+
+		variation Variation
+			isDefault
+			relationship: b544534e-617d-4826-837e-02cc4d16c761
+			defaultHierarchy: LocalDateTable_924c4c51-decf-490d-92d8-56be419e7518.'Hierarquia de datas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_approved
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 8062604f-e27f-4b73-86f0-6181d5df4ca1
+		summarizeBy: none
+		sourceColumn: hour_approved
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column completed_at
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 497440a3-0a14-4dc7-9902-06c3666a01be
+		summarizeBy: none
+		sourceColumn: completed_at
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_completed
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: fdbe02b3-620d-4e52-bed3-028a34739e1c
+		summarizeBy: none
+		sourceColumn: hour_completed
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column deleted_at
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 1a242066-08e8-40dd-955f-b7fb10e165b2
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_deleted
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 93a454fc-f80f-4b2f-a2a1-57daeb9c5f5a
+		summarizeBy: none
+		sourceColumn: hour_deleted
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column status_cadastro
+		dataType: string
+		lineageTag: eb7daedb-f509-4a3b-bfbd-cc205f532605
+		summarizeBy: none
+		sourceColumn: status_cadastro
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_conta
+		dataType: string
+		lineageTag: 755cff93-f568-496a-8ae8-e33ee652406c
+		summarizeBy: none
+		sourceColumn: status_conta
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column estado
+		dataType: string
+		lineageTag: 6bdbc9d9-0da4-4e51-af17-b833f8407115
+		summarizeBy: none
+		sourceColumn: estado
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FaixaEtaria =
+			
+			SWITCH(
+			    TRUE(),
+			    DimAdvogados[idade] < 18, "Menor de 18",
+			    DimAdvogados[idade] >= 18 && DimAdvogados[idade] <= 24, "18-24",
+			    DimAdvogados[idade] >= 25 && DimAdvogados[idade] <= 34, "25-34",
+			    DimAdvogados[idade] >= 35 && DimAdvogados[idade] <= 44, "35-44",
+			    DimAdvogados[idade] >= 45 && DimAdvogados[idade] <= 54, "45-54",
+			    DimAdvogados[idade] >= 55 && DimAdvogados[idade] <= 64, "55-64",
+			    DimAdvogados[idade] >= 65, "65+",
+			        "Sem idade definida"
+			)
+		lineageTag: 7a0a77c9-ead6-42a0-8a9e-2ceeaacb55b8
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Especialidade = LOOKUPVALUE(FatEspecialidadeConcatenada[especialidades], FatEspecialidadeConcatenada[doctor_id], DimAdvogados[id])
+		lineageTag: f0732a95-6000-4c46-9a31-dab69a3b203b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimAdvogados = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-lawyers/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "name", "cep", "sexo", "birthday_formatado", "idade", "created_at_formated", "hour_created", "approved_at_formatado", "hour_approved", "completed_at_formated", "hour_completed", "deleted_at_formated", "hour_deleted", "status_cadastro", "status_conta", "estado_from_cep"}, {"id", "name", "cep", "sexo", "birthday_formatado", "idade", "created_at_formated", "hour_created", "approved_at_formatado", "hour_approved", "completed_at_formated", "hour_completed", "deleted_at_formated", "hour_deleted", "status_cadastro", "status_conta", "estado_from_cep"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"name", type text}, {"cep", Int64.Type}, {"sexo", type text}, {"birthday_formatado", type date}, {"idade", Int64.Type}, {"created_at_formated", type date}, {"hour_created", type time}, {"approved_at_formatado", type date}, {"hour_approved", type time}, {"completed_at_formated", type date}, {"hour_completed", type time}, {"deleted_at_formated", type date}, {"hour_deleted", type time}, {"status_cadastro", type text}, {"status_conta", type text}, {"estado_from_cep", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"estado_from_cep", "estado"}, {"deleted_at_formated", "deleted_at"}, {"completed_at_formated", "completed_at"}, {"approved_at_formatado", "approved_at"}, {"created_at_formated", "created_at"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

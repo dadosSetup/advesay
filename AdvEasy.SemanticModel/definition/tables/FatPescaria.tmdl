@@ -1,0 +1,131 @@
+table FatPescaria
+	lineageTag: 8a19911c-107f-4968-abb1-40d2488dbdc8
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 142bef17-21fb-47d4-9322-0f36bc25fdb5
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column lawyer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 17744481-b4fe-4b81-93b1-bf7864a0768e
+		summarizeBy: sum
+		sourceColumn: lawyer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column advogado
+		dataType: string
+		lineageTag: f70fa5a1-bc3d-4c4b-a132-853b42a6d0a1
+		summarizeBy: none
+		sourceColumn: advogado
+
+		annotation SummarizationSetBy = Automatic
+
+	column client_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e0ff5a1-77d0-4b59-b3b6-683e50a5e32d
+		summarizeBy: sum
+		sourceColumn: client_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente
+		dataType: string
+		lineageTag: 69688270-fdc5-4be5-b047-0abe145393b1
+		summarizeBy: none
+		sourceColumn: cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column schedule_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ebc3b09c-5e61-459d-a883-2ddaf06e46ea
+		summarizeBy: sum
+		sourceColumn: schedule_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: int64
+		formatString: 0
+		lineageTag: 64fa47f4-3741-4d9f-b521-a9c1f3a60f0a
+		summarizeBy: sum
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column status_pescagem
+		dataType: string
+		lineageTag: e5a58bed-766c-420b-aa07-ca707b1225f4
+		summarizeBy: none
+		sourceColumn: status_pescagem
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_criacao
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 04edf42f-23be-43a6-b38f-4b7eb02afa5b
+		summarizeBy: none
+		sourceColumn: data_criacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_criacao
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 47574db5-f40e-4f04-9496-bbc48a226c31
+		summarizeBy: none
+		sourceColumn: hora_criacao
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column data_cancelamento
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2fca19d1-5776-47d6-a9b7-ebd9e730e165
+		summarizeBy: none
+		sourceColumn: data_cancelamento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora_cancelamento
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: ac267245-f1b2-4914-8bd6-2a2f747997c8
+		summarizeBy: none
+		sourceColumn: hora_cancelamento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	partition FatPescaria = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-fishing/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "lawyer_id", "advogado", "client_id", "cliente", "schedule_id", "status", "status_pescagem", "data_criacao", "hora_criacao", "data_cancelamento", "hora_cancelamento"}, {"id", "lawyer_id", "advogado", "client_id", "cliente", "schedule_id", "status", "status_pescagem", "data_criacao", "hora_criacao", "data_cancelamento", "hora_cancelamento"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"lawyer_id", Int64.Type}, {"client_id", Int64.Type}, {"schedule_id", Int64.Type}, {"status", Int64.Type}, {"data_criacao", type date}, {"hora_criacao", type time}, {"data_cancelamento", type date}, {"hora_cancelamento", type time}, {"advogado", type text}, {"cliente", type text}, {"status_pescagem", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,204 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "03b3635c67e06d7f9911",
+  "position": {
+    "x": 344.61538461538464,
+    "y": 446.25310173697272,
+    "z": 30000,
+    "height": 593.9454094292804,
+    "width": 693.99503722084376,
+    "tabOrder": 29000
+  },
+  "visual": {
+    "visualType": "funnel",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasBaseAdv"
+                    }
+                  },
+                  "Property": "Total Link Clicks"
+                }
+              },
+              "queryRef": "MedidasBaseAdv.Total Link Clicks",
+              "nativeQueryRef": "Total Link Clicks"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MedidasBaseAdv"
+                    }
+                  },
+                  "Property": "Acessos LP"
+                }
+              },
+              "queryRef": "MedidasBaseAdv.Acessos LP",
+              "nativeQueryRef": "Acessos LP"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas advogados"
+                    }
+                  },
+                  "Property": "Total de Advogados"
+                }
+              },
+              "queryRef": "Medidas advogados.Total de Advogados",
+              "nativeQueryRef": "Total de Advogados"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas advogados"
+                    }
+                  },
+                  "Property": "Aprovado"
+                }
+              },
+              "queryRef": "Medidas advogados.Aprovado",
+              "nativeQueryRef": "Aprovado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas advogados"
+                    }
+                  },
+                  "Property": "Cadastro Completo"
+                }
+              },
+              "queryRef": "Medidas advogados.Cadastro Completo",
+              "nativeQueryRef": "Cadastro Completo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas advogados"
+                    }
+                  },
+                  "Property": "Total advogados Assinantes"
+                }
+              },
+              "queryRef": "Medidas advogados.Total advogados Assinantes",
+              "nativeQueryRef": "Total advogados Assinantes"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MedidasBaseAdv"
+                  }
+                },
+                "Property": "Total Link Clicks"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Funil de Conversão'"
+                }
+              }
+            },
+            "heading": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Heading2'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "38D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

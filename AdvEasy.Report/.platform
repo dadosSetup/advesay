@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "AdvEasy"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bdcf941b-c460-49e4-860f-2e45010169c2"
+  }
+}

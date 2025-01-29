@@ -1,0 +1,72 @@
+table FatHistoricoOnline
+	lineageTag: 050f8fdc-349c-4034-bb6b-d58b3fa8a570
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a564a5f-6759-43b2-8719-0fd3698dfa9c
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column doctor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b757e9d-578f-41be-8722-5ce2ec085032
+		summarizeBy: none
+		sourceColumn: doctor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column online_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a629779a-3ae0-41cd-8c1c-e47dbe014372
+		summarizeBy: none
+		sourceColumn: online_at
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column offline_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: deb28a05-6dc8-45ca-a277-9477a20dbe38
+		summarizeBy: none
+		sourceColumn: offline_at
+
+		variation Variation
+			isDefault
+			relationship: 7ef8f5c6-1dc9-45d3-a645-2029a6919157
+			defaultHierarchy: LocalDateTable_fd13ea43-5229-42b7-b4fa-b4b3d5e384f0.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column days
+		dataType: int64
+		formatString: 0
+		lineageTag: 78934b04-48ae-41cb-9c91-cdae110dce14
+		summarizeBy: sum
+		sourceColumn: days
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatHistoricoOnline = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-online_history/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "doctor_id", "online_at", "offline_at", "days"}, {"id", "doctor_id", "online_at", "offline_at", "days"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"online_at", type date}, {"offline_at", type date}, {"days", Int64.Type}, {"doctor_id", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

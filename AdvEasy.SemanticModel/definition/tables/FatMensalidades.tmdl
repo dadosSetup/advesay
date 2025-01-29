@@ -1,0 +1,271 @@
+table FatMensalidades
+	lineageTag: 7e171395-7859-40c1-84e0-684533a50916
+
+	column id_advogado
+		dataType: int64
+		formatString: 0
+		lineageTag: f34c3e1f-d44a-458f-b307-ade7ae09f20d
+		summarizeBy: none
+		sourceColumn: id_advogado
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_inscricao
+		dataType: int64
+		formatString: 0
+		lineageTag: 95f4e8bd-7161-4f5f-8f9e-f9e96f1bd12a
+		summarizeBy: sum
+		sourceColumn: id_inscricao
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_advogado
+		dataType: string
+		lineageTag: 2c65d4f4-ea39-4cba-bdb3-2e8b78c7fb6d
+		summarizeBy: none
+		sourceColumn: nome_advogado
+
+		annotation SummarizationSetBy = Automatic
+
+	column deleted_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c6603f7a-8f17-4a3c-aed7-c868077bb8e4
+		summarizeBy: none
+		sourceColumn: deleted_at
+
+		variation Variation
+			isDefault
+			relationship: ed5b99c9-64ea-46fb-a347-c28767bc2430
+			defaultHierarchy: LocalDateTable_4b6767eb-313e-482b-97db-a2a1f951607d.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_deleted_at_date
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 7bc40a59-768f-439c-a938-5c091f5eb25b
+		summarizeBy: none
+		sourceColumn: hour_deleted_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column created_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3979034e-0546-4ed7-8b18-1ae0402a0de2
+		summarizeBy: none
+		sourceColumn: created_at
+
+		variation Variation
+			isDefault
+			relationship: b6afbcb0-2152-441b-a179-72dabb6d99a9
+			defaultHierarchy: LocalDateTable_206ac550-ff3f-44a0-a4a2-25c9e981bf1e.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_created_at_date
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: c5c06ff5-e035-4521-a016-c620ca9154ae
+		summarizeBy: none
+		sourceColumn: hour_created_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column started_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d083b322-3ea3-4195-b05a-180509d12dcc
+		summarizeBy: none
+		sourceColumn: started_at
+
+		variation Variation
+			isDefault
+			relationship: f6eac48f-dae1-4b71-a8fb-c46fe711272b
+			defaultHierarchy: LocalDateTable_bd7adb3a-6f01-4f96-8ac2-c726ef6f13a4.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_started_at_date
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: c5b41e85-77d0-4b15-8e79-071a309fdd92
+		summarizeBy: none
+		sourceColumn: hour_started_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column canceled_at
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3efee77f-1525-48e3-b570-47b9510b16c1
+		summarizeBy: none
+		sourceColumn: canceled_at
+
+		variation Variation
+			isDefault
+			relationship: 0bfd464b-e148-4695-a9ee-5117c9ff173c
+			defaultHierarchy: LocalDateTable_518e92cc-4a52-4a97-b172-9a90046c64f3.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hour_canceled_at_date
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: cb9ec229-125c-41b2-817a-ed7eb59a8d04
+		summarizeBy: none
+		sourceColumn: hour_canceled_at_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column name
+		dataType: string
+		lineageTag: fdda69a8-a5a1-4ba6-8bfd-78837cc30713
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: d42bf9a2-dbff-4bab-9a60-0be49a323ca8
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column desconto_trimestre
+		dataType: double
+		lineageTag: bd8f8a4b-4107-4207-bfae-60d16bbf6834
+		summarizeBy: sum
+		sourceColumn: desconto_trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column desconto_semestral
+		dataType: double
+		lineageTag: 90cd268b-d2cc-45bb-bfe4-655d9b1b9d25
+		summarizeBy: sum
+		sourceColumn: desconto_semestral
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column desconto_anual
+		dataType: double
+		lineageTag: 2e88f4e3-1d25-4460-975b-e1a628da5179
+		summarizeBy: sum
+		sourceColumn: desconto_anual
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column plano
+		dataType: string
+		lineageTag: 8be070fc-7a4d-4692-b675-6ccbe5bdfa5c
+		summarizeBy: none
+		sourceColumn: plano
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'valor total' =
+			
+			VAR calculo_trimestral = FatMensalidades[value] * 3
+			VAR calculo_semestral = FatMensalidades[value] * 6
+			VAR calculo_anual = FatMensalidades[value] * 12
+			
+			RETURN
+			IF(
+			    FatMensalidades[plano] = "Trimestral",
+			    calculo_trimestral - (calculo_trimestral * FatMensalidades[desconto_trimestre]),
+			    IF(
+			       FatMensalidades[plano] = "Semestral",
+			        calculo_semestral - (calculo_semestral * FatMensalidades[desconto_semestral]),
+			        IF(
+			            FatMensalidades[plano] = "Anual",
+			            calculo_anual - (calculo_anual * FatMensalidades[desconto_anual]),
+			            FatMensalidades[value]  // Valor padrão caso não seja nenhum dos planos acima
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: ea2bee9c-1dec-4ad7-9376-0c58f7830c35
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Mensalidade com desconto' =
+			
+			IF(FatMensalidades[plano] = "Mensal",
+			    FatMensalidades[valor total] / 1,
+			    IF(
+			        FatMensalidades[plano] = "Trimestral",
+			        FatMensalidades[valor total] / 3,
+			        IF(
+			            FatMensalidades[plano] = "Semestral",
+			            FatMensalidades[valor total] / 6,
+			            IF(
+			                FatMensalidades[plano] = "Anual",
+			                FatMensalidades[valor total] / 12
+			            )
+			        )
+			    )
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 07e96ec7-e9e0-4190-b57a-0c312c0471f5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition FatMensalidades = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-monthlyfee/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id_advogado", "id_inscricao", "nome_advogado", "deleted_at_date", "hour_deleted_at_date", "created_at_date", "hour_created_at_date", "started_at_date", "hour_started_at_date", "canceled_at_date", "hour_canceled_at_date", "name", "value", "desconto_trimestre", "desconto_semestral", "desconto_anual", "plano"}, {"id_advogado", "id_inscricao", "nome_advogado", "deleted_at_date", "hour_deleted_at_date", "created_at_date", "hour_created_at_date", "started_at_date", "hour_started_at_date", "canceled_at_date", "hour_canceled_at_date", "name", "value", "desconto_trimestre", "desconto_semestral", "desconto_anual", "plano"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id_advogado", Int64.Type}, {"id_inscricao", Int64.Type}, {"nome_advogado", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"deleted_at_date", "deleted_at"}, {"created_at_date", "created_at"}, {"started_at_date", "started_at"}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"deleted_at", type date}, {"hour_deleted_at_date", type time}, {"created_at", type date}, {"hour_created_at_date", type time}, {"started_at", type date}, {"hour_started_at_date", type time}}),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Tipo Alterado1",{{"canceled_at_date", "canceled_at"}}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas1",{{"canceled_at", type date}, {"hour_canceled_at_date", type time}, {"name", type text}, {"value", Currency.Type}, {"desconto_trimestre", type number}, {"desconto_semestral", type number}, {"desconto_anual", type number}, {"plano", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado2",10,0.1,Replacer.ReplaceValue,{"desconto_trimestre"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído",15,0.15,Replacer.ReplaceValue,{"desconto_semestral"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1",25,0.25,Replacer.ReplaceValue,{"desconto_semestral"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2",20,0.2,Replacer.ReplaceValue,{"desconto_anual"}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Valor Substituído3",51,0.51,Replacer.ReplaceValue,{"desconto_anual"})
+				in
+				    #"Valor Substituído4"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

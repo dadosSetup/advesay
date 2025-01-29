@@ -1,0 +1,441 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.5.0/schema.json",
+  "name": "41f211c5343e6268ec8f",
+  "position": {
+    "x": 345,
+    "y": 556.25,
+    "z": 26000,
+    "height": 497.5,
+    "width": 1558.75,
+    "tabOrder": 26000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FatRankAdvogados"
+                    }
+                  },
+                  "Property": "nome_advogado"
+                }
+              },
+              "queryRef": "FatRankAdvogados.nome_advogado",
+              "nativeQueryRef": "nome_advogado"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FatRankAdvogados"
+                    }
+                  },
+                  "Property": "data_criacao"
+                }
+              },
+              "queryRef": "FatRankAdvogados.data_criacao",
+              "nativeQueryRef": "data_criacao"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FatRankAdvogados"
+                    }
+                  },
+                  "Property": "created_time"
+                }
+              },
+              "queryRef": "FatRankAdvogados.created_time",
+              "nativeQueryRef": "created_time"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas RankAdvogados"
+                    }
+                  },
+                  "Property": "Rank Maximo"
+                }
+              },
+              "queryRef": "Medidas RankAdvogados.Rank Maximo",
+              "nativeQueryRef": "Posição Maxima",
+              "displayName": "Posição Maxima"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas RankAdvogados"
+                    }
+                  },
+                  "Property": "PontuacaoMaxima"
+                }
+              },
+              "queryRef": "Medidas RankAdvogados.PontuacaoMaxima",
+              "nativeQueryRef": "Pontuação Maxima",
+              "displayName": "Pontuação Maxima"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas RankAdvogados"
+                    }
+                  },
+                  "Property": "Rank minimo"
+                }
+              },
+              "queryRef": "Medidas RankAdvogados.Rank minimo",
+              "nativeQueryRef": "Posição minimo",
+              "displayName": "Posição minimo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas RankAdvogados"
+                    }
+                  },
+                  "Property": "PontuacaoMinima"
+                }
+              },
+              "queryRef": "Medidas RankAdvogados.PontuacaoMinima",
+              "nativeQueryRef": "Pontuação Minima",
+              "displayName": "Pontuação Minima"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FatRankAdvogados"
+                  }
+                },
+                "Property": "data_criacao"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0D253D'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "395.5847981072362D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FatRankAdvogados.nome_advogado"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "214.64973005269167D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas RankAdvogados.PontuacaoMinima"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "309.00010190336997D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas RankAdvogados.Rank_minimo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "164.2207367770155D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas RankAdvogados.Rank"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "201.66537100628432D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas RankAdvogados.PontuacaoMaxima"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "226.99993282819028D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FatRankAdvogados.data_criacao"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "98.38484613595591D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FatRankAdvogados.created_time"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "191.25D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas RankAdvogados.Rank Maximo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "213.0292717734071D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas RankAdvogados.Rank minimo"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "backColorPrimary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "backColorSecondary": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

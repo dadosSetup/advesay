@@ -1,0 +1,114 @@
+table MedidasBaseClientes
+	lineageTag: 0f596d0a-65cc-4824-a220-99c94a823f43
+
+	measure 'Amount Spent' = SUM(BaseAppCliente[Amount Spent])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: ac1d2b7b-fd18-435f-b656-93eff724dc07
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Acessos LP Cliente' = SUM(BaseAppCliente[web_passo1_acessou_lp_cliente])
+		lineageTag: 08938bad-62e9-41a3-99ae-aa288e188c2c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure CustoListagemAdvogados = DIVIDE(SUM('BaseAppCliente'[Amount Spent]), [ListagemAdvogados])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 4de89a6f-4e3e-4969-9514-d15a13a92dbc
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Link Clicks' = SUM(BaseAppCliente[Link Clicks])
+		formatString: 0
+		lineageTag: 1b34117e-3d91-45e1-9b84-f4b3cd43633f
+
+	measure ListagemAdvogados =
+			
+			SUM('BaseAppCliente'[passo5_listagem_advogados]) + SUM('BaseAppCliente'[web_passo2_listagem_advogados])
+		lineageTag: af2726d1-6b35-4204-8f87-0d13c3fa635a
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalAddition"
+				}
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure CustoPorCliqueCliente = SUM('BaseAppCliente'[Amount Spent])/SUM('BaseAppCliente'[Link Clicks])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 5973d3cb-343a-420c-b689-945d641dd515
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Custo LP Cliente' =
+			
+			DIVIDE(SUM('BaseAppCliente'[Amount Spent]), [Acessos LP Cliente])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: e33ffec6-2cb6-4e25-9c1c-1e16d75520cd
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalDivision"
+				}
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoCadastroRealizado =
+			
+			DIVIDE(
+				SUM('BaseAppCliente'[Amount Spent]),
+				[Total Clientes com filtro]
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: efa6a92a-0c2b-4157-90fd-8aa00ea36f22
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalDivision"
+				}
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoCadastroConsultoriaRealizada =
+			
+			DIVIDE(
+				SUM('BaseAppCliente'[Amount Spent]),
+				[Total Clientes Consultorias abertas]
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: cac34108-b9ff-4e15-b45a-55fb16a53cc7
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure CustoConsultoriasAvulsas =
+			
+			DIVIDE(SUM('BaseAppCliente'[Amount Spent]), [ConsultoriasAvulsas])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 3e27f5ef-bf4a-46f1-9db3-2b6d12a2ac70
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalDivision"
+				}
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Column
+		formatString: 0
+		lineageTag: 6608acb5-c757-4d9f-9cc9-36c5acb51947
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition MedidasBaseClientes = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 44649fe09fa74f57ac8ff68346532b1d
+

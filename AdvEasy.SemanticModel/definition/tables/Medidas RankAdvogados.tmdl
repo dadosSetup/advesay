@@ -1,0 +1,149 @@
+table 'Medidas RankAdvogados'
+	lineageTag: 474e6f87-62ae-4176-83cd-3e358df8fc5e
+
+	measure PontuacaoMaxima =
+			
+			IF(
+			    ISBLANK(
+			        MAX(FatRankAdvogados[points])
+			    ),
+			    0,
+			    MAX(FatRankAdvogados[points])
+			)
+		lineageTag: e0fd1996-999b-4eb9-9cb3-70d2c7ee6b5e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure PontuacaoMinima =
+			
+			IF(
+			    ISBLANK(
+			        MIN(FatRankAdvogados[points])
+			    ),
+			    0,
+			    MIN(FatRankAdvogados[points])
+			)
+		lineageTag: b75d5b47-09c4-4507-8917-a2c9aa940786
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Rank = ```
+			
+			RANK(
+			    DENSE,
+			    ALLSELECTED(FatRankAdvogados[nome_advogado]),
+			    ORDERBY([PontuacaoMaxima], DESC,
+			    [SomaPontuação], DESC,
+			    [Media_pontuacao], DESC,
+			    FatRankAdvogados[nome_advogado], ASC
+			    )
+			)
+			
+			
+			// Rank = 
+			// RANK(
+			//     DENSE,
+			//     ALLSELECTED(FatRankAdvogados[nome_advogado]),
+			//     ORDERBY([PontuacaoMaxima], DESC,
+			//     FatRankAdvogados[nome_advogado], ASC
+			//     )
+			// ) 
+			
+			
+			
+			// Rank = 
+			// RANK(
+			//     DENSE,
+			//     ALLSELECTED(FatRankAdvogados[nome_advogado]),
+			//     ORDERBY([PontuacaoMaxima], DESC,
+			//     [SomaPontuação], DESC,
+			//     [Media_pontuacao], DESC,
+			//     FatRankAdvogados[nome_advogado], ASC
+			//     )
+			// ) 
+			```
+		formatString: 0
+		lineageTag: 1ec7f7d0-cbd0-4db8-b61e-f94ba2be8627
+
+	measure Media_pontuacao = AVERAGEX(FatRankAdvogados, FatRankAdvogados[points])
+		lineageTag: fe4809a7-5166-4a44-af33-438038dd90ce
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure SomaPontuação = SUM(FatRankAdvogados[points])
+		lineageTag: b30323c0-9a50-4646-88a1-eb1acf12beac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Top 3 Advogados' = ```
+			
+			IF(
+			    [Rank] <= 3,
+			    'Medidas RankAdvogados'[PontuacaoMaxima]
+			)
+			
+			```
+		lineageTag: 6b7ad307-48c3-41a2-9860-96527f143a37
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Rank_minimo = ```
+			
+			RANK(
+			    DENSE,
+			    ALLSELECTED(FatRankAdvogados[nome_advogado]),
+			    ORDERBY([PontuacaoMinima], DESC,
+			    FatRankAdvogados[nome_advogado], ASC
+			    )
+			) 
+			```
+		formatString: 0
+		lineageTag: 9b79fa6a-4d37-43b5-b50b-9b191ac2e5df
+
+	measure 'Rank Maximo' = ```
+			
+			RANKX(
+			    ALLSELECTED(FatRankAdvogados),
+			    [PontuacaoMaxima],
+			    , 
+			    DESC,
+			    Dense
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Teste Rank
+		lineageTag: 9a37f4cb-c2ba-4437-abc1-49761320e20e
+
+	measure 'Rank minimo' = ```
+			
+			RANKX(
+			    ALLSELECTED(FatRankAdvogados),
+			    [PontuacaoMinima],
+			    , 
+			    DESC,
+			    DENSE
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Teste Rank
+		lineageTag: 15dca143-d57b-4510-bcc8-5a5fe8fcfb60
+
+	column Column
+		formatString: 0
+		lineageTag: 07c26597-a2bf-4796-9d90-3272a9624d72
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Medidas RankAdvogados' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 47f4e06dcc994611a4016a54f0b35bab
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

@@ -1,0 +1,62 @@
+table DimEstados
+	lineageTag: 4130c8a4-6fcf-497e-bce4-0ed209feb4b1
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 523d9a56-0090-410d-ba2f-a51061701bb3
+		summarizeBy: sum
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: f4583a4b-3a71-4ccb-b561-54be2456a663
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column code
+		dataType: string
+		lineageTag: 89d815af-9e9b-489a-83fa-bac0f918c825
+		summarizeBy: none
+		sourceColumn: code
+
+		annotation SummarizationSetBy = Automatic
+
+	column EstadoSemAcento = ```
+			
+			VAR ColunaEstadoOrigina = 'DimEstados'[name]
+			VAR SemAcento = 
+			    SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(
+			    SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(
+			    ColunaEstadoOrigina,
+			    "á", "a"), "é", "e"), "í", "i"), "ó", "o"), "ú", "u"),
+			    "Á", "A"), "É", "E"), "Í", "I"), "Ó", "O"), "Ú", "U"),
+			    "ã", "a"), "õ", "o"), "â", "a"), "ê", "e"), "ô", "o"),
+			    "ç", "c")
+			RETURN SemAcento
+			
+			```
+		lineageTag: 94631ed1-2955-4cca-a1d7-3473a14f8da9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimEstados = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-state/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"id", "name", "code"}, {"id", "name", "code"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"id", Int64.Type}, {"name", type text}, {"code", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

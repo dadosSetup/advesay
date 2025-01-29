@@ -1,0 +1,130 @@
+table BaseIndicacao
+	lineageTag: aeb50f61-dcd9-4aa8-afa2-b5c80c1e97f1
+
+	column Day
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bc6d8a67-4b57-4995-90e6-a40d6679f634
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Origem
+		dataType: string
+		lineageTag: 52d4a2ca-988b-4984-b4b8-395e1e3626a7
+		summarizeBy: none
+		sourceColumn: Origem
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Amount Spent'
+		dataType: double
+		lineageTag: 5edf1096-7794-4b32-92e5-45721476104f
+		summarizeBy: sum
+		sourceColumn: Amount Spent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Link Clicks'
+		dataType: int64
+		formatString: 0
+		lineageTag: fcf3a8f8-69ae-4a43-b1e6-032205d025dd
+		summarizeBy: sum
+		sourceColumn: Link Clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Acessos LP'
+		dataType: int64
+		formatString: 0
+		lineageTag: c8a9a5cf-5295-4449-9a58-fbbba88196e6
+		summarizeBy: sum
+		sourceColumn: Acessos LP
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo1_clique_quero_indicar
+		dataType: int64
+		formatString: 0
+		lineageTag: 577748b0-3075-4405-a27c-d1f5b67d6730
+		summarizeBy: sum
+		sourceColumn: passo1_clique_quero_indicar
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo2_registro_completo
+		dataType: int64
+		formatString: 0
+		lineageTag: c2a81bc7-e942-441d-bb31-f254e319db11
+		summarizeBy: sum
+		sourceColumn: passo2_registro_completo
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo3_clique_copiar_link
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ac03f6d-ae62-4ed3-b9c2-891b307b30d6
+		summarizeBy: sum
+		sourceColumn: passo3_clique_copiar_link
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo3_copiar_link_whatsapp
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e3026cd-9997-401c-a126-c067a3aff9c0
+		summarizeBy: sum
+		sourceColumn: passo3_copiar_link_whatsapp
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo3_copiar_link_gmail
+		dataType: int64
+		formatString: 0
+		lineageTag: 498fd3e3-a007-4e15-878e-a79e6a63420c
+		summarizeBy: sum
+		sourceColumn: passo3_copiar_link_gmail
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo3_copiar_link_linkedin
+		dataType: int64
+		formatString: 0
+		lineageTag: bcfd58d5-6126-4b4d-a5fb-7096f754ff17
+		summarizeBy: sum
+		sourceColumn: passo3_copiar_link_linkedin
+
+		annotation SummarizationSetBy = Automatic
+
+	column passo3_copiar_link_facebook
+		dataType: int64
+		formatString: 0
+		lineageTag: be270fb6-008d-4795-b03f-6ccd52bef5c0
+		summarizeBy: sum
+		sourceColumn: passo3_copiar_link_facebook
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BaseIndicacao = m
+		mode: import
+		source =
+				let
+				    Fonte = Web.BrowserContents(" https://docs.google.com/spreadsheets/d/e/2PACX-1vS-qX9h2G6SyeWFa23GjeDOvNh5QF012usApdllNbIZMi4Wnuec3gecqZa8Hpj0VhiD1UTVd6X6hzOy/pubhtml"),
+				    #"Tabela extraída de HTML" = Html.Table(Fonte, {{"Column1", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(1)"}, {"Column2", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(2)"}, {"Column3", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(3)"}, {"Column4", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(4)"}, {"Column5", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(5)"}, {"Column6", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(6)"}, {"Column7", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(7)"}, {"Column8", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(8)"}, {"Column9", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(9)"}, {"Column10", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(10)"}, {"Column11", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(11)"}, {"Column12", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(12)"}, {"Column13", "DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR > :nth-child(13)"}}, [RowSelector="DIV:nth-child(3) > DIV.ritz.grid-container > TABLE.waffle > * > TR"]),
+				    #"Linhas em Branco Removidas" = Table.SelectRows(#"Tabela extraída de HTML", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas em Branco Removidas", [PromoteAllScalars=true]),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Cabeçalhos Promovidos",{"1"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Removidas",{{"Day", type date}, {"Amount Spent", type number}, {"Link Clicks", Int64.Type}, {"Acessos LP", Int64.Type}, {"passo1_clique_quero_indicar", Int64.Type}, {"passo2_registro_completo", Int64.Type}, {"passo3_clique_copiar_link", Int64.Type}, {"passo3_copiar_link_whatsapp", Int64.Type}, {"passo3_copiar_link_gmail", Int64.Type}, {"passo3_copiar_link_linkedin", Int64.Type}, {"passo3_copiar_link_facebook", Int64.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

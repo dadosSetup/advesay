@@ -1,0 +1,35 @@
+table FatEspecialidadeConcatenada
+	lineageTag: 0fa6f3ab-0e71-47a3-85dd-e4ec693d6e4e
+
+	column doctor_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 671382c7-61e4-416f-b8da-33a645a0bc96
+		summarizeBy: none
+		sourceColumn: doctor_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column especialidades
+		dataType: string
+		lineageTag: 6247c082-935a-43dc-b14e-19885a742df4
+		summarizeBy: none
+		sourceColumn: especialidades
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FatEspecialidadeConcatenada = m
+		mode: import
+		source =
+				let
+				    Fonte = Json.Document(Web.Contents("https://microservices.setuptecnologia.com.br/ms-pbi/adv-specialty_concact/")),
+				    #"Convertido para Tabela" = Table.FromList(Fonte, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"doctor_id", "especialidades"}, {"doctor_id", "especialidades"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Column1 Expandido",{{"doctor_id", Int64.Type}, {"especialidades", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
